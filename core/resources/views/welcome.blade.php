@@ -10,6 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
+        <link rel="icon" href="{{ asset('assets/favicon.ico') }}">
         <style>
             html, body {
                 background-color: #fff;

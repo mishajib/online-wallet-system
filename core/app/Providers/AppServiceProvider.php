@@ -17,6 +17,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->extend('command.model.make', function ($command, $app) {
             return new ModelMakeCommand($app['files']);
         });
+
+        $this->app->bind('path.public', function() {
+            return base_path().'../';
+        });
     }
 
     /**
