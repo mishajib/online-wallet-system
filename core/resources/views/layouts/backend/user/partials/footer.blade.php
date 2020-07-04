@@ -6,6 +6,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 @include('layouts.errors')
 @include('layouts.success')
+@include('layouts.error')
 <script>
     $(document).ready(function() {
         $('#select2').select2({

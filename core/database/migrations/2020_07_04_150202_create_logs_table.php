@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReferredUserTable extends Migration
+class CreateLogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateReferredUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('referred_user', function (Blueprint $table) {
+        Schema::create('logs', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id');
+            $table->ipAddress("ip");
+            $table->string("machine_name");
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateReferredUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('referred_user');
+        Schema::dropIfExists('logs');
     }
 }
