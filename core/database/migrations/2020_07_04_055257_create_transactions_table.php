@@ -15,6 +15,9 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->integer('trx_num');
+            $table->decimal('amount');
+            $table->decimal('remaining_balance');
             $table->timestamps();
         });
     }
