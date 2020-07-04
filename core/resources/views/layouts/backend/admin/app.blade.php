@@ -42,8 +42,6 @@
 {{--    footer area--}}
     @include('layouts.backend.admin.partials.footer')
 
-</div>
-
 {{--scripts file--}}
 @include('layouts.backend.admin.partials.scripts')
 

@@ -93,7 +93,7 @@
                                                 <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
                                                     <i class="fa fa-user-md"></i>
                                                     <span class="admin-name">
-                                                        MI SHAJIB
+                                                        {{ Auth::user()->username }}
                                                     </span>
                                                     <i class="fa fa-angle-down"></i>
                                                 </a>
@@ -111,7 +111,7 @@
                                                         <a href="#"><span class="fa fa-cogs author-log-ic"></span> Settings</a>
                                                     </li>
                                                     <li>
-                                                        <a href="login.html"><span class="fa fa-unlock-alt author-log-ic"></span> Log Out</a>
+                                                        <a href="{{ route('admin.logout') }}"><span class="fa fa-unlock-alt author-log-ic"></span> Log Out</a>
                                                     </li>
                                                 </ul>
                                             </li>

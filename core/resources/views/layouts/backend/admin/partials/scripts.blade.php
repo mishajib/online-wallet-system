@@ -54,16 +54,6 @@
 <!-- main JS
     ============================================ -->
 <script src="{{ asset('assets/backend/admin/js/main.js') }}"></script>
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"
-        type="8e91843fa0e9e5f8708ddce4-text/javascript"></script>
-<script type="8e91843fa0e9e5f8708ddce4-text/javascript">
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-23581568-13');
-
-</script>
-<script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js"
-        data-cf-settings="8e91843fa0e9e5f8708ddce4-|49" defer=""></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+@include('layouts.errors')
+@include('layouts.success')
