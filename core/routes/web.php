@@ -54,5 +54,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin', 'as' => 'admi
     Route::get('{user}/transaction', 'TransactionController@userTransaction')->name('user.specific.transaction');
     Route::get('user/add/balance', 'TransactionController@addBalancePage')->name('user.add.balance');
     Route::post('user/add/balance', 'TransactionController@addBalance')->name('user.store.balance');
+    Route::get('site/setting', 'SettingController@index')->name('site.setting');
+    Route::put('site/{id}/setting/update', 'SettingController@update')->name('site.setting.update');
 });
 //End Admin Routes

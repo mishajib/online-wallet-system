@@ -6,8 +6,8 @@
         </div>
         <div class="nalika-profile">
             <div class="profile-dtl">
-                <a href="#"><img src="{{ asset('assets/backend/admin/img/notification/4.jpg') }}" alt="" /></a>
-                <h2>MI <span class="min-dtn">SHAJIB</span></h2>
+                <a href="#"><img src="{{ Auth::user()->image }}" alt="" /></a>
+                <h2>{{ Auth::user()->name }}</h2>
             </div>
             <div class="profile-social-dtl">
                 <ul class="dtl-social">
@@ -40,6 +40,13 @@
                             <i class="fa fa-history"></i>
                             <span class="mini-click-non">Transactions</span>
                         </a>
+                    </li>
+
+                    <li class="{{ Request::is('site/setting') ? 'active' : '' }}">
+                    <a class="{{ Request::is('site/setting') ? 'active' : '' }}" href="{{ route('admin.site.setting') }}">
+                        <i class="fa fa-cogs"></i>
+                        <span class="mini-click-non">Setting</span>
+                    </a>
                     </li>
 
                 </ul>

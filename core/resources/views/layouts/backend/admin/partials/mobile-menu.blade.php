@@ -21,6 +21,10 @@
                             <li class="{{ Request::is('user/transaction/all') ? 'active' : '' }}">
                                 <a  href="{{ route('admin.user.transaction.all') }}">Transactions <span class="fa fa-history"></span></a>
                             </li>
+
+                            <li class="{{ Request::is('site/setting') ? 'active' : '' }}">
+                                <a  href="{{ route('admin.site.setting') }}">Setting <span class="fa fa-cogs"></span></a>
+                            </li>
                         </ul>
                     </nav>
                 </div>

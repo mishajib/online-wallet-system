@@ -17,6 +17,8 @@ class CreateAdminsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('username')->unique();
+            $table->string('slug');
+            $table->string('image')->default(asset('assets/backend/user.png'));
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();

@@ -2,6 +2,8 @@
 
 @section('title', 'User Profile')
 
+@section('breadcrumb', "Profile")
+
 @section('content')
     <div class="row">
         <div class="col-4">
@@ -105,7 +107,7 @@
                                 @method('PUT')
                                 <div class="form-group">
                                     <label for="image">Select Image</label>
-                                    <input name="image" type="file" class="form-control dropify">
+                                    <input name="image" type="file" class="form-control" id="dropify" data-default-file="{{ asset('assets/uploads/profile/'.Auth::user()->image) ?? old("image") }}">
                                 </div>
 
 
