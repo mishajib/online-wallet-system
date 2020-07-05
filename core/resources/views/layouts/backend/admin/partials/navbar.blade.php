@@ -93,22 +93,16 @@
                                                 <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
                                                     <i class="fa fa-user-md"></i>
                                                     <span class="admin-name">
-                                                        {{ Auth::user()->username }}
+                                                        {{ Auth::user()->name }}
                                                     </span>
                                                     <i class="fa fa-angle-down"></i>
                                                 </a>
                                                 <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
                                                     <li>
-                                                        <a href="register.html"><span class="fa fa-home author-log-ic"></span> Register</a>
-                                                    </li>
-                                                    <li>
                                                         <a href="#"><span class="fa fa-user author-log-ic"></span> My Profile</a>
                                                     </li>
                                                     <li>
-                                                        <a href="lock.html"><span class="fa fa-diamond author-log-ic"></span> Lock</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><span class="fa fa-cogs author-log-ic"></span> Settings</a>
+                                                        <a href="{{ route('admin.site.setting') }}"><span class="fa fa-cogs author-log-ic"></span> Settings</a>
                                                     </li>
                                                     <li>
                                                         <a href="{{ route('admin.logout') }}"><span class="fa fa-unlock-alt author-log-ic"></span> Log Out</a>

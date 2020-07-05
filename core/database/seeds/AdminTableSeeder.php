@@ -17,6 +17,7 @@ class AdminTableSeeder extends Seeder
             'name' => 'Super Admin',
             'username' => 'admin',
             'email' => 'admin@admin.com',
+            'slug' => 'admin',
             'password' => Hash::make('admin'),
         ]);
     }

@@ -18,9 +18,6 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <div class="breadcomb-wp">
-                                        <div class="breadcomb-icon">
-                                            <i class="fa fa-home"></i>
-                                        </div>
                                         <div class="breadcomb-ctn">
                                             <h2>
                                                 @yield('breadcomb')

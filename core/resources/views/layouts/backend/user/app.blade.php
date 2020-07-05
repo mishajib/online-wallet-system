@@ -1,16 +1,35 @@
-@include('layouts.backend.user.partials.header')
+@include("layouts.backend.user.partials.header")
 
-@include('layouts.backend.user.partials.navbar')
+<div class="d-flex" id="wrapper">
 
-<div class="container-fluid mt-4">
-    <div class="row">
-        @include('layouts.backend.user.partials.sidebar')
+    {{--    Sidebar--}}
+        @include("layouts.backend.user.partials.sidebar")
+    {{--    sidebar--}}
 
-        <div class="col-lg-9 col-md-9 col-sm-12">
-            @yield('content')
+    {{--     Page Content --}}
+    <div id="page-content-wrapper">
+
+{{--        navbar--}}
+        @include('layouts.backend.user.partials.navbar')
+{{--        navbar end--}}
+
+        <div class="container-fluid mt-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <h1>@yield('breadcrumb')</h1>
+                            </li>
+                        </ol>
+                    </nav>
+
+                    @yield('content')
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
+</div>
 
 @include('layouts.backend.user.partials.footer')

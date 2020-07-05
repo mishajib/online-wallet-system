@@ -1,4 +1,4 @@
-<script src="{{ asset('assets/backend/bootstrap-4/js/jquery-3.5.1.slim.min.js') }}"></script>
+<script src="{{ asset('assets/backend/bootstrap-4/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/backend/bootstrap-4/js/popper.min.js') }}"></script>
 <script src="{{ asset('assets/backend/bootstrap-4/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/backend/js/select2.min.js') }}"></script>
@@ -13,7 +13,14 @@
             allowClear: true,
         });
 
-        $('.dropify').dropify();
+        $('#dropify').dropify();
+
+
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+
     });
 </script>
 </body>

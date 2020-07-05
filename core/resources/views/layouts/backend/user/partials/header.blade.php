@@ -8,7 +8,10 @@
     <title>@yield('title', 'Enter site title here') | {{ config('app.name') }}</title>
 
     <link rel="stylesheet" href="{{ asset('assets/backend/bootstrap-4/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/backend/css/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/backend/admin/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/backend/css/select2.min.css') }}">
+
     <link rel="stylesheet" href="{{ asset('assets/backend/dropify/css/dropify.min.css') }}">
 </head>
 <body>

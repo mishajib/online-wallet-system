@@ -1,36 +1,18 @@
-<div class="col-lg-3 col-md-3 col-sm-12">
-    <div class="card border-dark">
-        <div class="card-header bg-info">
-            <div class="card-img">
-                <p class="text-center">
-                    <img src="{{ asset('assets/uploads/profile/' .Auth::user()->image) }}"
-                         class="w-50 h-50 img-responsive rounded-circle border border-primary img-thumbnail" alt="">
-                </p>
-            </div>
-            <h1 class="text-white card-title text-center border pb-2 border-white rounded">
-                {{ Auth::user()->name }}
-            </h1>
-            <h4 class="text-white card-title text-center border pb-2 pt-2 border-white rounded">Remaining Balance: {{ number_format(Auth::user()->balance, 2) }}</h4>
-        </div>
-        <div class="card-body">
-            <ul class="list-group text-center font-weight-bold">
-                <li class="list-group-item h4 mb-3 border-info rounded">
-                    <a class="text-dark text-decoration-none" href="#">{{ __("Balance") }}</a>
-                </li>
+<div class="bg-dark border-right" id="sidebar-wrapper">
+    <img src="{{ asset('assets/backend/logo.png') }}" class="sidebar-heading img-responsive" alt="">
 
-                <li class="list-group-item h4 mb-3 border-info rounded">
-                    <a class="text-dark text-decoration-none" href="#">{{ __("Transaction Log") }}</a>
-                </li>
+    <p class="text-center pt-5">
+        <img class="rounded-circle" style="width: 35%; height: 100px;" src="{{ asset('assets/uploads/profile/'.Auth::user()->image) }}" alt="{{ Auth::user()->name }}">
+        <h2 class="text-white text-center">{{ Auth::user()->name }}</h2>
+    </p>
 
-                <li class="list-group-item h4 mb-3 border-info rounded">
-                    <a class="text-dark text-decoration-none" href="#">{{ __("Account Info") }}</a>
-                </li>
-
-                <li class="list-group-item h4 mb-3 border-info rounded">
-                    <a class="text-dark text-decoration-none" href="#">{{ __("Money Transfer") }}</a>
-                </li>
-
-            </ul>
-        </div>
+    <div class="list-group ml-3 list-group-flush pt-5">
+        <a href="{{ route('user.dashboard') }}"
+           class="bg-dark text-white list-group-item list-group-item-action bg-light">{{ __("Dashboard") }}</a>
+        <a href="#" class="bg-dark text-white list-group-item list-group-item-action bg-light">Shortcuts</a>
+        <a href="#" class="bg-dark text-white list-group-item list-group-item-action bg-light">Overview</a>
+        <a href="#" class="bg-dark text-white list-group-item list-group-item-action bg-light">Events</a>
+        <a href="#" class="bg-dark text-white list-group-item list-group-item-action bg-light">Profile</a>
+        <a href="#" class="bg-dark text-white list-group-item list-group-item-action bg-light">Status</a>
     </div>
 </div>

@@ -2,6 +2,8 @@
 
 @section('title', 'User Dashboard')
 
+@section('breadcrumb', 'Dashboard')
+
 
 @section('content')
     <div class="card">
