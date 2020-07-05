@@ -51,9 +51,16 @@
 <!-- plugins JS
     ============================================ -->
 <script src="{{ asset('assets/backend/admin/js/plugins.js') }}"></script>
+<script src="{{ asset('assets/backend/js/select2.min.js') }}"></script>
 <!-- main JS
     ============================================ -->
 <script src="{{ asset('assets/backend/admin/js/main.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 @include('layouts.errors')
 @include('layouts.success')
+
+<script>
+    $('#select2-single').select2({
+        allowClear: true,
+    });
+</script>

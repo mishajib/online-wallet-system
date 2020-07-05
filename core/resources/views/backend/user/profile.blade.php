@@ -28,6 +28,7 @@
                             <form action="{{ route('user.profile.update') }}" method="POST">
                                 @csrf
                                 @method('PUT')
+
                                 <div class="form-group">
                                     <label for="name">Full Name</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
@@ -104,7 +105,7 @@
                                 @method('PUT')
                                 <div class="form-group">
                                     <label for="image">Select Image</label>
-                                    <input type="file" class="form-control">
+                                    <input name="image" type="file" class="form-control dropify">
                                 </div>
 
 

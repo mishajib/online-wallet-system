@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('address');
+            $table->decimal('balance', 18, 8)->default(0.00);
             $table->string('city');
             $table->string('postcode');
             $table->integer('ref_by')->nullable();
