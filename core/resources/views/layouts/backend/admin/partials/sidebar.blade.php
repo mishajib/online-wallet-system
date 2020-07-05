@@ -20,20 +20,26 @@
         <div class="left-custom-menu-adp-wrap comment-scrollbar">
             <nav class="sidebar-nav left-sidebar-menu-pro">
                 <ul class="metismenu" id="menu1">
-                    <li class="active">
-                        <a href="#">
+                    <li class="{{ Request::is('/admin/dashboard') ? 'active' : '' }}">
+                        <a class="{{ Request::is('/admin/dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
                             <i class="fa fa-dashboard"></i>
-                            <span class="mini-click-non">Ecommerce</span>
+                            <span class="mini-click-non">Dashboard</span>
                         </a>
                     </li>
 
-                    <li>
-                        <a class="has-arrow" href="mailbox.html" aria-expanded="false"><i class="fa fa-envelope-o icon-wrap"></i> <span class="mini-click-non">Mailbox</span></a>
+                    <li class="{{ (Request::is('admin/user/*')) ? 'active' : '' }}">
+                        <a class="has-arrow" href="javascript:void(0);" aria-expanded="{{ (Request::is('admin/user*')) ? true : false }}"><i class="fa fa-envelope-o icon-wrap"></i> <span class="mini-click-non">User</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="Inbox" href="mailbox.html"><span class="mini-sub-pro">Inbox</span></a></li>
-                            <li><a title="View Mail" href="mailbox-view.html"><span class="mini-sub-pro">View Mail</span></a></li>
-                            <li><a title="Compose Mail" href="mailbox-compose.html"><span class="mini-sub-pro">Compose Mail</span></a></li>
+                            <li><a title="All User" href="{{ route('admin.user.index') }}"><span class="mini-sub-pro">All user</span></a></li>
+                            <li><a title="Add balance" href="{{ route('admin.user.add.balance') }}"><span class="mini-sub-pro">Add balance</span></a></li>
                         </ul>
+                    </li>
+
+                    <li class="{{ Request::is('user/transaction/all') ? 'active' : '' }}">
+                        <a class="{{ Request::is('user/transaction/all') ? 'active' : '' }}" href="{{ route('admin.user.transaction.all') }}">
+                            <i class="fa fa-history"></i>
+                            <span class="mini-click-non">Transactions</span>
+                        </a>
                     </li>
 
                 </ul>

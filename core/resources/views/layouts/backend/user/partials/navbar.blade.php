@@ -8,7 +8,7 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown mt-n3">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="{{ asset('assets/backend/admin/img/logo/logosn.png') }}" class="img-responsive img-circle border rounded-circle mt-auto" alt="">
+                    <img src="{{ asset('assets/backend/admin/img/logo/logosn.png') }}" class="img-responsive border rounded-circle mt-auto" alt="">
                     <span>{{ Auth::user()->username }}</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">

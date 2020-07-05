@@ -15,30 +15,36 @@
                 <thead class="thead-light">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th>TRX Num</th>
+                    <th>Sender</th>
+                    <th>TRX Type</th>
+                    <th>Amount</th>
+                    <th>Remaining Balance</th>
+                    <th>Details</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                @forelse($transactions as $key => $transaction)
+                    <tr>
+                        <th scope="row">{{ ++$key }}</th>
+                        <td>{{ $transaction->trx_num }}</td>
+                        <td>
+                            @if(empty($transaction->user))
+                                <span class="text-danger">{{ __("No data found!!!") }}</span>
+                            @else
+                                {{ $transaction->user->username }}
+                            @endif
+                        </td>
+                        <td>{{ $transaction->trx_type }}</td>
+                        <td>{{ $transaction->amount }}</td>
+                        <td>{{ $transaction->remaining_balance }}</td>
+                        <td>{{ $transaction->details }}</td>
+                    </tr>
+                @empty
+                    <h2>
+                        <span class="text-danger">{{ __("No data found!!!") }}</span>
+                    </h2>
+                @endforelse
                 </tbody>
             </table>
         </div>

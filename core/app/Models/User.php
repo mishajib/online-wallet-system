@@ -42,4 +42,19 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Log::class);
     }
+
+    public function referreduser()
+    {
+        return $this->hasMany(User::class, 'ref_by', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'ref_by');
+    }
+
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

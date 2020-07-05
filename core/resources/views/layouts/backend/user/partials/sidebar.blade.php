@@ -1,15 +1,16 @@
 <div class="col-lg-3 col-md-3 col-sm-12">
     <div class="card border-dark">
-        <div class="card-header">
+        <div class="card-header bg-info">
             <div class="card-img">
                 <p class="text-center">
-                    <img src="{{ asset('assets/backend/user.png') }}"
-                         class="w-50 h-50 img-responsive img-thumbnail" alt="">
+                    <img src="{{ asset('assets/uploads/profile/' .Auth::user()->image) }}"
+                         class="w-50 h-50 img-responsive rounded-circle border border-primary img-thumbnail" alt="">
                 </p>
             </div>
-            <h1 class="card-title text-center border pb-2 border-dark rounded">
-                {{ Auth::user()->username }}
+            <h1 class="text-white card-title text-center border pb-2 border-white rounded">
+                {{ Auth::user()->name }}
             </h1>
+            <h4 class="text-white card-title text-center border pb-2 pt-2 border-white rounded">Remaining Balance: {{ number_format(Auth::user()->balance, 2) }}</h4>
         </div>
         <div class="card-body">
             <ul class="list-group text-center font-weight-bold">
