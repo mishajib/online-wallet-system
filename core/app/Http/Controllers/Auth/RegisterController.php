@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Setting;
+use App\Models\Transaction;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -29,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '';
 
     /**
      * Create a new controller instance.
@@ -44,14 +48,20 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'name' => ['required', 'string', 'max:80'],
             'username' => ['required', 'alpha_num', 'max:40', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'numeric'],
+            'address' => ['required'],
+            'city' => ['required'],
+            'postcode' => ['required'],
+            'refer' => ['alpha_num', 'nullable'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -59,15 +69,53 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return \App\User
+     * @param array $data
+     * @return \App\Models\User
      */
     protected function create(array $data)
     {
-        return User::create([
+        $referUser = User::where('username', $data['refer'])->first();
+        $setting = Setting::first();
+        $user = User::create([
+            'name' => $data['name'],
             'username' => $data['username'],
             'email' => $data['email'],
+            'phone' => $data['phone'],
+            'address' => $data['address'],
+            'city' => $data['city'],
+            'postcode' => $data['postcode'],
+            'balance' => $setting->join_bonus,
+            'ref_by' => $referUser->id ?? null,
+            'slug' => Str::slug($data['username']),
             'password' => Hash::make($data['password']),
         ]);
+        $trx_num = Str::random(12);
+        Transaction::create([
+            'user_id' => $user->id,
+            'trx_num' => $trx_num,
+            'trx_type' => $setting->join_bonus . ' ' . $setting->currency . ' credited',
+            'amount' => $setting->join_bonus,
+            'remaining_balance' => $user->balance,
+            'details' => $setting->join_bonus . ' ' . $setting->currency . ' received join bonus',
+        ]);
+
+        if (!empty($data['refer'])) {
+            $referUser->balance += $setting->join_bonus;
+            Transaction::create([
+                'user_id' => $referUser->id,
+                'trx_num' => $trx_num,
+                'trx_type' => $setting->join_bonus . ' ' . $setting->currency . ' credited',
+                'amount' => $setting->join_bonus,
+                'remaining_balance' => $user->balance,
+                'details' => $setting->join_bonus . ' ' . $setting->currency . ' received referral bonus',
+            ]);
+            $referUser->save();
+        }
+        return $user;
+    }
+
+    public function registered(Request $request, $user)
+    {
+        return redirect(route('verification.notice'))->with('success', 'User registered successfully. Please verify your mail!!!');
     }
 }
