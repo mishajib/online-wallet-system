@@ -1,8 +1,8 @@
 @extends("layouts.backend.admin.app")
 
-@section("title", "All User")
+@section("title", "All interest")
 
-@section('breadcomb', 'All User')
+@section('breadcomb', 'All interest')
 
 @section("content")
     <div class="product-status mg-b-30">
@@ -10,57 +10,64 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-status-wrap">
-                        <h4>Products List</h4>
+                        <h4>Interest List</h4>
                         <div class="add-product">
-                            <a href="{{ route('admin.user.add.balance') }}">Add Product</a>
+                            <a title="Add interest" href="{{ route('admin.interest.create') }}">Add Interest</a>
                         </div>
                         <table>
                             <tr>
                                 <th>Serial No</th>
                                 <th>Name</th>
-                                <th>Username</th>
-                                <th>Phone</th>
-                                <th>Balance</th>
-                                <th>Ref By</th>
-                                <th>Joined</th>
+                                <th>Percent</th>
+                                <th>Created AT</th>
+                                <th>Updated AT</th>
                                 <th>Action</th>
                             </tr>
-                            @forelse($users as $key => $user)
+                            @forelse($interests as $key => $interest)
                                 <tr>
 
                                     <td>{{ ++$key }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->username }}</td>
-                                    <td>{{ $user->phone }}</td>
-                                    <td>{{ number_format($user->balance, 2) }}</td>
+                                    <td>{{ $interest->name }}</td>
+                                    <td>{{ $interest->percent }}</td>
+                                    <td>{{ $interest->created_at->diffForHumans() }}</td>
+                                    <td>{{ $interest->updated_at->diffForHumans() }}</td>
                                     <td>
-                                        @if(empty($user->user->name))
-                                            <span class="text-danger">{{ __("Not found!!!") }}</span>
-                                        @else
-                                            {{ $user->user->name }}
-                                        @endif
-                                    </td>
-                                    <td>{{ $user->created_at->diffForHumans() }}</td>
-                                    <td>
-                                        <img class="img-circle img-responsive" src="{{ asset('assets/uploads/profile/' . $user->image) }}" alt="{{ $user->slug }}">
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-warning btn-sm" href="{{ route('admin.user.edit', $user->slug) }}">
+                                        <button title="Click to give interest to all users" onclick="giveInterest({{ $interest->id }})" class="btn btn-sm btn-warning waves-effect" type="button">
+                                            <i style="font-size: 15px;" class="fa fa-check"></i>
+                                            <form id="interest-form-{{ $interest->id }}" action="{{ route('admin.interest.give', $interest->id) }}" method="POST" style="display: none;">
+                                                @csrf
+                                                @method('PUT')
+                                            </form>
+                                        </button>
+
+                                        <a title="Edit interest" class="btn btn-sm btn-info" href="{{ route('admin.interest.edit', $interest->id) }}">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <a class="btn btn-sm btn-info" href="{{ route('admin.user.show', $user->slug) }}">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
+
+                                        <button title="Delete interest" onclick="deleteItem({{ $interest->id }})" class="btn btn-danger waves-effect" type="button">
+                                            <i style="font-size: 15px;" class="fa fa-trash"></i>
+                                            <form id="delete-form-{{ $interest->id }}" action="{{ route('admin.interest.destroy', $interest->id) }}" method="POST" style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        </button>
+
                                     </td>
                                 </tr>
                             @empty
-                                <h3><span class="text-danger">{{ __('No user found!!!') }}</span></h3>
+                                <tr>
+                                    <td colspan="6">
+                                        <h1 class="text-center">
+                                            <span class="text-danger">{{ __('No interest found!!!') }}</span>
+                                        </h1>
+                                    </td>
+                                </tr>
                             @endforelse
 
                         </table>
                         <div class="custom-pagination">
                             <ul class="pagination">
-                                {{ $users->links() }}
+                                {{ $interests->links() }}
                             </ul>
                         </div>
                     </div>

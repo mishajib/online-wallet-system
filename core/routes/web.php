@@ -31,6 +31,9 @@ Route::group(['namespace' => 'Backend\User', 'as' => 'user.', 'middleware' => ['
     Route::put('profile-update', 'ProfileController@updateProfile')->name('profile.update');
     Route::put('profile-image-update', 'ProfileController@updateProfileImage')->name('profile.image.update');
     Route::put('password-update', 'ProfileController@updatePassword')->name('password.update');
+    Route::get('transfer/money', 'TransferController@index')->name('transfer');
+    Route::post('transfer/money', 'TransferController@transfer')->name('transfer.money');
+    Route::get('referred/users', 'DashboardController@refUsers')->name('referred.user');
 });
 //End User Routes
 
@@ -46,15 +49,22 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin', 'as' => 'admi
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('logout', 'Authentication\AdminLoginController@logout')->name('logout');
     Route::get('user/all', 'UserController@index')->name('user.index');
-    Route::get('user/{slug}/edit', 'UserController@edit')->name('user.edit');
-    Route::put('user/{slug}/update', 'UserController@update')->name('user.update');
-    Route::get('user/{slug}/show', 'UserController@show')->name('user.show');
+    Route::get('user/{id}/edit', 'UserController@edit')->name('user.edit');
+    Route::put('user/{id}/update', 'UserController@update')->name('user.update');
+    Route::get('user/{id}/show', 'UserController@show')->name('user.show');
     Route::put('user/{id}/update/password', 'UserController@updatePassword')->name('user.update.password');
     Route::get('user/transaction/all', 'TransactionController@index')->name('user.transaction.all');
     Route::get('{user}/transaction', 'TransactionController@userTransaction')->name('user.specific.transaction');
-    Route::get('user/add/balance', 'TransactionController@addBalancePage')->name('user.add.balance');
-    Route::post('user/add/balance', 'TransactionController@addBalance')->name('user.store.balance');
+    Route::get('user/manage/balance', 'TransactionController@manageBalance')->name('user.balance.manage.page');
+    Route::post('user/balance/operation', 'TransactionController@balanceOperation')->name('user.balance.operation');
     Route::get('site/setting', 'SettingController@index')->name('site.setting');
     Route::put('site/{id}/setting/update', 'SettingController@update')->name('site.setting.update');
+    Route::get('interest/all', 'InterestController@index')->name('interest.all');
+    Route::get('interest/create', 'InterestController@create')->name('interest.create');
+    Route::put('interest/give/{id}', 'InterestController@give')->name('interest.give');
+    Route::get('interest/{id}/edit', 'InterestController@edit')->name('interest.edit');
+    Route::post('interest/store', 'InterestController@store')->name('interest.store');
+    Route::put('interest/{id}/update', 'InterestController@update')->name('interest.update');
+    Route::delete('interest/{id}/destroy', 'InterestController@destroy')->name('interest.destroy');
 });
 //End Admin Routes

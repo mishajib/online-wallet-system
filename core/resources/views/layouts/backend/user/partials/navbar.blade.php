@@ -12,11 +12,11 @@
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item">
                 <a class="nav-link text-white" href="javascript:void(0);">
-                    {{ number_format(Auth::user()->balance, 2) }}
+                    {{ number_format(Auth::user()->balance, 2) . " " . $setting->currency }}
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Transfer Money</a>
+                <a class="nav-link" href="{{ route('user.transfer') }}">Transfer Money</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

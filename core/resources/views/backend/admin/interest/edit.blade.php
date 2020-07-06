@@ -1,8 +1,8 @@
 @extends("layouts.backend.admin.app")
 
-@section("title", "Add Balance")
+@section("title", "Edit Interest")
 
-@section('breadcomb', 'Add Balance')
+@section('breadcomb', 'Edit Interest')
 
 @section("content")
     <div class="single-product-tab-area mg-b-30">
@@ -14,48 +14,46 @@
                         <div class="review-tab-pro-inner">
                             <div class="panel">
                                 <div class="panel-heading">
-                                    <h1>Add balance</h1>
+                                    <h1>Edit Interest</h1>
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-6 col-lg-offset-3">
-                                            <form method="POST" action="{{ route('admin.user.store.balance') }}">
+                                            <form method="POST" action="{{ route('admin.interest.update', $interest->id) }}">
                                                 @csrf
+                                                @method("PUT")
                                                 <div class="review-content-section">
                                                     <div class="input-group mg-b-pro-edt">
-                                                                    <span class="input-group-addon">
-                                                                        <i class="fa fa-user-md" aria-hidden="true"></i>
-                                                                    </span>
-                                                        <select data-placeholder="Select user" class="form-control pro-edt-select form-control-primary" name="username" id="select2-single">
-                                                            <option value=""></option>
-                                                            @forelse($users as $user)
-                                                                <option value="{{ $user->id }}">{{ $user->username }}</option>
-                                                            @empty
-                                                                <span class="text-danger">{{ __("No user found!!!") }}</span>
-                                                            @endforelse
-                                                        </select>
-                                                    </div>
-                                                    <div class="input-group mg-b-pro-edt">
-                                                                    <span class="input-group-addon">
-                                                                        <i class="fa fa-money" aria-hidden="true"></i>
-                                                                    </span>
-                                                        <input type="number" min="0" step="any" name="amount"
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-usd" aria-hidden="true"></i>
+                                                        </span>
+                                                        <input id="name" type="text" name="name"
                                                                class="form-control"
-                                                               placeholder="Enter amount">
+                                                               placeholder="Enter interest name" value="{{ $interest->name ?? old('name') }}">
+                                                    </div>
+
+                                                    <div class="input-group mg-b-pro-edt">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-percent" aria-hidden="true"></i>
+                                                        </span>
+                                                        <input type="text" name="percent"
+                                                               class="form-control"
+                                                               placeholder="Enter interest percent" value="{{ $interest->percent ?? old('percent') }}">
                                                     </div>
 
                                                     <div class="row">
                                                         <div
                                                             class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                             <div class="text-center custom-pro-edt-ds">
-                                                                <button type="submit"
+                                                                <button title="Click to submit" type="submit"
                                                                         class="btn btn-ctl-bt waves-effect waves-light m-r-10">
                                                                     Save
                                                                 </button>
-                                                                <a href="{{ route('admin.user.index') }}"
-                                                                   class="btn btn-ctl-bt waves-effect waves-light" style="margin-top: 0;">
+                                                                <button title="Click to go previous page" type="button" onclick="window.history.back()"
+                                                                   class="btn btn-ctl-bt waves-effect waves-light"
+                                                                   style="margin-top: 0;">
                                                                     Discard
-                                                                </a>
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>

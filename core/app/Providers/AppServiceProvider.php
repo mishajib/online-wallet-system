@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Console\Commands\ModelMakeCommand;
+use App\Models\Setting;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,6 +31,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('layouts.app', function ($view) {
+            $view->with('setting', Setting::first());
+        });
+
+        view()->composer('layouts.backend.admin.app', function ($view) {
+            $view->with('setting', Setting::first());
+        });
+
+        view()->composer('layouts.backend.user.app', function ($view) {
+            $view->with('setting', Setting::first());
+        });
+
     }
 }

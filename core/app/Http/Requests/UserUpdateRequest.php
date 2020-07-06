@@ -28,7 +28,6 @@ class UserUpdateRequest extends FormRequest
             'username' => "bail|required|alpha_num|unique:users,id,:id",
             'email' => "bail|required|email|unique:users,id,:id",
             'phone' => "bail|required|string",
-            'balance' => "bail|required|numeric|min:1",
             'address' => "bail|string|required",
             'city' => "bail|string|required",
             "postcode" => "bail|string|required",

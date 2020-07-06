@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->decimal('balance', 18, 8)->default(0.00);
             $table->string('city');
             $table->string('postcode');
-            $table->integer('ref_by')->nullable();
+            $table->unsignedInteger('ref_by')->nullable();
             $table->string('slug');
             $table->string('image')->default(asset('assets/backend/user.png'));
             $table->timestamp('email_verified_at')->nullable();

@@ -8,22 +8,31 @@
                             <li class="{{ Request::is('admin/dashboard') ? 'active' : '' }}">
                                 <a  href="{{ route('admin.dashboard') }}">Dashboard <span class="fa fa-dashboard"></span></a>
                             </li>
-                            <li class="{{ (Request::is('admin/user/*')) ? 'active' : '' }}">
+                            <li class="{{ (Request::is('admin/user*')) ? 'active' : '' }}">
                                 <a data-toggle="collapse" data-target="#user" href="#">User <i class="fa fa-user fa-caret-down"></i></a>
                                 <ul id="user" class="collapse dropdown-header-top">
                                     <li><a href="{{ route('admin.user.index') }}">All user</a>
                                     </li>
-                                    <li><a href="{{ route('admin.user.add.balance') }}">Add balance</a>
+                                    <li><a href="{{ route('admin.user.balance.manage.page') }}">Add / Subtract balance</a>
                                     </li>
                                 </ul>
                             </li>
 
-                            <li class="{{ Request::is('user/transaction/all') ? 'active' : '' }}">
+                            <li class="{{ Request::is('admin/user/transaction/all') ? 'active' : '' }}">
                                 <a  href="{{ route('admin.user.transaction.all') }}">Transactions <span class="fa fa-history"></span></a>
                             </li>
 
-                            <li class="{{ Request::is('site/setting') ? 'active' : '' }}">
+                            <li class="{{ Request::is('admin/site/setting') ? 'active' : '' }}">
                                 <a  href="{{ route('admin.site.setting') }}">Setting <span class="fa fa-cogs"></span></a>
+                            </li>
+
+                            <li class="{{ (Request::is('admin/interest*')) ? 'active' : '' }}">
+                                <a data-toggle="collapse" data-target="#interest" href="#">Interest <i class="fa fa-dollar fa-caret-down"></i></a>
+                                <ul id="interest" class="collapse dropdown-header-top">
+                                    <li><a href="{{ route('admin.interest.all') }}">All interest</a>
+                                    </li>
+                                    <li><a href="{{ route('admin.interest.create') }}">Add interest</a></li>
+                                </ul>
                             </li>
                         </ul>
                     </nav>

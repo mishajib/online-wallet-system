@@ -10,9 +10,9 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-status-wrap">
-                        <h4>Products List</h4>
+                        <h4>User List</h4>
                         <div class="add-product">
-                            <a href="{{ route('admin.user.add.balance') }}">Add Product</a>
+                            <a href="{{ route('admin.user.balance.manage.page') }}">Add / Subtract Balance</a>
                         </div>
                         <table>
                             <tr>
@@ -45,10 +45,10 @@
                                         <img class="img-circle img-responsive" src="{{ asset('assets/uploads/profile/' . $user->image) }}" alt="{{ $user->slug }}">
                                     </td>
                                     <td>
-                                        <a class="btn btn-warning btn-sm" href="{{ route('admin.user.edit', $user->slug) }}">
+                                        <a title="Click to edit user" class="btn btn-warning btn-sm" href="{{ route('admin.user.edit', $user->id) }}">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <a class="btn btn-sm btn-info" href="{{ route('admin.user.show', $user->slug) }}">
+                                        <a title="Click to show user information" class="btn btn-sm btn-info" href="{{ route('admin.user.show', $user->id) }}">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                     </td>
