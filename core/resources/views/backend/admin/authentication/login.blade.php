@@ -49,7 +49,7 @@
                                 </label>
                                 <p class="help-block small">{{ __("(if this is a private computer)") }}</p>
                             </div>
-                            <button class="btn btn-success btn-block loginbtn">{{ __("Login") }}</button>
+                            <button title="Click to login" class="btn btn-success btn-block loginbtn">{{ __("Login") }}</button>
                         </form>
                     </div>
                 </div>

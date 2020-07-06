@@ -20,33 +20,41 @@
         <div class="left-custom-menu-adp-wrap comment-scrollbar">
             <nav class="sidebar-nav left-sidebar-menu-pro">
                 <ul class="metismenu" id="menu1">
-                    <li class="{{ Request::is('/admin/dashboard') ? 'active' : '' }}">
-                        <a class="{{ Request::is('/admin/dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
+                    <li class="{{ Request::is('admin/dashboard') ? 'active' : '' }}">
+                        <a class="{{ Request::is('admin/dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
                             <i class="fa fa-dashboard"></i>
                             <span class="mini-click-non">Dashboard</span>
                         </a>
                     </li>
 
-                    <li class="{{ (Request::is('admin/user/*')) ? 'active' : '' }}">
+                    <li class="{{ (Request::is('admin/user*')) ? 'active' : '' }}">
                         <a class="has-arrow" href="javascript:void(0);" aria-expanded="{{ (Request::is('admin/user*')) ? true : false }}"><i class="fa fa-envelope-o icon-wrap"></i> <span class="mini-click-non">User</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
                             <li><a title="All User" href="{{ route('admin.user.index') }}"><span class="mini-sub-pro">All user</span></a></li>
-                            <li><a title="Add balance" href="{{ route('admin.user.add.balance') }}"><span class="mini-sub-pro">Add balance</span></a></li>
+                            <li><a title="Add balance" href="{{ route('admin.user.balance.manage.page') }}"><span class="mini-sub-pro">Add / Subtract balance</span></a></li>
                         </ul>
                     </li>
 
-                    <li class="{{ Request::is('user/transaction/all') ? 'active' : '' }}">
-                        <a class="{{ Request::is('user/transaction/all') ? 'active' : '' }}" href="{{ route('admin.user.transaction.all') }}">
+                    <li class="{{ Request::is('admin/user/transaction/all') ? 'active' : '' }}">
+                        <a class="{{ Request::is('admin/user/transaction/all') ? 'active' : '' }}" href="{{ route('admin.user.transaction.all') }}">
                             <i class="fa fa-history"></i>
                             <span class="mini-click-non">Transactions</span>
                         </a>
                     </li>
 
-                    <li class="{{ Request::is('site/setting') ? 'active' : '' }}">
-                    <a class="{{ Request::is('site/setting') ? 'active' : '' }}" href="{{ route('admin.site.setting') }}">
+                    <li class="{{ Request::is('admin/site/setting') ? 'active' : '' }}">
+                    <a class="{{ Request::is('admin/site/setting') ? 'active' : '' }}" href="{{ route('admin.site.setting') }}">
                         <i class="fa fa-cogs"></i>
                         <span class="mini-click-non">Setting</span>
                     </a>
+                    </li>
+
+                    <li class="{{ (Request::is('admin/interest*')) ? 'active' : '' }}">
+                        <a class="has-arrow" href="javascript:void(0);" aria-expanded="{{ (Request::is('admin/interest*')) ? true : false }}"><i class="fa fa-dollar icon-wrap"></i> <span class="mini-click-non">Interest</span></a>
+                        <ul class="submenu-angle" aria-expanded="false">
+                            <li><a title="All interest" href="{{ route('admin.interest.all') }}"><span class="mini-sub-pro">All interest</span></a></li>
+                            <li><a title="Add balance" href="{{ route('admin.interest.create') }}"><span class="mini-sub-pro">Add interest</span></a></li>
+                        </ul>
                     </li>
 
                 </ul>

@@ -15,17 +15,17 @@ class UserController extends Controller
         return view('backend.admin.user.index', compact('users'));
     }
 
-    public function show($slug)
+    public function show($id)
     {
-        $user = User::where('slug', $slug)->first();
-        $transactions = $user->transaction()->paginate(10);
+        $user = User::findOrFail($id);
+        $transactions = $user->transactions()->paginate(10);
         $referredUsers = $user->referreduser()->paginate(10);
         return view('backend.admin.user.show', compact('user', 'transactions', 'referredUsers'));
     }
 
-    public function edit($slug)
+    public function edit($id)
     {
-        $user = User::where('slug', $slug)->first();
+        $user = User::findOrFail($id);
         return view('backend.admin.user.edit', compact('user'));
     }
 
@@ -41,7 +41,6 @@ class UserController extends Controller
         $user->address = $request->address;
         $user->city = $request->city;
         $user->postcode = $request->postcode;
-        $user->balance = $request->balance;
         $user->save();
         return redirect()->back()->with('success', 'User updated successfully');
 

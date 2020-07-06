@@ -16,7 +16,8 @@ class SettingTableSeeder extends Seeder
             "site_name" => "Online Wallet System",
             "fixed_charge" => 0.00,
             "percent_charge" => 0,
-            "join_bonus" => 0.00
+            "join_bonus" => 0.00,
+            "currency" => "BDT",
         ]);
     }
 }

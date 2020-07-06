@@ -43,7 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Log::class);
     }
 
-    public function referreduser()
+    public function referredusers()
     {
         return $this->hasMany(User::class, 'ref_by', 'id');
     }
@@ -53,7 +53,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(User::class, 'ref_by');
     }
 
-    public function transaction()
+    public function transactions()
     {
         return $this->hasMany(Transaction::class);
     }

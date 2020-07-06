@@ -59,12 +59,10 @@
 
                                                     <div class="input-group mg-b-pro-edt">
                                                     <span class="input-group-addon">
-                                                        <i class="fa fa-money" aria-hidden="true"></i>
+                                                        <i class="fa fa-phone" aria-hidden="true"></i>
                                                     </span>
-                                                        <input type="number" min="0" step="any" name="balance"
-                                                               value="{{ number_format($user->balance, 2) }}"
-                                                               class="form-control"
-                                                               placeholder="0.00">
+                                                        <input type="text" name="phone" value="{{ $user->phone }}"
+                                                               class="form-control" placeholder="Phone number">
                                                     </div>
 
 
@@ -72,14 +70,6 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                 <div class="review-content-section">
-
-                                                    <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-phone" aria-hidden="true"></i>
-                                                    </span>
-                                                        <input type="text" name="phone" value="{{ $user->phone }}"
-                                                               class="form-control" placeholder="Phone number">
-                                                    </div>
 
                                                     <div class="input-group mg-b-pro-edt">
                                                     <span class="input-group-addon">
@@ -113,10 +103,10 @@
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="text-center custom-pro-edt-ds">
-                                                    <button type="submit"
+                                                    <button title="Click to submit" type="submit"
                                                             class="btn btn-ctl-bt waves-effect waves-light m-r-10">Save
                                                     </button>
-                                                    <a href="{{ route('admin.user.index') }}" class="btn btn-ctl-bt waves-effect waves-light">
+                                                    <a title="Click to go previous page" href="{{ route('admin.user.index') }}" class="btn btn-ctl-bt waves-effect waves-light">
                                                         Discard
                                                     </a>
                                                 </div>

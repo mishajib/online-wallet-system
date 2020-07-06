@@ -18,7 +18,6 @@
                 <tr>
                     <th scope="col">#</th>
                     <th>TRX Num</th>
-                    <th>Sender</th>
                     <th>TRX Type</th>
                     <th>Amount</th>
                     <th>Remaining Balance</th>
@@ -28,27 +27,29 @@
                 <tbody>
                 @forelse($transactions as $key => $transaction)
                     <tr>
-                        <th scope="row">{{ ++$key }}</th>
+                        <th scope="row">{{ $transactions->firstItem()+$key }}</th>
                         <td>{{ $transaction->trx_num }}</td>
-                        <td>
-                            @if(empty($transaction->user))
-                                <span class="text-danger">{{ __("No data found!!!") }}</span>
-                            @else
-                                {{ $transaction->user->username }}
-                            @endif
-                        </td>
                         <td>{{ $transaction->trx_type }}</td>
-                        <td>{{ $transaction->amount }}</td>
+                        <td>{{ number_format($transaction->amount, 2)  }}</td>
                         <td>{{ $transaction->remaining_balance }}</td>
                         <td>{{ $transaction->details }}</td>
                     </tr>
                 @empty
-                    <h2>
-                        <span class="text-danger">{{ __("No data found!!!") }}</span>
-                    </h2>
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            <h1>
+                                <span class="text-danger">{{ __("No data found!!!") }}</span>
+                            </h1>
+                        </td>
+                    </tr>
                 @endforelse
                 </tbody>
             </table>
+            <nav aria-label="...">
+                <ul class="pagination">
+                    {{ $transactions->links() }}
+                </ul>
+            </nav>
         </div>
     </div>
 @stop

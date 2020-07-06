@@ -21,6 +21,7 @@ class SettingController extends Controller
             'fixed_charge' => "bail|numeric|required",
             'percent_charge' => "bail|numeric|required",
             'join_bonus' => "bail|numeric|required",
+            'currency' => "bail|string|required",
         ]);
 
         $setting = Setting::findOrFail($id);
@@ -28,6 +29,7 @@ class SettingController extends Controller
         $setting->fixed_charge = $request->fixed_charge;
         $setting->percent_charge = $request->percent_charge;
         $setting->join_bonus = $request->join_bonus;
+        $setting->currency = $request->currency;
         $setting->save();
         return back()->with('success', 'Site setting successfully updated');
     }

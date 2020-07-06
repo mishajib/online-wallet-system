@@ -15,12 +15,17 @@
                                 <div class="panel-heading">
                                     <p class="text-center">
                                         <img style="width: 20%" class="img-thumbnail img-responsive img-circle"
-                                             src="{{ asset('assets/uploads/profile/'.$user->image) }}" alt="{{ $user->username }}">
+                                             src="{{ asset('assets/uploads/profile/'.$user->image) }}"
+                                             alt="{{ $user->username }}">
                                     </p>
                                     <h1 class="text-center">{{ $user->name }}</h1>
                                     <h3 class="text-center"> {{ $user->username }}</h3>
-                                    <h4 class="text-center">Remaining
-                                        Balance: {{ number_format($user->balance, 2) }}</h4>
+                                    <h4 class="text-center">
+                                        Remaining Balance: {{ number_format($user->balance, 2) }}
+                                    </h4>
+                                    <p class="text-center">
+                                        <a class="btn btn-primary" href="{{ route('admin.user.balance.manage.page') }}">Manage Balance</a>
+                                    </p>
                                 </div>
                                 <div class="panel-body text-justify">
                                     <h3 class="well">Email: {{ $user->email }}</h3>
@@ -68,7 +73,13 @@
                                         <td>{{ $transaction->created_at->diffForHumans() }}</td>
                                     </tr>
                                 @empty
-                                    <h3><span class="text-danger">{{ __('No transaction found!!!') }}</span></h3>
+                                    <tr>
+                                        <td colspan="8">
+                                            <h1 class="text-center">
+                                                <span class="text-danger">{{ __('No transaction found!!!') }}</span>
+                                            </h1>
+                                        </td>
+                                    </tr>
                                 @endforelse
 
                             </table>
@@ -114,16 +125,24 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a class="btn btn-warning btn-sm" href="{{ route('admin.user.edit', $user->slug) }}">
+                                            <a class="btn btn-warning btn-sm"
+                                               href="{{ route('admin.user.edit', $user->id) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-info" href="{{ route('admin.user.show', $user->slug) }}">
+                                            <a class="btn btn-sm btn-info"
+                                               href="{{ route('admin.user.show', $user->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         </td>
                                     </tr>
                                 @empty
-                                    <h3><span class="text-danger">{{ __('No user found!!!') }}</span></h3>
+                                    <tr>
+                                        <td colspan="8">
+                                            <h1 class="text-center">
+                                                <span class="text-danger">{{ __('No user found!!!') }}</span>
+                                            </h1>
+                                        </td>
+                                    </tr>
                                 @endforelse
 
                             </table>

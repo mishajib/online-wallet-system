@@ -45,6 +45,13 @@
                                 <input type="number" min="0" step="any" name="join_bonus" value="{{ number_format($setting->join_bonus, 2) ?? old('join_bonus') }}" class="form-control" placeholder="Join Bonus">
                             </div>
 
+                            <div class="input-group mg-b-pro-edt">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-dollar" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" name="currency" value="{{ $setting->currency ?? old('join_bonus') }}" class="form-control" placeholder="Join Bonus">
+                            </div>
+
                             <div class="row">
                                 <div
                                     class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
