@@ -43,5 +43,9 @@ class AppServiceProvider extends ServiceProvider
             $view->with('setting', Setting::first());
         });
 
+        view()->composer('layouts.backend.admin.auth.app', function ($view) {
+            $view->with('setting', Setting::first());
+        });
+
     }
 }

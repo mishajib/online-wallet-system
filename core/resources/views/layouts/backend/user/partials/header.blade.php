@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'Enter site title here') | {{ $setting->site_name }}</title>
 
+    <link rel="icon" href="{{ asset('assets/favicon.png') }}">
     <link rel="stylesheet" href="{{ asset('assets/backend/bootstrap-4/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/backend/css/sidebar.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/backend/admin/css/font-awesome.min.css') }}">

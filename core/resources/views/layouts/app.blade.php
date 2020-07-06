@@ -9,7 +9,7 @@
 
     <title>@yield('title') | {{ $setting->site_name }}</title>
 
-
+    <link rel="icon" href="{{ asset('assets/favicon.png') }}">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -76,5 +76,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 @include('layouts.errors')
 @include('layouts.success')
+@include('layouts.error')
 </body>
 </html>
