@@ -24,6 +24,7 @@ Route::get('home', "HomeController@index")->name('home')->middleware(['auth:web'
 //User Routes
 Auth::routes(['verify' => true]);
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('register/{user}', 'Auth\RegisterController@showRegistrationForm')->name('refer');
 
 Route::group(['namespace' => 'Backend\User', 'as' => 'user.', 'middleware' => ['auth:web', 'verified', 'preventBackHistory']], function () {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');

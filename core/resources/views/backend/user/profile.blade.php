@@ -90,6 +90,21 @@
                                 <button type="submit" class="btn btn-primary">Update</button>
 
                             </form>
+
+                            <div class="form-group mt-5">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <label for="postcode">{{ __("Referral Link") }}</label>
+                                        <input readonly title="Referral Link" type="text" value="{{ route('refer', Auth::user()->username) }}" class="form-control" id="refer">
+
+                                    </div>
+                                    <div class="col-md-3 ml-n3" style="margin-top: 27px;">
+                                        <button title="Click to copy referral link" class="btn btn-info mt-1" type="button" id="copyText" data-clipboard-target="#refer" aria-label="copied!">
+                                            {{ __('Copy Referral Link') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

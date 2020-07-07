@@ -4,6 +4,7 @@
 <script src="{{ asset('assets/backend/js/select2.min.js') }}"></script>
 <script src="{{ asset('assets/backend/dropify/js/dropify.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
 @include('layouts.errors')
 @include('layouts.success')
 @include('layouts.error')
@@ -22,6 +23,8 @@
         });
 
     });
+
+    new ClipboardJS('#copyText');
 </script>
 </body>
 </html>
