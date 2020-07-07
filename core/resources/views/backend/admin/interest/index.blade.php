@@ -26,7 +26,7 @@
                             @forelse($interests as $key => $interest)
                                 <tr>
 
-                                    <td>{{ ++$key }}</td>
+                                    <td>{{ $interests->firstItem()+$key }}</td>
                                     <td>{{ $interest->name }}</td>
                                     <td>{{ $interest->percent }}</td>
                                     <td>{{ $interest->created_at->diffForHumans() }}</td>

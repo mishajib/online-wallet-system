@@ -19,8 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-//Route::get('email/check', function () {
-//    return view('refer_mail');
+//Route::get('template', function () {
+//    return view('auth.passwords.reset');
 //});
 
 Route::get('home', "HomeController@index")->name('home')->middleware(['auth:web', 'preventBackHistory']);

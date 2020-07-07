@@ -1,11 +1,23 @@
-@extends('layouts.app')
+@extends('layouts.backend.user.auth.app')
+
+@section("title", "Verify Email")
+
+@section('color', "bg-secondary")
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center my-5">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+            <div class="card border-success">
+                <div class="card-header bg-success p-5 rounded">
+                    <p class="text-center text-white">
+                        <img src="{{ asset('assets/backend/img/mail.svg') }}" alt="verify-email"
+                             class="img-responsive w-25">
+                    </p>
+                    <h1 class="card-title text-center text-white">
+                        {{ __('Verify Your Email Address') }}
+                    </h1>
+                </div>
 
                 <div class="card-body">
                     @if (session('resent'))

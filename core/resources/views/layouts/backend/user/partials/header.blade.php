@@ -15,4 +15,4 @@
 
     <link rel="stylesheet" href="{{ asset('assets/backend/dropify/css/dropify.min.css') }}">
 </head>
-<body>
+<body class="@yield('color')">

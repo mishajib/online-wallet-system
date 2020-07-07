@@ -25,7 +25,7 @@
                             @forelse($transactions as $key => $transaction)
                                 <tr>
 
-                                    <td>{{ ++$key }}</td>
+                                    <td>{{ $transactions->firstItem()+$key }}</td>
                                     <td>{{ $transaction->trx_num }}</td>
                                     <td>{{ $transaction->user->username }}</td>
                                     <td>{{ $transaction->trx_type }}</td>

@@ -4,13 +4,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Home</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
-        <link rel="icon" href="{{ asset('assets/favicon.ico') }}">
+        <link rel="icon" href="{{ asset('assets/favicon.png') }}">
         <style>
             html, body {
                 background-color: #fff;
