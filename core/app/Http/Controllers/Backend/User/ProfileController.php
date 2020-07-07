@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Models\Setting;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -95,5 +96,23 @@ class ProfileController extends Controller
         } else {
             return back()->with("error", "Current password does not matched!!!");
         }
+    }
+
+    public function sendLink(Request $request)
+    {
+        $request->validate([
+            'refer_link' => 'bail|required|email',
+        ]);
+        $setting = Setting::first();
+        $sender_email = Auth::user()->email;
+        $receiver_email = $request->refer_link;
+        $subject = "Join Online Wallet System by this link";
+        $message = view('refer_mail');
+        $headers = "From: $setting->site_name <$sender_email> \r\n";
+        $headers .= "Reply-To: <$receiver_email> \r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=utf-8\r\n";
+        @mail($receiver_email, $subject, $message, $headers);
+        return back()->with('success', "Referral link sent successfully");
     }
 }

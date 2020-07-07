@@ -99,12 +99,33 @@
 
                                     </div>
                                     <div class="col-md-3 ml-n3" style="margin-top: 27px;">
-                                        <button title="Click to copy referral link" class="btn btn-info mt-1" type="button" id="copyText" data-clipboard-target="#refer" aria-label="copied!">
+                                        <button title="Click to copy referral link" class="btn btn-info mt-1" type="button" id="copyText" data-clipboard-target="#refer">
                                             {{ __('Copy Referral Link') }}
                                         </button>
                                     </div>
                                 </div>
                             </div>
+
+                            <form action="{{ route('user.referral.link.send') }}" method="POST">
+                                @csrf
+                                <div class="form-group mt-5">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <label for="refer_link">Send Referral Link By Email</label>
+                                            <input type="email" class="form-control @error('refer_link') is-invalid @enderror"
+                                                   id="refer_link" aria-describedby="refer_link" name="refer_link" required
+                                                   placeholder="Enter email"
+                                                   value="{{ old('refer_link') }}">
+
+                                        </div>
+                                        <div class="col-md-3 ml-n3" style="margin-top: 27px;">
+                                            <button title="Click to send referral link" class="btn btn-info mt-1" type="submit">
+                                                {{ __('Send') }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

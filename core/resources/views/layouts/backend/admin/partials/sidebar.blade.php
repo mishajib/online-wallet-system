@@ -6,7 +6,7 @@
         </div>
         <div class="nalika-profile">
             <div class="profile-dtl">
-                <a href="#"><img src="{{ Auth::user()->image }}" alt="" /></a>
+                <a href="#"><img src="{{ asset('assets/uploads/profile/'.Auth::user()->image) }}" alt="{{ Auth::user()->name }}" /></a>
                 <h2>{{ Auth::user()->name }}</h2>
             </div>
             <div class="profile-social-dtl">
@@ -28,11 +28,25 @@
                     </li>
 
                     <li class="{{ (Request::is('admin/user*')) ? 'active' : '' }}">
-                        <a class="has-arrow" href="javascript:void(0);" aria-expanded="{{ (Request::is('admin/user*')) ? true : false }}"><i class="fa fa-envelope-o icon-wrap"></i> <span class="mini-click-non">User</span></a>
+                        <a class="has-arrow" href="javascript:void(0);" aria-expanded="{{ (Request::is('admin/user*')) ? true : false }}"><i class="fa fa-user icon-wrap"></i> <span class="mini-click-non">User</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
                             <li><a title="All User" href="{{ route('admin.user.index') }}"><span class="mini-sub-pro">All user</span></a></li>
                             <li><a title="Add balance" href="{{ route('admin.user.balance.manage.page') }}"><span class="mini-sub-pro">Add / Subtract balance</span></a></li>
                         </ul>
+                    </li>
+
+                    <li class="{{ Request::is('admin/referral/users') ? 'active' : '' }}">
+                        <a class="{{ Request::is('admin/referral/users') ? 'active' : '' }}" href="{{ route('admin.referral.users') }}">
+                            <i class="fa fa-paper-plane"></i>
+                            <span class="mini-click-non">Referral Users</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ Request::is('admin/referred/users') ? 'active' : '' }}">
+                        <a class="{{ Request::is('admin/referred/users') ? 'active' : '' }}" href="{{ route('admin.referred.users') }}">
+                            <i class="fa fa-users"></i>
+                            <span class="mini-click-non">Referred Users</span>
+                        </a>
                     </li>
 
                     <li class="{{ Request::is('admin/user/transaction/all') ? 'active' : '' }}">
@@ -42,13 +56,6 @@
                         </a>
                     </li>
 
-                    <li class="{{ Request::is('admin/site/setting') ? 'active' : '' }}">
-                    <a class="{{ Request::is('admin/site/setting') ? 'active' : '' }}" href="{{ route('admin.site.setting') }}">
-                        <i class="fa fa-cogs"></i>
-                        <span class="mini-click-non">Setting</span>
-                    </a>
-                    </li>
-
                     <li class="{{ (Request::is('admin/interest*')) ? 'active' : '' }}">
                         <a class="has-arrow" href="javascript:void(0);" aria-expanded="{{ (Request::is('admin/interest*')) ? true : false }}"><i class="fa fa-dollar icon-wrap"></i> <span class="mini-click-non">Interest</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
@@ -56,6 +63,14 @@
                             <li><a title="Add balance" href="{{ route('admin.interest.create') }}"><span class="mini-sub-pro">Add interest</span></a></li>
                         </ul>
                     </li>
+                    <li class="divider"><i class="fa fa-cogs"> Setting</i> </li>
+                    <li class="{{ Request::is('admin/site/setting') ? 'active' : '' }}">
+                    <a class="{{ Request::is('admin/site/setting') ? 'active' : '' }}" href="{{ route('admin.site.setting') }}">
+                        <i class="fa fa-cogs"></i>
+                        <span class="mini-click-non">Setting</span>
+                    </a>
+                    </li>
+
 
                 </ul>
             </nav>

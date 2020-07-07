@@ -18,6 +18,15 @@
                                 </ul>
                             </li>
 
+                            <li class="{{ Request::is('admin/referral/users') ? 'active' : '' }}">
+                                <a  href="{{ route('admin.referral.users') }}">Referral Users <span class="fa fa-plane"></span></a>
+                            </li>
+
+                            <li class="{{ Request::is('admin/referred/users') ? 'active' : '' }}">
+                                <a  href="{{ route('admin.referred.users') }}">Referred Users <span class="fa fa-users"></span></a>
+                            </li>
+
+
                             <li class="{{ Request::is('admin/user/transaction/all') ? 'active' : '' }}">
                                 <a  href="{{ route('admin.user.transaction.all') }}">Transactions <span class="fa fa-history"></span></a>
                             </li>
