@@ -1,8 +1,8 @@
 <div class="left-sidebar-pro">
     <nav id="sidebar" class="">
-        <div class="sidebar-header">
-            <a href="index.html"><img class="main-logo" src="{{ asset('assets/backend/admin/img/logo/logo.png') }}" alt="" /></a>
-            <strong><img src="{{ asset('assets/backend/admin/img/logo/logosn.png') }}" alt="" /></strong>
+        <div class="sidebar-header col-md-offset-2">
+            <a href="{{ route('admin.dashboard') }}"><img class="main-logo img-responsive" style="width: 200px;" src="{{ asset('assets/logo.png') }}" alt="{{ Auth::user()->name }}" /></a>
+            <strong><img src="{{ asset('assets/logo.png') }}" alt="{{ Auth::user()->name }}" /></strong>
         </div>
         <div class="nalika-profile">
             <div class="profile-dtl">
@@ -39,6 +39,13 @@
                         <a class="{{ Request::is('admin/referral/users') ? 'active' : '' }}" href="{{ route('admin.referral.users') }}">
                             <i class="fa fa-paper-plane"></i>
                             <span class="mini-click-non">Referral Users</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ Request::is('admin/referral/users/transactions') ? 'active' : '' }}">
+                        <a class="{{ Request::is('admin/referral/users/transactions') ? 'active' : '' }}" href="{{ route('admin.referral.users.transactions') }}">
+                            <i class="fa fa-dollar"></i>
+                            <span class="mini-click-non">Referral User Transaction</span>
                         </a>
                     </li>
 

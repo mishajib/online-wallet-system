@@ -79,6 +79,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin', 'as' => 'admi
 
     Route::get('referred/users', 'ReferController@index')->name('referred.users');
     Route::get('referral/users', 'ReferController@referralUsers')->name('referral.users');
+    Route::get('referral/users/transactions', 'ReferController@referralTransactions')->name('referral.users.transactions');
 
 });
 //End Admin Routes
