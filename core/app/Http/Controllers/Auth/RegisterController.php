@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -42,7 +43,25 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:web');
+    }
+
+    public function showRegistrationForm($user = null)
+    {
+        if ($user) {
+            $ref_user = User::where('username', $user)->first();
+            if (!$ref_user)
+            {
+                return back()->with('error', 'Invalid referal link!!!');
+            }
+            return view('auth.register', compact('ref_user'));
+        } else {
+            $ref_user = 0;
+            return view('auth.register', compact('ref_user'));
+        }
+
+
+
     }
 
     /**
@@ -93,10 +112,10 @@ class RegisterController extends Controller
         Transaction::create([
             'user_id' => $user->id,
             'trx_num' => $trx_num,
-            'trx_type' => $setting->join_bonus . ' ' . $setting->currency . ' credited',
+            'trx_type' => number_format($setting->join_bonus, 2) . ' ' . $setting->currency . ' credited',
             'amount' => $setting->join_bonus,
             'remaining_balance' => $user->balance,
-            'details' => $setting->join_bonus . ' ' . $setting->currency . ' received join bonus',
+            'details' => number_format($setting->join_bonus, 2) . ' ' . $setting->currency . ' received join bonus',
         ]);
 
         if (!empty($data['refer'])) {
@@ -104,10 +123,10 @@ class RegisterController extends Controller
             Transaction::create([
                 'user_id' => $referUser->id,
                 'trx_num' => $trx_num,
-                'trx_type' => $setting->join_bonus . ' ' . $setting->currency . ' credited',
+                'trx_type' => number_format($setting->join_bonus, 2) . ' ' . $setting->currency . ' credited',
                 'amount' => $setting->join_bonus,
                 'remaining_balance' => $user->balance,
-                'details' => $setting->join_bonus . ' ' . $setting->currency . ' received referral bonus',
+                'details' => number_format($setting->join_bonus, 2) . ' ' . $setting->currency . ' received referral bonus',
             ]);
             $referUser->save();
         }
@@ -116,6 +135,10 @@ class RegisterController extends Controller
 
     public function registered(Request $request, $user)
     {
-        return redirect(route('verification.notice'))->with('success', 'User registered successfully. Please verify your mail!!!');
+        if ($user) {
+            return redirect(route('verification.notice'))->with('success', 'User registered successfully. Please verify your mail!!!');
+        } else {
+            return redirect()->route('register');
+        }
     }
 }

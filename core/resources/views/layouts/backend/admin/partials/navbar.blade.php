@@ -99,7 +99,7 @@
                                                 </a>
                                                 <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
                                                     <li>
-                                                        <a href="#"><span class="fa fa-user author-log-ic"></span> My Profile</a>
+                                                        <a href="{{ route('admin.profile') }}"><span class="fa fa-user author-log-ic"></span> My Profile</a>
                                                     </li>
                                                     <li>
                                                         <a href="{{ route('admin.site.setting') }}"><span class="fa fa-cogs author-log-ic"></span> Settings</a>

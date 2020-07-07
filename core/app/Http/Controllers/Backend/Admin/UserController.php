@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -19,7 +20,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $transactions = $user->transactions()->paginate(10);
-        $referredUsers = $user->referreduser()->paginate(10);
+        $referredUsers = $user->referredusers()->paginate(10);
         return view('backend.admin.user.show', compact('user', 'transactions', 'referredUsers'));
     }
 
@@ -54,7 +55,7 @@ class UserController extends Controller
         ]);
 
         $user = User::findOrFail($id);
-        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
         $user->save();
         return back()->with('success', 'Password reset successful');
     }

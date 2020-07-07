@@ -27,7 +27,7 @@ class TransferController extends Controller
         $sender = Auth::user();
         $setting = Setting::first();
         if ($receiver) {
-            $charge = $request->amount * ($setting->percent_charge/100) + $setting->fixed_charge;
+            $charge = $request->amount * ($setting->percent_charge / 100) + $setting->fixed_charge;
             $totalAmount = $request->amount + $charge;
             if ($totalAmount <= $sender->balance) {
                 $trx_num = Str::random(12);
@@ -52,6 +52,21 @@ class TransferController extends Controller
                     'details' => $request->amount . " " . $setting->currency . " sent to " . $receiver->username,
                 ]);
                 $sender->save();
+
+                if ($sender->ref_by != null) {
+                    $percent_amount = $request->amount * (2/100);
+                    $sender->user->balance += $percent_amount;
+                    $sender->user->transactions()->create([
+                        'user_id' => $sender->user->id,
+                        'trx_num' => Str::random(12),
+                        'trx_type' => $percent_amount . " " . $setting->currency . " has been credited",
+                        'amount' => $percent_amount,
+                        'remaining_balance' => $sender->user->balance,
+                        'details' => $percent_amount . " " . $setting->currency . " received transfer bonus from " . $sender->username,
+                    ]);
+                    $sender->user->save();
+                }
+
 
                 return back()->with('success', "Transfer successful");
 

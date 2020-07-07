@@ -52,6 +52,8 @@
     ============================================ -->
 <script src="{{ asset('assets/backend/admin/js/plugins.js') }}"></script>
 <script src="{{ asset('assets/backend/js/select2.min.js') }}"></script>
+
+<script src="{{ asset('assets/backend/dropify/js/dropify.min.js') }}"></script>
 <!-- main JS
     ============================================ -->
 <script src="{{ asset('assets/backend/admin/js/main.js') }}"></script>
@@ -131,4 +133,7 @@
             }
         })
     }
+
+
+    $('#dropify').dropify();
 </script>

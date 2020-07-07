@@ -19,6 +19,8 @@
                     <th scope="col">#</th>
                     <th>Name</th>
                     <th>Username</th>
+                    <th>Phone Number</th>
+                    <th>Join Date</th>
                     <th>Ref By</th>
                 </tr>
                 </thead>
@@ -28,6 +30,8 @@
                         <th scope="row">{{ $refUsers->firstItem()+$key }}</th>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->username }}</td>
+                        <td>{{ $user->phone }}</td>
+                        <td>{{ $user->created_at->diffForHumans() }}</td>
                         <td>{{ $user->user->username }}</td>
                     </tr>
                 @empty

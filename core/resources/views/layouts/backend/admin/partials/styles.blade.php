@@ -52,3 +52,5 @@
 <link rel="stylesheet" href="{{ asset('assets/backend/admin/css/responsive.css') }}">
 
 <link rel="stylesheet" href="{{ asset('assets/backend/css/select2.min.css') }}">
+
+<link rel="stylesheet" href="{{ asset('assets/backend/dropify/css/dropify.min.css') }}">

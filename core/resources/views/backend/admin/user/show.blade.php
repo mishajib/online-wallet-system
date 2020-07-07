@@ -63,7 +63,7 @@
                                 @forelse($transactions as $key => $transaction)
                                     <tr>
 
-                                        <td>{{ ++$key }}</td>
+                                        <td>{{ $transactions->firstItem()+$key }}</td>
                                         <td>{{ $transaction->trx_num }}</td>
                                         <td>{{ $transaction->user->username }}</td>
                                         <td>{{ $transaction->trx_type }}</td>
@@ -112,7 +112,7 @@
                                 </tr>
                                 @forelse($referredUsers as $key => $user)
                                     <tr>
-                                        <td>{{ ++$key }}</td>
+                                        <td>{{ $referredUsers->firstItem()+$key }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->username }}</td>
                                         <td>{{ $user->phone }}</td>

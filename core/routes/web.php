@@ -19,11 +19,16 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+//Route::get('email/check', function () {
+//    return view('refer_mail');
+//});
+
 Route::get('home', "HomeController@index")->name('home')->middleware(['auth:web', 'preventBackHistory']);
 
 //User Routes
 Auth::routes(['verify' => true]);
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('register/{user}', 'Auth\RegisterController@showRegistrationForm')->name('refer');
 
 Route::group(['namespace' => 'Backend\User', 'as' => 'user.', 'middleware' => ['auth:web', 'verified', 'preventBackHistory']], function () {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
@@ -34,6 +39,7 @@ Route::group(['namespace' => 'Backend\User', 'as' => 'user.', 'middleware' => ['
     Route::get('transfer/money', 'TransferController@index')->name('transfer');
     Route::post('transfer/money', 'TransferController@transfer')->name('transfer.money');
     Route::get('referred/users', 'DashboardController@refUsers')->name('referred.user');
+    Route::post('referral/link/send', 'ProfileController@sendLink')->name('referral.link.send');
 });
 //End User Routes
 
@@ -66,5 +72,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin', 'as' => 'admi
     Route::post('interest/store', 'InterestController@store')->name('interest.store');
     Route::put('interest/{id}/update', 'InterestController@update')->name('interest.update');
     Route::delete('interest/{id}/destroy', 'InterestController@destroy')->name('interest.destroy');
+    Route::get('/profile', 'ProfileController@index')->name('profile');
+    Route::put('profile-update', 'ProfileController@updateProfile')->name('profile.update');
+    Route::put('profile-image-update', 'ProfileController@updateProfileImage')->name('profile.image.update');
+    Route::put('password-update', 'ProfileController@updatePassword')->name('password.update');
+
+    Route::get('referred/users', 'ReferController@index')->name('referred.users');
+    Route::get('referral/users', 'ReferController@referralUsers')->name('referral.users');
+
 });
 //End Admin Routes

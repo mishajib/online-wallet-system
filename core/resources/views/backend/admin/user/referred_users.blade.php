@@ -1,8 +1,8 @@
 @extends("layouts.backend.admin.app")
 
-@section("title", "All User")
+@section("title", "Referred Users")
 
-@section('breadcomb', 'All User')
+@section('breadcomb', 'Referred Users')
 
 @section("content")
     <div class="product-status mg-b-30">
@@ -10,10 +10,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-status-wrap">
-                        <h4>User List</h4>
-                        <div class="add-product">
-                            <a href="{{ route('admin.user.balance.manage.page') }}">Add / Subtract Balance</a>
-                        </div>
+                        <h4>Referred User List</h4>
                         <table>
                             <tr>
                                 <th>Serial No</th>
@@ -27,7 +24,6 @@
                             </tr>
                             @forelse($users as $key => $user)
                                 <tr>
-
                                     <td>{{ $users->firstItem()+$key }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->username }}</td>
