@@ -19,4 +19,10 @@ class ReferController extends Controller
         $users = User::whereNull('ref_by')->latest()->paginate(10);
         return view('backend.admin.user.referral_users', compact('users'));
     }
+
+    public function referralTransactions()
+    {
+        $users = User::whereNull('ref_by')->with('transactions')->latest()->paginate(10);
+        return view('backend.admin.user.referral_users_transactions', compact('users'));
+    }
 }

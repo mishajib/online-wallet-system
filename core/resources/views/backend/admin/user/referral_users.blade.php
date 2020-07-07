@@ -1,8 +1,8 @@
 @extends("layouts.backend.admin.app")
 
-@section("title", "Referred Users")
+@section("title", "Referral Users")
 
-@section('breadcomb', 'Referred Users')
+@section('breadcomb', 'Referral Users')
 
 @section("content")
     <div class="product-status mg-b-30">
@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-status-wrap">
-                        <h4>Referred User List</h4>
+                        <h4>Referral User List</h4>
                         <table>
                             <tr>
                                 <th>Serial No</th>

@@ -27,6 +27,8 @@
 @media (min-width: 768px) {
     #sidebar-wrapper {
         margin-left: 0;
+        padding-left: 42px;
+        padding-right: 42px;
     }
 
     #page-content-wrapper {
@@ -35,6 +37,6 @@
     }
 
     #wrapper.toggled #sidebar-wrapper {
-        margin-left: -19rem;
+        margin-left: -18rem;
     }
 }

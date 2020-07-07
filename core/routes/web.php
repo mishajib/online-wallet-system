@@ -19,8 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-//Route::get('email/check', function () {
-//    return view('refer_mail');
+//Route::get('template', function () {
+//    return view('auth.passwords.reset');
 //});
 
 Route::get('home', "HomeController@index")->name('home')->middleware(['auth:web', 'preventBackHistory']);
@@ -79,6 +79,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin', 'as' => 'admi
 
     Route::get('referred/users', 'ReferController@index')->name('referred.users');
     Route::get('referral/users', 'ReferController@referralUsers')->name('referral.users');
+    Route::get('referral/users/transactions', 'ReferController@referralTransactions')->name('referral.users.transactions');
 
 });
 //End Admin Routes
