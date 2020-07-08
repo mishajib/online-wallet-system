@@ -22,6 +22,7 @@
                     <th>Amount</th>
                     <th>Remaining Balance</th>
                     <th>Details</th>
+                    <th>Time</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,6 +34,7 @@
                         <td>{{ number_format($transaction->amount, 2)  }}</td>
                         <td>{{ $transaction->remaining_balance }}</td>
                         <td>{{ $transaction->details }}</td>
+                        <td>{{ $transaction->created_at->diffForHumans() }}</td>
                     </tr>
                 @empty
                     <tr>

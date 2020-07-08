@@ -1,8 +1,8 @@
 <div class="left-sidebar-pro">
     <nav id="sidebar" class="">
         <div class="sidebar-header col-md-offset-2">
-            <a href="{{ route('admin.dashboard') }}"><img class="main-logo img-responsive" style="width: 200px;" src="{{ asset('assets/logo.png') }}" alt="{{ Auth::user()->name }}" /></a>
-            <strong><img src="{{ asset('assets/logo.png') }}" alt="{{ Auth::user()->name }}" /></strong>
+            <a href="{{ route('admin.dashboard') }}"><img class="main-logo img-responsive" style="width: 200px;" src="{{ asset('assets/frontend/images/logo.png') }}" alt="{{ Auth::user()->name }}" /></a>
+            <strong><img src="{{ asset('assets/frontend/images/logo.png') }}" alt="{{ Auth::user()->name }}" /></strong>
         </div>
         <div class="nalika-profile">
             <div class="profile-dtl">
@@ -42,24 +42,32 @@
                         </a>
                     </li>
 
-                    <li class="{{ Request::is('admin/referral/users/transactions') ? 'active' : '' }}">
-                        <a class="{{ Request::is('admin/referral/users/transactions') ? 'active' : '' }}" href="{{ route('admin.referral.users.transactions') }}">
-                            <i class="fa fa-dollar"></i>
-                            <span class="mini-click-non">Referral User Transaction</span>
-                        </a>
-                    </li>
 
                     <li class="{{ Request::is('admin/referred/users') ? 'active' : '' }}">
-                        <a class="{{ Request::is('admin/referred/users') ? 'active' : '' }}" href="{{ route('admin.referred.users') }}">
-                            <i class="fa fa-users"></i>
-                            <span class="mini-click-non">Referred Users</span>
-                        </a>
+                    <a class="{{ Request::is('admin/referred/users') ? 'active' : '' }}" href="{{ route('admin.referred.users') }}">
+                    <i class="fa fa-users"></i>
+                    <span class="mini-click-non">Referred Users</span>
+                    </a>
                     </li>
 
                     <li class="{{ Request::is('admin/user/transaction/all') ? 'active' : '' }}">
-                        <a class="{{ Request::is('admin/user/transaction/all') ? 'active' : '' }}" href="{{ route('admin.user.transaction.all') }}">
+                    <a class="{{ Request::is('admin/user/transaction/all') ? 'active' : '' }}" href="{{ route('admin.user.transaction.all') }}">
+                    <i class="fa fa-history"></i>
+                    <span class="mini-click-non">Transactions</span>
+                    </a>
+                    </li>
+
+                    <li class="{{ Request::is('admin/referral/users/transactions') ? 'active' : '' }}">
+                        <a class="{{ Request::is('admin/referral/users/transactions') ? 'active' : '' }}" href="{{ route('admin.referral.users.transactions') }}">
                             <i class="fa fa-history"></i>
-                            <span class="mini-click-non">Transactions</span>
+                            <span class="mini-click-non">Non-referred User Transaction</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ Request::is('admin/referral/users/transactions') ? 'active' : '' }}">
+                        <a class="{{ Request::is('admin/referral/users/transactions') ? 'active' : '' }}" href="{{ route('admin.referred.users.transactions') }}">
+                            <i class="fa fa-history"></i>
+                            <span class="mini-click-non">Referred User Transaction</span>
                         </a>
                     </li>
 
@@ -76,6 +84,20 @@
                         <i class="fa fa-cogs"></i>
                         <span class="mini-click-non">Setting</span>
                     </a>
+                    </li>
+
+                    <li class="{{ Request::is('admin/ip/logs') ? 'active' : '' }}">
+                        <a class="{{ Request::is('admin/ip/logs') ? 'active' : '' }}" href="{{ route('admin.user.track') }}">
+                            <i class="fa fa-location-arrow"></i>
+                            <span class="mini-click-non">Ip Logs</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ url('/') }}" target="_blank">
+                            <i class="fa fa-home"></i>
+                            <span class="mini-click-non">Home</span>
+                        </a>
                     </li>
 
 

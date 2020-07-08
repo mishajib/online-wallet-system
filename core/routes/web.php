@@ -39,6 +39,7 @@ Route::group(['namespace' => 'Backend\User', 'as' => 'user.', 'middleware' => ['
     Route::get('transfer/money', 'TransferController@index')->name('transfer');
     Route::post('transfer/money', 'TransferController@transfer')->name('transfer.money');
     Route::get('referred/users', 'DashboardController@refUsers')->name('referred.user');
+    Route::get('refer/friend', 'ProfileController@referPage')->name('refer.friend');
     Route::post('referral/link/send', 'ProfileController@sendLink')->name('referral.link.send');
 });
 //End User Routes
@@ -80,6 +81,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin', 'as' => 'admi
     Route::get('referred/users', 'ReferController@index')->name('referred.users');
     Route::get('referral/users', 'ReferController@referralUsers')->name('referral.users');
     Route::get('referral/users/transactions', 'ReferController@referralTransactions')->name('referral.users.transactions');
+    Route::get('referred/users/transactions', 'ReferController@referredTransactions')->name('referred.users.transactions');
+
+    Route::get('ip/logs', 'TrackController@index')->name('user.track');
 
 });
 //End Admin Routes

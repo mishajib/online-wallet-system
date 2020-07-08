@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use App\Notifications\AdminResetPasswordNotification;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class Admin extends Authenticatable
 {
+    use Notifiable;
+
     protected $guard = 'admin';
     /**
      * The attributes that are mass assignable.
@@ -33,4 +37,8 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function SendPasswordResetNotification($token){
+        $this->notify(new AdminResetPasswordNotification($token));
+    }
 }

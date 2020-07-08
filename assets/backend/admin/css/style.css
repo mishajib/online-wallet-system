@@ -98,7 +98,7 @@ body {}
     width: 240px;
 }
 #sidebar {
-    min-width: 205px;
+    width: 205px;
     background: #1b2a47;
     color: #fff;
 	position:fixed;
@@ -3666,4 +3666,8 @@ th.fc-day-header.fc-widget-header {
 	background:#152036;
 	border-color: #152036;
 	color:#fff;
+}
+
+.form-control[disabled] {
+	background-color: #152036;
 }

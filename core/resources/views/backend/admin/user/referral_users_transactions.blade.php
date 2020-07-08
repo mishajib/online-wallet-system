@@ -22,11 +22,9 @@
                                 <th>Details</th>
                                 <th>Time & Date</th>
                             </tr>
-                            @forelse($users as $user)
-                                @foreach($user->transactions()->paginate(10) as $key => $transaction)
+                            @forelse($trans as $key => $transaction)
                                     <tr>
-
-                                        <td>{{ ++$key }}</td>
+                                        <td>{{ $trans->firstItem()+$key }}</td>
                                         <td>{{ $transaction->trx_num }}</td>
                                         <td>{{ $transaction->user->username }}</td>
                                         <td>{{ $transaction->trx_type }}</td>
@@ -35,7 +33,6 @@
                                         <td>{{ $transaction->details }}</td>
                                         <td>{{ $transaction->created_at->diffForHumans() }}</td>
                                     </tr>
-                                @endforeach
                             @empty
                                 <tr>
                                     <td colspan="8">
@@ -49,7 +46,7 @@
                         </table>
                         <div class="custom-pagination">
                             <ul class="pagination">
-                                {{ $users->links() }}
+                                {{ $trans->links() }}
                             </ul>
                         </div>
                     </div>
