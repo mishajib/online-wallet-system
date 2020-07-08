@@ -91,7 +91,7 @@
     </div>
 </div>
 
-<section id="about" class="p-5 mt-5" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
+<section id="about" class="p-5 mt-5" data-aos="fade-up">
     <div class="container-fluid">
         <div class="row mt-4">
             <div class="col-lg-7 col-md-8 col-sm-12">
@@ -107,7 +107,7 @@
     </div>
 </section>
 
-<section id="works" class="p-5" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
+<section id="works" class="p-5" data-aos="fade-up">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -151,7 +151,7 @@
     </div>
 </section>
 
-<section id="service" class="p-5" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
+<section id="service" class="p-5" data-aos="fade-up">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -196,7 +196,7 @@
 </section>
 
 
-<section id="choose" class="p-5" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
+<section id="choose" class="p-5" data-aos="fade-up">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -241,7 +241,7 @@
 </section>
 
 
-<section id="contact" class="p-5" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
+<section id="contact" class="p-5" data-aos="fade-up">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
