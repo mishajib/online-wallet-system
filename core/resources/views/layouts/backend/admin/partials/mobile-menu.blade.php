@@ -19,7 +19,7 @@
                             </li>
 
                             <li class="{{ Request::is('admin/referral/users') ? 'active' : '' }}">
-                                <a  href="{{ route('admin.referral.users') }}">Referral Users <span class="fa fa-plane"></span></a>
+                                <a  href="{{ route('admin.referral.users') }}">Non-Referred Users <span class="fa fa-plane"></span></a>
                             </li>
 
                             <li class="{{ Request::is('admin/referred/users') ? 'active' : '' }}">
@@ -29,6 +29,14 @@
 
                             <li class="{{ Request::is('admin/user/transaction/all') ? 'active' : '' }}">
                                 <a  href="{{ route('admin.user.transaction.all') }}">Transactions <span class="fa fa-history"></span></a>
+                            </li>
+
+                            <li class="{{ Request::is('referral/users/transactions') ? 'active' : '' }}">
+                                <a  href="{{ route('admin.referral.users.transactions') }}">Non-referred User Transaction <span class="fa fa-history"></span></a>
+                            </li>
+
+                            <li class="{{ Request::is('referred/users/transactions') ? 'active' : '' }}">
+                                <a  href="{{ route('admin.referred.users.transactions') }}">Referred User Transaction <span class="fa fa-history"></span></a>
                             </li>
 
                             <li class="{{ Request::is('admin/site/setting') ? 'active' : '' }}">

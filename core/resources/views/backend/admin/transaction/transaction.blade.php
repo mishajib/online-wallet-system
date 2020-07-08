@@ -20,7 +20,6 @@
                                 <th>Amount</th>
                                 <th>Remaining Balance</th>
                                 <th>Details</th>
-                                <th>Action</th>
                             </tr>
                             @forelse($transactions as $key => $transaction)
                                 <tr>

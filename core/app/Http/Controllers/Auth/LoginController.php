@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Log;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -49,6 +50,10 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
+        $user->userLogs()->create([
+            'ip' => $request->ip(),
+            'machine_name' => gethostname(),
+        ]);
         Session::flash('success', $user->username . ' welcome back!');
         return redirect()->route('user.dashboard');
     }

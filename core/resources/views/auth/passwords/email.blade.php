@@ -13,7 +13,7 @@
                              class="img-responsive w-25">
                     </p>
                     <h1 class="card-title text-white text-center">
-                        {{ __('Reset Password') }}
+                        {{ __('Forgot Password') }}
                     </h1>
                 </div>
 

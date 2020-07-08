@@ -34,6 +34,18 @@ class ProfileController extends Controller
         $user->city = $request->city;
         $user->postcode = $request->postcode;
         $user->save();
+
+        $setting = Setting::first();
+        $sender_email = "no-reply@ows.com";
+        $receiver_email = Auth::user()->email;
+        $subject = "Profile updation notification";
+        $message = view('emails.profile_update');
+        $headers = "From: $setting->site_name <$sender_email> \r\n";
+        $headers .= "Reply-To: <$receiver_email> \r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=utf-8\r\n";
+        @mail($receiver_email, $subject, $message, $headers);
+
         return back()->with('success', 'User profile has been successfully updated');
 
     }
@@ -98,6 +110,11 @@ class ProfileController extends Controller
         }
     }
 
+    public function referPage()
+    {
+        return view('backend.user.refer');
+    }
+
     public function sendLink(Request $request)
     {
         $request->validate([
@@ -107,7 +124,7 @@ class ProfileController extends Controller
         $sender_email = Auth::user()->email;
         $receiver_email = $request->refer_link;
         $subject = "Join Online Wallet System by this link";
-        $message = view('refer_mail');
+        $message = view('emails.refer_mail');
         $headers = "From: $setting->site_name <$sender_email> \r\n";
         $headers .= "Reply-To: <$receiver_email> \r\n";
         $headers .= "MIME-Version: 1.0\r\n";
