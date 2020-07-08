@@ -167,6 +167,7 @@ return [
          */
         Intervention\Image\ImageServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -230,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Location' => Stevebauman\Location\Facades\Location::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 
