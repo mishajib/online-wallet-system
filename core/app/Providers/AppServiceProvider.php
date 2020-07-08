@@ -31,23 +31,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('layouts.app', function ($view) {
-            $view->with('setting', Setting::first());
-        });
-
-        view()->composer('layouts.backend.admin.app', function ($view) {
-            $view->with('setting', Setting::first());
-        });
-
-        view()->composer('layouts.backend.user.app', function ($view) {
-            $view->with('setting', Setting::first());
-        });
-
-        view()->composer('layouts.backend.user.auth.app', function ($view) {
-            $view->with('setting', Setting::first());
-        });
-
-        view()->composer('layouts.backend.admin.auth.app', function ($view) {
+        view()->composer([
+            'layouts.app',
+            'layouts.backend.admin.app',
+            'layouts.backend.user.app',
+            'layouts.backend.user.auth.app',
+            'layouts.backend.admin.auth.app',
+            'welcome',
+        ], function ($view) {
             $view->with('setting', Setting::first());
         });
 
