@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class TransferController extends Controller
     {
         $request->validate([
             'username' => 'bail|string|required',
-            'amount' => 'bail|numeric|required',
+            'amount' => 'bail|numeric|required|min:0',
         ]);
 
         $receiver = User::where('username', $request->username)->first();
@@ -32,6 +33,18 @@ class TransferController extends Controller
             if ($totalAmount <= $sender->balance) {
                 $trx_num = Str::random(12);
                 $receiver->balance += $request->amount;
+
+                $trx = new Transaction();
+                $trx->user_id = $receiver->id;
+                $trx->trx_num = $trx_num;
+                $trx->trx_type = $request->amount . " " . $setting->currency . " has been credited";
+                $trx->amount = $request->amount;
+                $trx->remaining_balance = $receiver->balance;
+                $trx->details = $request->amount . " " . $setting->currency . " received from " . $sender->username;
+                $trx->save();
+
+
+
                 $receiver->transactions()->create([
                     'user_id' => $receiver->id,
                     'trx_num' => $trx_num,

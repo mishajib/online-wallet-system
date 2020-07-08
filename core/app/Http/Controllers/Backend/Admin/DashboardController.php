@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $data['revenue'] = User::sum('balance');
         $data['setting'] = Setting::first();
         $data['total_referred_users'] = User::whereNotNull('ref_by')->count();
-        $data['transactions'] = Transaction::latest()->take(15)->get();
+        $data['transactions'] = Transaction::latest()->take(15)->with('user')->get();
         return view('backend.admin.dashboard')->with($data);
     }
 }
