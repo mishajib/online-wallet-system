@@ -23,6 +23,7 @@ class UserTableSeeder extends Seeder
             'city' => 'Dhaka',
             'postcode' => '1230',
             'slug' => Str::slug('user'),
+            'email_verified_at' => now()->timestamp,
             'password' => Hash::make('user'),
         ]);
     }

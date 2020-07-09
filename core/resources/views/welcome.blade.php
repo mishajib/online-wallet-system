@@ -100,8 +100,8 @@
                 <p class="text-justify text-dark pt-2 mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet autem, cum delectus dolore eaque eligendi, error fuga minus molestiae nobis odio odit, omnis placeat sunt unde. Ab adipisci, amet animi asperiores aspernatur cum deserunt dolore ducimus error eum excepturi harum in maiores officia quasi quisquam repellat, tempore? Accusamus accusantium aliquam debitis eum facilis nostrum provident quas voluptatum. Iure natus placeat tempore tenetur. Assumenda cumque, cupiditate debitis facere id in laudantium natus, nemo obcaecati sed sequi soluta ullam veniam voluptas voluptate. Accusamus aperiam assumenda doloribus eaque minima obcaecati placeat repudiandae! Animi corporis dignissimos dolorem ea eaque, earum eligendi et ipsam itaque laudantium libero magnam, molestiae natus odit porro possimus rem repellat sed sit temporibus totam vero voluptate. Cupiditate distinctio dolor tempore tenetur. Atque et inventore nihil, nostrum pariatur perspiciatis temporibus. Ad at consectetur cumque, deserunt dolorem eaque enim error facilis fugiat fugit molestias neque quam qui quibusdam sapiente sint sit, suscipit?</p>
             </div>
 
-            <div class="col-lg-5 col-md-5 col-sm-12 pt-5">
-                <img src="{{ asset('assets/frontend/images/about_wallet.svg') }}" alt="about" class="img-responsive img-fluid mt-5">
+            <div class="col-lg-5 col-md-5 col-sm-12">
+                <img src="{{ asset('assets/frontend/images/about_wallet.svg') }}" alt="about" class="img-responsive img-fluid">
             </div>
         </div>
     </div>
@@ -315,7 +315,6 @@
 <script src="{{ asset('assets/frontend/js/bootstrap.min.js') }}"></script>
 <script async src="https://unpkg.com/typer-dot-js@0.1.0/typer.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-<script src="{{ asset('assets/frontend/js/aos.js') }}"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
 </body>

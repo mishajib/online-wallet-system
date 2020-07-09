@@ -17,7 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('trx_num');
-            $table->string('trx_type');
+            $table->boolean('trx_type');
             $table->decimal('amount');
             $table->decimal('remaining_balance');
             $table->string('details');

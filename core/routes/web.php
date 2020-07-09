@@ -85,5 +85,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin', 'as' => 'admi
 
     Route::get('ip/logs', 'TrackController@index')->name('user.track');
 
+    Route::post('user/{id}', 'UserController@loginUsingId')->name('login.using.id');
+
 });
 //End Admin Routes

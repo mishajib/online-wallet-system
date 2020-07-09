@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bonus;
 use App\Models\Setting;
 use App\Models\Transaction;
 use App\Models\User;
@@ -93,7 +94,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $referUser = User::where('username', $data['refer'])->first();
         $setting = Setting::first();
         $user = User::create([
             'name' => $data['name'],
@@ -112,24 +112,33 @@ class RegisterController extends Controller
         Transaction::create([
             'user_id' => $user->id,
             'trx_num' => $trx_num,
-            'trx_type' => number_format($setting->join_bonus, 2) . ' ' . $setting->currency . ' credited',
+            'trx_type' => true,
             'amount' => $setting->join_bonus,
             'remaining_balance' => $user->balance,
             'details' => number_format($setting->join_bonus, 2) . ' ' . $setting->currency . ' received join bonus',
         ]);
 
         if (!empty($data['refer'])) {
-            $referUser->balance += $setting->join_bonus;
+            $referUser = User::where('username', $data['refer'])->first();
+            $refer_bonus = $setting->join_bonus * ($setting->refer_bonus/100);
+            $referUser->balance += $refer_bonus;
             Transaction::create([
                 'user_id' => $referUser->id,
                 'trx_num' => $trx_num,
-                'trx_type' => number_format($setting->join_bonus, 2) . ' ' . $setting->currency . ' credited',
-                'amount' => $setting->join_bonus,
+                'trx_type' => true,
+                'amount' => $refer_bonus,
                 'remaining_balance' => $user->balance,
-                'details' => number_format($setting->join_bonus, 2) . ' ' . $setting->currency . ' received referral bonus',
+                'details' => number_format($refer_bonus, 2) . ' ' . $setting->currency . ' received referral bonus',
             ]);
+            $bonus = new Bonus();
+            $bonus->user_id = $referUser->id;
+            $bonus->refer_bonus = $refer_bonus;
+            $bonus->transfer_bonus = null;
+            $bonus->save();
             $referUser->save();
         }
+
+
         return $user;
     }
 

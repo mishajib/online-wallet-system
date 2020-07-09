@@ -47,9 +47,23 @@
 
                             <div class="input-group mg-b-pro-edt">
                                 <span class="input-group-addon">
+                                    <i class="fa fa-key" aria-hidden="true"></i>
+                                </span>
+                                <input type="number" min="0" name="refer_bonus" value="{{ $setting->refer_bonus ?? old('refer_bonus') }}" class="form-control" placeholder="Refer Bonus">
+                            </div>
+
+                            <div class="input-group mg-b-pro-edt">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-key" aria-hidden="true"></i>
+                                </span>
+                                <input type="number" min="0" name="transfer_bonus" value="{{ $setting->transfer_bonus ?? old('transfer_bonus') }}" class="form-control" placeholder="Transfer Bonus">
+                            </div>
+
+                            <div class="input-group mg-b-pro-edt">
+                                <span class="input-group-addon">
                                     <i class="fa fa-dollar" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" name="currency" value="{{ $setting->currency ?? old('join_bonus') }}" class="form-control" placeholder="Join Bonus">
+                                <input type="text" name="currency" value="{{ $setting->currency ?? old('currency') }}" class="form-control" placeholder="Join Bonus">
                             </div>
 
                             <div class="row">

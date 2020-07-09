@@ -25,6 +25,13 @@
                                     </h4>
                                     <p class="text-center">
                                         <a class="btn btn-primary" href="{{ route('admin.user.balance.manage.page') }}">Manage Balance</a>
+                                        <button title="Login to this user" onclick="loginUser({{ $user->id }})" class="btn btn-info waves-effect" type="button">
+                                            Login as user
+                                            <i style="font-size: 15px;" class="fa fa-arrow-right"></i>
+                                            <form id="login-form-{{ $user->id }}" action="{{ route('admin.login.using.id', $user->id) }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </button>
                                     </p>
                                 </div>
                                 <div class="panel-body text-justify">

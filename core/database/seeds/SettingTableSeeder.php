@@ -17,6 +17,8 @@ class SettingTableSeeder extends Seeder
             "fixed_charge" => 0.00,
             "percent_charge" => 0,
             "join_bonus" => 0.00,
+            "refer_bonus" => 0,
+            "transfer_bonus" => 0,
             "currency" => "BDT",
         ]);
     }

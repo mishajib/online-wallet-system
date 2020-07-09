@@ -118,7 +118,7 @@
                                         <div class="form-group form-group-sm">
                                             <input id="refer" type="text"
                                                    class="form-control form-control-lg @error('refer') is-invalid @enderror"
-                                                   name="refer" value="{{ $ref_user->username ?? old('refer') }}" autocomplete="refer" placeholder="Enter referral username">
+                                                   name="refer" readonly value="{{ $ref_user->username ?? old('refer') }}" autocomplete="refer" placeholder="Enter referral username">
 
                                             @error('refer')
                                             <span class="invalid-feedback" role="alert">

@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('logs')->latest()->paginate(10);
+        $users = User::with('user')->latest()->paginate(10);
         return view('backend.admin.user.index', compact('users'));
     }
 
@@ -58,6 +59,12 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
         return back()->with('success', 'Password reset successful');
+    }
+
+    public function loginUsingId($id)
+    {
+        Auth::guard('web')->loginUsingId($id, true);
+        return redirect()->route('user.dashboard')->with('success', 'Login successful as ' . Auth::guard('web')->user()->name);
     }
 
 

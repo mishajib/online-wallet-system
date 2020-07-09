@@ -27,7 +27,7 @@
 
                         <div class="form-group">
                             <label for="amount">Amount</label>
-                            <input type="number" min="0" step="any" class="form-control @error('amount') is-invalid @enderror"
+                            <input type="number" min="20" step="any" class="form-control @error('amount') is-invalid @enderror"
                                    id="amount" aria-describedby="amount" name="amount" required
                                    placeholder="Enter amount">
                         </div>
