@@ -13,7 +13,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $data['setting'] = Setting::first();
+//        $data['setting'] = '';
         $data['user'] = Auth::user();
         $data['transactions'] = $data['user']->transactions()->latest()->paginate(10);
         $data['total_transaction'] = $data['user']->transactions()->sum('amount');
