@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bonus;
 use App\Models\Setting;
 use App\Models\Transaction;
 use App\Models\User;
@@ -21,7 +22,7 @@ class TransferController extends Controller
     {
         $request->validate([
             'username' => 'bail|string|required',
-            'amount' => 'bail|numeric|required|min:0',
+            'amount' => 'bail|numeric|required|min:20',
         ]);
 
         $receiver = User::where('username', $request->username)->first();
@@ -34,21 +35,10 @@ class TransferController extends Controller
                 $trx_num = Str::random(12);
                 $receiver->balance += $request->amount;
 
-                $trx = new Transaction();
-                $trx->user_id = $receiver->id;
-                $trx->trx_num = $trx_num;
-                $trx->trx_type = $request->amount . " " . $setting->currency . " has been credited";
-                $trx->amount = $request->amount;
-                $trx->remaining_balance = $receiver->balance;
-                $trx->details = $request->amount . " " . $setting->currency . " received from " . $sender->username;
-                $trx->save();
-
-
-
                 $receiver->transactions()->create([
                     'user_id' => $receiver->id,
                     'trx_num' => $trx_num,
-                    'trx_type' => $request->amount . " " . $setting->currency . " has been credited",
+                    'trx_type' => true,
                     'amount' => $request->amount,
                     'remaining_balance' => $receiver->balance,
                     'details' => $request->amount . " " . $setting->currency . " received from " . $sender->username,
@@ -59,7 +49,7 @@ class TransferController extends Controller
                 $sender->transactions()->create([
                     'user_id' => $sender->id,
                     'trx_num' => $trx_num,
-                    'trx_type' => $totalAmount . " " . $setting->currency . " has been debited",
+                    'trx_type' => false,
                     'amount' => $totalAmount,
                     'remaining_balance' => $sender->balance,
                     'details' => $request->amount . " " . $setting->currency . " sent to " . $receiver->username,
@@ -67,16 +57,21 @@ class TransferController extends Controller
                 $sender->save();
 
                 if ($sender->ref_by != null) {
-                    $percent_amount = $request->amount * (2/100);
+                    $percent_amount = $request->amount * ($setting->transfer_bonus/100);
                     $sender->user->balance += $percent_amount;
                     $sender->user->transactions()->create([
                         'user_id' => $sender->user->id,
                         'trx_num' => Str::random(12),
-                        'trx_type' => $percent_amount . " " . $setting->currency . " has been credited",
+                        'trx_type' => true,
                         'amount' => $percent_amount,
                         'remaining_balance' => $sender->user->balance,
                         'details' => $percent_amount . " " . $setting->currency . " received transfer bonus from " . $sender->username,
                     ]);
+                    $bonus = new Bonus();
+                    $bonus->user_id = $sender->user->id;
+                    $bonus->refer_bonus = null;
+                    $bonus->transfer_bonus = $percent_amount;
+                    $bonus->save();
                     $sender->user->save();
                 }
 

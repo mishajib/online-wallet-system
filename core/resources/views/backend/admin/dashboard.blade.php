@@ -65,6 +65,16 @@
         </div>
     </div>
 
+    <div class="section-admin container-fluid">
+        <div class="row admin text-center">
+            <div class="col-md-12">
+                <div class="row">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="product-status mg-tb-30">
         <div class="container-fluid">
             <div class="row">

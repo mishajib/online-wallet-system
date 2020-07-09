@@ -6,6 +6,43 @@
 
 
 @section('content')
+    <div class="row mb-5">
+        <div class="col-3">
+            <div class="card bg-primary text-center shadow text-white">
+                <div class="card-header">
+                    <h3>Transactions</h3>
+                    <h1><i class="fa fa-exchange"></i> {{ number_format($total_transaction, 2) .' '. $setting->currency }} </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="card bg-success text-center shadow text-white">
+                <div class="card-header">
+                    <h3>Referred Users</h3>
+                    <h1><i class="fa fa-user-plus"></i> {{ count(Auth::user()->referredusers) }} </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="card bg-dark text-center shadow text-white">
+                <div class="card-header">
+                    <h3>Received Bonus</h3>
+                    <h1><i class="fa fa-get-pocket"></i> {{ number_format($total_bonus, 2) . ' '. $setting->currency }} </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="card bg-info text-center shadow text-white">
+                <div class="card-header">
+                    <h3>Send Money</h3>
+                    <h1><i class="fa fa-send-o"></i> {{ number_format($total_send_money, 2) .' '. $setting->currency }} </h1>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card">
         <div class="card-header bg-info">
             <h1 class="card-title">
@@ -30,7 +67,13 @@
                     <tr>
                         <th scope="row">{{ $transactions->firstItem()+$key }}</th>
                         <td>{{ $transaction->trx_num }}</td>
-                        <td>{{ $transaction->trx_type }}</td>
+                        <td>
+                            @if($transaction->trx_type == true)
+                                <span class="badge badge-success">Credited</span>
+                            @else
+                                <span class="badge badge-danger">Debited</span>
+                            @endif
+                        </td>
                         <td>{{ number_format($transaction->amount, 2)  }}</td>
                         <td>{{ $transaction->remaining_balance }}</td>
                         <td>{{ $transaction->details }}</td>

@@ -19,6 +19,8 @@ class CreateSettingsTable extends Migration
             $table->decimal('fixed_charge', 18, 8);
             $table->integer('percent_charge');
             $table->decimal('join_bonus', 18, 8);
+            $table->integer('refer_bonus');
+            $table->integer('transfer_bonus');
             $table->string('currency');
             $table->timestamps();
         });
