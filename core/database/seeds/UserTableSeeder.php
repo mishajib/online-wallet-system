@@ -24,6 +24,7 @@ class UserTableSeeder extends Seeder
             'postcode' => '1230',
             'slug' => Str::slug('user'),
             'email_verified_at' => now()->timestamp,
+            'status' => true,
             'password' => Hash::make('user'),
         ]);
     }

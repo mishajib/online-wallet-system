@@ -63,7 +63,10 @@ class UserController extends Controller
 
     public function loginUsingId($id)
     {
-        Auth::guard('web')->loginUsingId($id, true);
+        $user = Auth::guard('web')->loginUsingId($id);
+        if ($user->status == 0) {
+            return back()->withInput()->with('error', 'Inactive user');
+        }
         return redirect()->route('user.dashboard')->with('success', 'Login successful as ' . Auth::guard('web')->user()->name);
     }
 
