@@ -100,5 +100,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin', 'as' => 'admi
     Route::post('contact/message/{id}/reply', 'ContactController@replyMail')
         ->name('reply.message');
 
+    Route::post('user/{id}/activate', 'UserController@active')->name('user.activate');
+    Route::post('user/{id}/deactivate', 'UserController@deactive')->name('user.deactivate');
+
 });
 //End Admin Routes
