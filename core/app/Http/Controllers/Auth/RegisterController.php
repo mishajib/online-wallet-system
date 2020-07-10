@@ -106,6 +106,7 @@ class RegisterController extends Controller
             'balance' => $setting->join_bonus,
             'ref_by' => $referUser->id ?? null,
             'slug' => Str::slug($data['username']),
+            'status' => true,
             'password' => Hash::make($data['password']),
         ]);
         $trx_num = Str::random(12);

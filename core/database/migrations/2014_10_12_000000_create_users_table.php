@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('image')->default(asset('assets/backend/user.png'));
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('status')->default(false);
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
