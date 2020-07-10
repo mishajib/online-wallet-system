@@ -8,8 +8,8 @@ class Bonus extends Model
 {
     protected $guarded = [];
 
-    public function users()
+    public function user()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }

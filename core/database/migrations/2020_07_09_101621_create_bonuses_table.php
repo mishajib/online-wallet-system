@@ -18,6 +18,7 @@ class CreateBonusesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->decimal('refer_bonus', 18, 8)->nullable();
             $table->decimal('transfer_bonus', 18, 8)->nullable();
+            $table->string('detail');
             $table->timestamps();
         });
     }
