@@ -32,6 +32,39 @@
                                                 @csrf
                                             </form>
                                         </button>
+
+                                        @if($user->status == 1)
+                                            <button title="Click to deactivate"
+                                                    onclick="deactivateUser
+                                                        ({{ $user->id }})"
+                                                    class="btn btn-danger
+                                                    waves-effect" type="button">
+                                                Deactivate User
+                                                <i style="font-size: 15px;" class="fa fa-arrow-right"></i>
+                                                <form id="active-form-{{
+                                                $user->id }}" action="{{
+                                                route('admin.user.deactivate',
+                                                 $user->id) }}"
+                                                      method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            </button>
+                                        @else
+                                            <button title="Click to activate"
+                                                    onclick="activeUser
+                                                        ({{ $user->id }})"
+                                                    class="btn btn-success
+                                                    waves-effect" type="button">
+                                                Activate User
+                                                <i style="font-size: 15px;" class="fa fa-arrow-right"></i>
+                                                <form id="deactive-form-{{
+                                                $user->id }}" action="{{
+                                                route('admin.user.activate', $user->id) }}"
+                                                      method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            </button>
+                                        @endif
                                     </p>
                                 </div>
                                 <div class="panel-body text-justify">

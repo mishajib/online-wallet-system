@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -68,6 +69,32 @@ class UserController extends Controller
             return back()->withInput()->with('error', 'Inactive user');
         }
         return redirect()->route('user.dashboard')->with('success', 'Login successful as ' . Auth::guard('web')->user()->name);
+    }
+
+    public function active($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user->status == false) {
+            $user->status = true;
+            $user->save();
+            Session::flash('success', 'User has been activated');
+        } else {
+            Session::flash('error', 'User is already been activated');
+        }
+        return back();
+    }
+
+    public function deactive($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user->status == true) {
+            $user->status = false;
+            $user->save();
+            return back()->with('success', 'User has been deactivated');
+        } else {
+            return back()->with('error', 'User is already been deactivated');
+        }
+
     }
 
 

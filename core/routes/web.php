@@ -41,6 +41,10 @@ Route::group(['namespace' => 'Backend\User', 'as' => 'user.', 'middleware' => ['
     Route::get('referred/users', 'DashboardController@refUsers')->name('referred.user');
     Route::get('refer/friend', 'ProfileController@referPage')->name('refer.friend');
     Route::post('referral/link/send', 'ProfileController@sendLink')->name('referral.link.send');
+
+    Route::get('refer/bonus/all', 'TransactionController@index')->name('refer.bonus');
+    Route::get('transfer/bonus/all', 'TransactionController@transferBonus')
+        ->name('transfer.bonus');
 });
 //End User Routes
 
@@ -86,6 +90,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin', 'as' => 'admi
     Route::get('ip/logs', 'TrackController@index')->name('user.track');
 
     Route::post('user/{id}', 'UserController@loginUsingId')->name('login.using.id');
+
+    Route::get('contact/all', 'ContactController@index')->name('contact.index');
+    Route::post('send/message', 'ContactController@sendMail')->name('send.message');
+    Route::get('contact/message/{id}/show', 'ContactController@show')
+        ->name('show.message');
+    Route::get('contact/message/{id}/send', 'ContactController@replySendMail')
+        ->name('send.reply.message');
+    Route::post('contact/message/{id}/reply', 'ContactController@replyMail')
+        ->name('reply.message');
+
+    Route::post('user/{id}/activate', 'UserController@active')->name('user.activate');
+    Route::post('user/{id}/deactivate', 'UserController@deactive')->name('user.deactivate');
 
 });
 //End Admin Routes

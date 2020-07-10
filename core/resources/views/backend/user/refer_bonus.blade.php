@@ -1,15 +1,15 @@
 @extends("layouts.backend.user.app")
 
-@section('title', 'Referred Users')
+@section('title', 'Refer Bonus')
 
-@section('breadcrumb', 'Referred Users')
+@section('breadcrumb', 'Refer Bonus')
 
 
 @section('content')
     <div class="card">
         <div class="card-header bg-info">
             <h1 class="card-title">
-                Referred User List
+                Refer Bonus <span></span>
             </h1>
         </div>
         <div class="card-body">
@@ -19,24 +19,24 @@
                     <th scope="col">#</th>
                     <th>Name</th>
                     <th>Username</th>
-                    <th>Phone Number</th>
-                    <th>Join Date</th>
-                    <th>Ref By</th>
+                    <th>Amount</th>
+                    <th>Received Time</th>
+                    <th>Details</th>
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($refUsers as $key => $user)
+                @forelse($bonuses as $key => $bonus)
                     <tr>
-                        <th scope="row">{{ $refUsers->firstItem()+$key }}</th>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->username }}</td>
-                        <td>{{ $user->phone }}</td>
-                        <td>{{ $user->created_at->diffForHumans() }}</td>
-                        <td>{{ $user->user->username }}</td>
+                        <th scope="row">{{ $bonuses->firstItem()+$key }}</th>
+                        <td>{{ $bonus->user->name }}</td>
+                        <td>{{ $bonus->user->username }}</td>
+                        <td>{{ $bonus->refer_bonus }}</td>
+                        <td>{{ $bonus->created_at->diffForHumans() }}</td>
+                        <td>{{ $bonus->detail }}</td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center">
+                        <td colspan="6" class="text-center">
                             <h1>
                                 <span class="text-danger">{{ __("No data found!!!") }}</span>
                             </h1>
@@ -45,6 +45,11 @@
                 @endforelse
                 </tbody>
             </table>
+            <nav aria-label="...">
+                <ul class="pagination">
+                    {{ $bonuses->links() }}
+                </ul>
+            </nav>
         </div>
     </div>
 @stop

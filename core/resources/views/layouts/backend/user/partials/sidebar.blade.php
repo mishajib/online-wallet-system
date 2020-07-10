@@ -10,6 +10,12 @@
         <a href="{{ route('user.dashboard') }}"
            class="bg-dark text-white list-group-item list-group-item-action bg-light">{{ __("Dashboard") }}</a>
         <a href="{{ route('user.referred.user') }}" class="bg-dark text-white list-group-item list-group-item-action bg-light mt-4">{{ __('Referred Users') }}</a>
+        <a href="{{ route('user.refer.bonus') }}" class="bg-dark text-white
+         list-group-item list-group-item-action bg-light mt-4">{{ __('Refer
+         Bonus List') }}</a>
+        <a href="{{ route('user.transfer.bonus') }}" class="bg-dark text-white
+         list-group-item list-group-item-action bg-light mt-4">{{ __('Transfer
+         Bonus List') }}</a>
         <a href="{{ route('user.refer.friend') }}" class="bg-dark text-white list-group-item list-group-item-action bg-light mt-4">{{ __('Refer a friend') }}</a>
 
     </div>

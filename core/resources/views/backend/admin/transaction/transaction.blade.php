@@ -2,7 +2,7 @@
 
 @section("title", "All Transactions")
 
-@section('breadcomb', 'All User')
+@section('breadcomb', 'All Transactions')
 
 @section("content")
     <div class="product-status mg-b-30">

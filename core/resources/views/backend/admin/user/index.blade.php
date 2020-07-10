@@ -45,11 +45,6 @@
                                     </td>
                                     <td>{{ $user->created_at->diffForHumans() }}</td>
                                     <td>
-                                        <img class="img-circle img-responsive"
-                                             src="{{ asset('assets/uploads/profile/' . $user->image) }}"
-                                             alt="{{ $user->slug }}">
-                                    </td>
-                                    <td>
                                         @if($user->status == 1)
                                             <span
                                                 class="badge badge-success text-success">Active</span>

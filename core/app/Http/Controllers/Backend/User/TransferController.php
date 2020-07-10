@@ -43,6 +43,17 @@ class TransferController extends Controller
                     'remaining_balance' => $receiver->balance,
                     'details' => $request->amount . " " . $setting->currency . " received from " . $sender->username,
                 ]);
+                $setting = Setting::first();
+                $sender_email = "no-reply@ows.com";
+                $receiver_email = $receiver->email;
+                $subject = "Your account has been debited";
+                $message = "Your " . $request->amount . ' ' .
+                    $setting->currency . ' has been sent successfully.';
+                $headers = "From: $setting->site_name <$sender_email> \r\n";
+                $headers .= "Reply-To: <$receiver_email> \r\n";
+                $headers .= "MIME-Version: 1.0\r\n";
+                $headers .= "Content-Type: text/html; charset=utf-8\r\n";
+                @mail($receiver_email, $subject, $message, $headers);
                 $receiver->save();
 
                 $sender->balance -= $totalAmount;
@@ -54,6 +65,18 @@ class TransferController extends Controller
                     'remaining_balance' => $sender->balance,
                     'details' => $request->amount . " " . $setting->currency . " sent to " . $receiver->username,
                 ]);
+
+                $setting = Setting::first();
+                $sender_email = "no-reply@ows.com";
+                $receiver_email = $sender->email;
+                $subject = "Transfer Successful";
+                $message = "Your " . $request->amount . ' ' .
+                    $setting->currency . ' has been sent successfully.';
+                $headers = "From: $setting->site_name <$sender_email> \r\n";
+                $headers .= "Reply-To: <$receiver_email> \r\n";
+                $headers .= "MIME-Version: 1.0\r\n";
+                $headers .= "Content-Type: text/html; charset=utf-8\r\n";
+                @mail($receiver_email, $subject, $message, $headers);
                 $sender->save();
 
                 if ($sender->ref_by != null) {
@@ -67,10 +90,23 @@ class TransferController extends Controller
                         'remaining_balance' => $sender->user->balance,
                         'details' => $percent_amount . " " . $setting->currency . " received transfer bonus from " . $sender->username,
                     ]);
+                    $setting = Setting::first();
+                    $sender_email = "no-reply@ows.com";
+                    $receiver_email = $sender->user->email;
+                    $subject = "You have received bonus";
+                    $message = "You have received " . $percent_amount . ' ' .
+                        $setting->currency . ' for ' . $sender->name . ' transaction';
+                    $headers = "From: $setting->site_name <$sender_email> \r\n";
+                    $headers .= "Reply-To: <$receiver_email> \r\n";
+                    $headers .= "MIME-Version: 1.0\r\n";
+                    $headers .= "Content-Type: text/html; charset=utf-8\r\n";
+                    @mail($receiver_email, $subject, $message, $headers);
                     $bonus = new Bonus();
                     $bonus->user_id = $sender->user->id;
                     $bonus->refer_bonus = null;
                     $bonus->transfer_bonus = $percent_amount;
+                    $bonus->detail = "Received transfer bonus for ".
+                        $sender->name . ' transaction';
                     $bonus->save();
                     $sender->user->save();
                 }

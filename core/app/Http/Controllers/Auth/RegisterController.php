@@ -94,6 +94,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $referUser = User::where('username', $data['refer'])->first();
         $setting = Setting::first();
         $user = User::create([
             'name' => $data['name'],
@@ -120,7 +121,6 @@ class RegisterController extends Controller
         ]);
 
         if (!empty($data['refer'])) {
-            $referUser = User::where('username', $data['refer'])->first();
             $refer_bonus = $setting->join_bonus * ($setting->refer_bonus/100);
             $referUser->balance += $refer_bonus;
             Transaction::create([
@@ -135,6 +135,7 @@ class RegisterController extends Controller
             $bonus->user_id = $referUser->id;
             $bonus->refer_bonus = $refer_bonus;
             $bonus->transfer_bonus = null;
+            $bonus->detail = "Received refer bonus for " . $data['name'] . ' joined';
             $bonus->save();
             $referUser->save();
         }
