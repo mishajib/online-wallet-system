@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('email', function () {
+   return new \App\Mail\WelcomeMail();
+});
+
 Route::get('home', "HomeController@index")->name('home')->middleware(['auth:web', 'preventBackHistory']);
 Route::post('send/message', 'Backend\Admin\ContactController@sendMail')->name('send.message');
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ReferBonusMail;
+use App\Mail\WelcomeMail;
 use App\Models\Bonus;
 use App\Models\Setting;
 use App\Models\Transaction;
@@ -12,6 +14,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -98,7 +101,8 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
 
-            $refer = $request->refer ? $request->refer : null;;
+        $refer = $request->refer ? $request->refer : null;
+
         event(new Registered($user = $this->create($request->all(),$refer)));
 
         $this->guard()->login($user);
@@ -159,11 +163,13 @@ class RegisterController extends Controller
             $bonus->refer_bonus = $refer_bonus;
             $bonus->transfer_bonus = null;
             $bonus->detail = "Received refer bonus for " . $data['name'] . ' joined';
+            Mail::to($referUser)->send(new ReferBonusMail($referUser, $user,
+                $refer_bonus));
             $bonus->save();
             $referUser->save();
         }
 
-
+        Mail::to($user)->send(new WelcomeMail($user));
         return $user;
     }
 

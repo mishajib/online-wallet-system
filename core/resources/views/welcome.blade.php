@@ -48,7 +48,7 @@
 
                 <div class="col-3 ">
                     <div class="site-logo">
-                        <a href="index.html" class="font-weight-bold">
+                        <a href="{{ route('welcome') }}" class="font-weight-bold">
                             <img class="img-responsive w-75"
                                  src="{{ asset('assets/frontend/images/logo.png') }}"
                                  alt="ows">
