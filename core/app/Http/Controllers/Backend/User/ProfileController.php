@@ -19,7 +19,8 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        return view('backend.user.profile');
+        $title = "User Profile";
+        return view('backend.user.profile', compact('title'));
     }
 
     public function updateProfile(UserRequest $request)
@@ -110,7 +111,8 @@ class ProfileController extends Controller
 
     public function referPage()
     {
-        return view('backend.user.refer');
+        $title = "Refer a friend";
+        return view('backend.user.refer', compact('title'));
     }
 
     public function sendLink(Request $request)

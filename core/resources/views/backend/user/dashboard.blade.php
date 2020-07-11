@@ -1,7 +1,5 @@
 @extends("layouts.backend.user.app")
 
-@section('title', 'User Dashboard')
-
 @section('breadcrumb', 'Dashboard')
 
 
@@ -48,6 +46,9 @@
             <h1 class="card-title">
                 Transaction Log
             </h1>
+            <form action="{{ route('user.search.transaction') }}" method="GET" class="form-inline my-2 my-lg-0 float-right">
+                <input name="query" class="form-control mr-sm-2" type="search" placeholder="Search transaction" aria-label="Search">
+            </form>
         </div>
         <div class="card-body">
             <table class="table table-bordered">

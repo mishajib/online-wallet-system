@@ -344,7 +344,7 @@
                         <div class="col-md-8 mx-auto">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="{{ route('admin.send.message') }}" method="POST">
+                                    <form action="{{ route('send.message') }}" method="POST">
                                         @csrf
 
                                         <div class="form-row">

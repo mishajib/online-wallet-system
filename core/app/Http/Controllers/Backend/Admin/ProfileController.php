@@ -17,7 +17,8 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        return view('backend.admin.profile');
+        $title = "Admin Profile";
+        return view('backend.admin.profile', compact('title'));
     }
 
     public function updateProfile(AdminProfileRequest $request)

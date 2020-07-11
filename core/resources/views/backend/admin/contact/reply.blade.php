@@ -1,8 +1,6 @@
 @extends("layouts.backend.admin.app")
 
-@section("title", $contact->subject)
-
-@section('breadcomb', $contact->subject)
+@section('breadcomb', $title)
 
 @section("content")
     <div class="product-status mg-b-30">
@@ -18,7 +16,7 @@
                                     }}</h1>
                                 </div>
                                 <div class="panel-body text-justify">
-                                    <form action="{{ route('admin.reply.message', $contact->id) }}">
+                                    <form action="{{ route('admin.reply.message', $contact->id) }}" method="POST">
                                         @csrf
                                         <div class="input-group mg-b-pro-edt">
                                                     <span class="input-group-addon">

@@ -19,11 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-//Route::get('template', function () {
-//    return view('auth.passwords.reset');
-//});
-
 Route::get('home', "HomeController@index")->name('home')->middleware(['auth:web', 'preventBackHistory']);
+Route::post('send/message', 'Backend\Admin\ContactController@sendMail')->name('send.message');
 
 //User Routes
 Auth::routes(['verify' => true]);
@@ -32,7 +29,7 @@ Route::get('register/{user}', 'Auth\RegisterController@showRegistrationForm')->n
 
 Route::group(['namespace' => 'Backend\User', 'as' => 'user.', 'middleware' => ['auth:web', 'verified', 'preventBackHistory']], function () {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-    Route::get('profile', 'ProfileController@index')->name('profile');
+    Route::get('profile', 'ProfileController@index')->name('profile')->middleware('password.confirm');
     Route::put('profile-update', 'ProfileController@updateProfile')->name('profile.update');
     Route::put('profile-image-update', 'ProfileController@updateProfileImage')->name('profile.image.update');
     Route::put('password-update', 'ProfileController@updatePassword')->name('password.update');
@@ -43,8 +40,8 @@ Route::group(['namespace' => 'Backend\User', 'as' => 'user.', 'middleware' => ['
     Route::post('referral/link/send', 'ProfileController@sendLink')->name('referral.link.send');
 
     Route::get('refer/bonus/all', 'TransactionController@index')->name('refer.bonus');
-    Route::get('transfer/bonus/all', 'TransactionController@transferBonus')
-        ->name('transfer.bonus');
+    Route::get('transfer/bonus/all', 'TransactionController@transferBonus')->name('transfer.bonus');
+    Route::get('user/transaction/search', 'TransactionController@searchTransaction')->name('search.transaction');
 });
 //End User Routes
 
@@ -52,6 +49,12 @@ Route::group(['namespace' => 'Backend\User', 'as' => 'user.', 'middleware' => ['
 Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin\Authentication', 'as' => 'admin.', 'middleware' => ['preventBackHistory', 'adminauth']], function () {
     Route::get('login', 'AdminLoginController@showLoginForm')->name('login.page');
     Route::post('login', 'AdminLoginController@login')->name('login');
+
+    Route::get('password/reset', 'AdminForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::post('password/email', 'AdminForgotPasswordController@sendResetLinkEmail')->name('password.email');
+
+    Route::get('password/reset/{token}', 'AdminResetPasswordController@showResetForm')->name('password.reset');
+    Route::post('password/reset', 'AdminResetPasswordController@reset')->name('update.password');
 
 });
 
@@ -92,7 +95,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin', 'as' => 'admi
     Route::post('user/{id}', 'UserController@loginUsingId')->name('login.using.id');
 
     Route::get('contact/all', 'ContactController@index')->name('contact.index');
-    Route::post('send/message', 'ContactController@sendMail')->name('send.message');
     Route::get('contact/message/{id}/show', 'ContactController@show')
         ->name('show.message');
     Route::get('contact/message/{id}/send', 'ContactController@replySendMail')
@@ -102,6 +104,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin', 'as' => 'admi
 
     Route::post('user/{id}/activate', 'UserController@active')->name('user.activate');
     Route::post('user/{id}/deactivate', 'UserController@deactive')->name('user.deactivate');
+
+    Route::get('user/search', 'UserController@userSearch')->name('user.search');
+    Route::get('user/referral/search', 'ReferController@referralUserSearch')->name('user.search.referral');
+    Route::get('user/referred/search', 'ReferController@referredUserSearch')->name('user.search.referred');
+    Route::get('user/transaction/search', 'TransactionController@transactionSearch')->name('user.search.transaction');
+    Route::get('contact/search', 'ContactController@contactSearch')->name('search.contact');
+
 
 });
 //End Admin Routes

@@ -14,8 +14,9 @@ class UserController extends Controller
 {
     public function index()
     {
+        $title = "All Users";
         $users = User::with('user')->latest()->paginate(10);
-        return view('backend.admin.user.index', compact('users'));
+        return view('backend.admin.user.index', compact('users', 'title'));
     }
 
     public function show($id)
@@ -23,13 +24,15 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $transactions = $user->transactions()->paginate(10);
         $referredUsers = $user->referredusers()->paginate(10);
-        return view('backend.admin.user.show', compact('user', 'transactions', 'referredUsers'));
+        $title = $user->name. " Information";
+        return view('backend.admin.user.show', compact('user', 'transactions', 'referredUsers', 'title'));
     }
 
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('backend.admin.user.edit', compact('user'));
+        $title = $user->name. ' Edit';
+        return view('backend.admin.user.edit', compact('user', 'title'));
     }
 
     public function update(UserUpdateRequest $request, $id)
@@ -95,6 +98,19 @@ class UserController extends Controller
             return back()->with('error', 'User is already been deactivated');
         }
 
+    }
+
+    public function userSearch(Request $request) {
+        $request->validate([
+            'query' => 'bail|required|string'
+        ]);
+        $query = $request->input('query');
+        $user = User::where('username', $query)->first();
+        if ($user) {
+            return view('backend.admin.search.user_search', compact('query', 'user'));
+        } else {
+            return back()->with('error', 'User doesn\'t exists!!!');
+        }
     }
 
 

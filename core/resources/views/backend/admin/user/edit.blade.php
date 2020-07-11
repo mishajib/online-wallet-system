@@ -1,8 +1,6 @@
 @extends("layouts.backend.admin.app")
 
-@section("title", "Edit User")
-
-@section('breadcomb', 'Edit User')
+@section('breadcomb', $title)
 
 @section("content")
     <div class="single-product-tab-area mg-b-30">

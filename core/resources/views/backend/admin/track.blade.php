@@ -1,8 +1,6 @@
 @extends("layouts.backend.admin.app")
 
-@section("title", "User IP Logs")
-
-@section('breadcomb', 'User IP Logs')
+@section('breadcomb', $title)
 
 @section("content")
     <div class="product-status mg-b-30">

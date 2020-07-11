@@ -3,12 +3,12 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Lang;
 
-class AdminResetPasswordNotification extends Notification
+class ResetPasswordNotification extends Notification
 {
     use Queueable;
 
@@ -17,6 +17,8 @@ class AdminResetPasswordNotification extends Notification
      *
      * @return void
      */
+  
+
     /**
      * The password reset token.
      *
@@ -76,7 +78,7 @@ class AdminResetPasswordNotification extends Notification
             $url = call_user_func(static::$createUrlCallback, $notifiable, $this->token);
         } else {
             $url = url(route('admin.password.reset', [
-                '_token' => $this->token,
+                'token' => $this->token,
                 'email' => $notifiable->getEmailForPasswordReset(),
             ], false));
         }

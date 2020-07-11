@@ -1,8 +1,6 @@
 @extends("layouts.backend.admin.app")
 
-@section("title", "Site Setting")
-
-@section('breadcomb', 'Site Setting')
+@section('breadcomb', $title)
 
 @section("content")
     <div class="container-fluid">

@@ -1,7 +1,5 @@
 @extends('layouts.backend.user.auth.app')
 
-@section("title", "User Login")
-
 @section('content')
     <div class="container-fluid">
         <div class="row">

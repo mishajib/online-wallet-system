@@ -9,11 +9,12 @@ class TrackController extends Controller
 {
     public function index()
     {
-        $logs = Log::latest()->paginate(10);
+        $logs = Log::latest()->with('user')->paginate(10);
 //        foreach ($logs as $log) {
 //            $location = \Location::get($log->ip);
 //    }
 //    dd($location);
-        return view('backend.admin.track', compact('logs'));
+        $title = "User Ip Logs";
+        return view('backend.admin.track', compact('logs', 'title'));
     }
 }

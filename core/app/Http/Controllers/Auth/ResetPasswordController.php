@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
@@ -41,5 +42,13 @@ class ResetPasswordController extends Controller
         event(new PasswordReset($user));
         Session::flash('success', 'Password reset successfully');
         $this->guard()->login($user);
+    }
+
+    public function showResetForm(Request $request, $token = null)
+    {
+        $title = "Reset Password";
+        return view('auth.passwords.reset', compact('title'))->with(
+            ['token' => $token, 'email' => $request->email,]
+        );
     }
 }

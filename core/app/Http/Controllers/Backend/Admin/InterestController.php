@@ -12,13 +12,15 @@ class InterestController extends Controller
 {
     public function index()
     {
+        $title = "All Interest";
         $interests = Interest::latest()->paginate(10);
-        return view('backend.admin.interest.index', compact('interests'));
+        return view('backend.admin.interest.index', compact('interests', 'title'));
     }
 
     public function create()
     {
-        return view('backend.admin.interest.create');
+        $title = "Create Interest";
+        return view('backend.admin.interest.create', compact('title'));
     }
 
     public function store(Request $request)
@@ -37,8 +39,9 @@ class InterestController extends Controller
 
     public function edit($id)
     {
+        $title = "Edit Interest";
         $interest = Interest::findOrFail($id);
-        return view('backend.admin.interest.edit', compact('interest'));
+        return view('backend.admin.interest.edit', compact('interest', 'title'));
     }
 
     public function update(Request $request, $id)

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Console\Commands\ModelMakeCommand;
 use App\Models\Setting;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,16 +32,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer([
-            'layouts.app',
-            'layouts.backend.admin.app',
-            'layouts.backend.user.app',
-            'layouts.backend.user.auth.app',
-            'layouts.backend.admin.auth.app',
-            'welcome',
-        ], function ($view) {
-            $view->with('setting', Setting::first());
-        });
-
+        view()->share('setting', Setting::first());
     }
 }

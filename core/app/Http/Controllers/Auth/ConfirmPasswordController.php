@@ -37,4 +37,10 @@ class ConfirmPasswordController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public function showConfirmForm()
+    {
+        $title = "Confirm Password";
+        return view('auth.passwords.confirm', compact('title'));
+    }
 }

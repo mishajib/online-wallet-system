@@ -1,8 +1,6 @@
 @extends("layouts.backend.admin.app")
 
-@section("title", "Referral Users")
-
-@section('breadcomb', 'Referral Users')
+@section('breadcomb', $title)
 
 @section("content")
     <div class="product-status mg-b-30">
@@ -11,6 +9,11 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-status-wrap">
                         <h4>Referral User List</h4>
+                        <form action="{{ route('admin.user.search.referral') }}" method="GET" class="navbar-form navbar-right">
+                            <div class="form-group">
+                                <input type="text" name="query" class="form-control" placeholder="Search User">
+                            </div>
+                        </form>
                         <table>
                             <tr>
                                 <th>Serial No</th>
