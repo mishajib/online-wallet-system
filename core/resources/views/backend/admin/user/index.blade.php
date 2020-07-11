@@ -1,8 +1,6 @@
 @extends("layouts.backend.admin.app")
 
-@section("title", "All User")
-
-@section('breadcomb', 'All User')
+@section('breadcomb', $title)
 
 @section("content")
     <div class="product-status mg-b-30">
@@ -14,6 +12,11 @@
                         <div class="add-product">
                             <a href="{{ route('admin.user.balance.manage.page') }}">Add
                                 / Subtract Balance</a>
+                            <form action="{{ route('admin.user.search') }}" method="GET" class="navbar-form navbar-left">
+                                <div class="form-group">
+                                    <input type="text" name="query" class="form-control" placeholder="Search User">
+                                </div>
+                            </form>
                         </div>
                         <table>
                             <tr>

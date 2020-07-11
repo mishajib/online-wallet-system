@@ -8,28 +8,21 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-status-wrap">
-                        <h4>Contacts</h4>
-                        <form action="{{ route('admin.search.contact') }}" method="GET" class="navbar-form navbar-right">
-                            <div class="form-group">
-                                <input type="text" name="query" class="form-control" placeholder="Search Contact">
-                            </div>
-                        </form>
+                        <h4>Search Result for:  {{ $title }}</h4>
                         <table class="table table-mailbox">
                             <tr>
                                 <th>Serial No</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Phone</th>
                                 <th>Subject</th>
                                 <th>Sent Time</th>
                                 <th>Action</th>
                             </tr>
                             @forelse($contacts as $key => $contact)
                                 <tr class="unread">
-                                    <td>{{ $contacts->firstItem()+$key }}</td>
+                                    <td>{{ ++$key }}</td>
                                     <td>{{ $contact->name }}</td>
                                     <td>{{ $contact->email }}</td>
-                                    <td>{{ $contact->phone }}</td>
                                     <td>{{ $contact->subject }}</td>
                                     <td>
                                         {{
@@ -63,11 +56,6 @@
                             @endforelse
 
                         </table>
-                        <div class="custom-pagination">
-                            <ul class="pagination">
-                                {{ $contacts->links() }}
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>

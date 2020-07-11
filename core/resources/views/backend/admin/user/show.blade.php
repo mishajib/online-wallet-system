@@ -1,8 +1,6 @@
 @extends("layouts.backend.admin.app")
 
-@section("title", $user->name. " Information")
-
-@section('breadcomb', $user->name. " Information")
+@section('breadcomb', $title)
 
 @section("content")
     <div class="product-status mg-b-30">
@@ -35,13 +33,12 @@
 
                                         @if($user->status == 1)
                                             <button title="Click to deactivate"
-                                                    onclick="deactivateUser
-                                                        ({{ $user->id }})"
+                                                    onclick="deactivateUser({{ $user->id }})"
                                                     class="btn btn-danger
                                                     waves-effect" type="button">
                                                 Deactivate User
                                                 <i style="font-size: 15px;" class="fa fa-arrow-right"></i>
-                                                <form id="active-form-{{
+                                                <form id="deactive-form-{{
                                                 $user->id }}" action="{{
                                                 route('admin.user.deactivate',
                                                  $user->id) }}"
@@ -57,7 +54,7 @@
                                                     waves-effect" type="button">
                                                 Activate User
                                                 <i style="font-size: 15px;" class="fa fa-arrow-right"></i>
-                                                <form id="deactive-form-{{
+                                                <form id="active-form-{{
                                                 $user->id }}" action="{{
                                                 route('admin.user.activate', $user->id) }}"
                                                       method="POST" style="display: none;">

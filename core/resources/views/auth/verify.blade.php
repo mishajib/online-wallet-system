@@ -1,7 +1,5 @@
 @extends('layouts.backend.user.auth.app')
 
-@section("title", "Verify Email")
-
 @section('color', "bg-secondary")
 
 @section('content')

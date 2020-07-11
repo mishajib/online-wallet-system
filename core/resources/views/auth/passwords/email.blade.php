@@ -1,7 +1,5 @@
 @extends('layouts.backend.user.auth.app')
 
-@section('title', "Forgot Password")
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center my-5">

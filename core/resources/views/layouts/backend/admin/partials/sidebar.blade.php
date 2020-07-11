@@ -27,14 +27,7 @@
                         </a>
                     </li>
 
-                    <li class="{{ Request::is('admin/contact/all') ?
-                    'active' : '' }}">
-                        <a class="{{ Request::is('admin/contact/all') ?
-                        'active' : '' }}" href="{{ route('admin.contact.index') }}">
-                            <i class="fa fa-phone"></i>
-                            <span class="mini-click-non">Contacts</span>
-                        </a>
-                    </li>
+
 
                     <li class="{{ (Request::is('admin/user*')) ? 'active' : '' }}">
                         <a class="has-arrow" href="javascript:void(0);" aria-expanded="{{ (Request::is('admin/user*')) ? true : false }}"><i class="fa fa-user icon-wrap"></i> <span class="mini-click-non">User</span></a>
@@ -77,6 +70,15 @@
                         <a class="{{ Request::is('admin/referral/users/transactions') ? 'active' : '' }}" href="{{ route('admin.referred.users.transactions') }}">
                             <i class="fa fa-history"></i>
                             <span class="mini-click-non">Referred User Transaction</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ Request::is('admin/contact/all') ?
+                    'active' : '' }}">
+                        <a class="{{ Request::is('admin/contact/all') ?
+                        'active' : '' }}" href="{{ route('admin.contact.index') }}">
+                            <i class="fa fa-phone"></i>
+                            <span class="mini-click-non">Contacts</span>
                         </a>
                     </li>
 

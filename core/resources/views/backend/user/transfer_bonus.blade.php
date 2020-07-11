@@ -1,7 +1,5 @@
 @extends("layouts.backend.user.app")
 
-@section('title', 'Transfer Bonus')
-
 @section('breadcrumb', 'Transfer Bonus')
 
 
@@ -17,8 +15,6 @@
                 <thead class="thead-light">
                 <tr>
                     <th scope="col">#</th>
-                    <th>Name</th>
-                    <th>Username</th>
                     <th>Amount</th>
                     <th>Received Time</th>
                     <th>Details</th>
@@ -28,15 +24,13 @@
                 @forelse($bonuses as $key => $bonus)
                     <tr>
                         <th scope="row">{{ $bonuses->firstItem()+$key }}</th>
-                        <td>{{ $bonus->user->name }}</td>
-                        <td>{{ $bonus->user->username }}</td>
                         <td>{{ $bonus->transfer_bonus }}</td>
                         <td>{{ $bonus->created_at->diffForHumans() }}</td>
                         <td>{{ $bonus->detail }}</td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center">
+                        <td colspan="4" class="text-center">
                             <h1>
                                 <span class="text-danger">{{ __("No data found!!!") }}</span>
                             </h1>

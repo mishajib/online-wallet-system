@@ -1,8 +1,6 @@
 @extends("layouts.backend.admin.app")
 
-@section("title", "Add / Subtract Balance")
-
-@section('breadcomb', 'Add / Subtract Balance')
+@section('breadcomb', $title)
 
 @section("content")
     <div class="single-product-tab-area mg-b-30">
@@ -14,7 +12,7 @@
                         <div class="review-tab-pro-inner">
                             <div class="panel">
                                 <div class="panel-heading">
-                                    <h1>Add / Subtract balance</h1>
+                                    <h1>{{ $title }}</h1>
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">

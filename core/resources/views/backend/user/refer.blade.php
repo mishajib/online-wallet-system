@@ -1,7 +1,5 @@
 @extends("layouts.backend.user.app")
 
-@section('title', 'Refer a friend')
-
 @section('breadcrumb', 'Refer a friend')
 
 

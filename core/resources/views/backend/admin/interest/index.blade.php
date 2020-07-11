@@ -1,8 +1,7 @@
 @extends("layouts.backend.admin.app")
 
-@section("title", "All interest")
 
-@section('breadcomb', 'All interest')
+@section('breadcomb', $title)
 
 @section("content")
     <div class="product-status mg-b-30">

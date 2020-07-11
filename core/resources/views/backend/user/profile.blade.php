@@ -1,7 +1,5 @@
 @extends('layouts.backend.user.app')
 
-@section('title', 'User Profile')
-
 @section('breadcrumb', "Profile")
 
 @section('content')

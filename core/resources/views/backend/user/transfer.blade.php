@@ -1,6 +1,5 @@
 @extends("layouts.backend.user.app")
 
-@section("title", "Transfer Money")
 @section('breadcrumb', "Transfer Money")
 
 @section("content")

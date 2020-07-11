@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Setting;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
     public function index()
     {
+        $title = "All Contacts";
         $contacts = Contact::latest()->paginate(10);
-        return view('backend.admin.contact.contact', compact('contacts'));
+        return view('backend.admin.contact.contact', compact('contacts', 'title'));
     }
 
     public function sendMail(Request $request)
@@ -54,13 +54,15 @@ class ContactController extends Controller
     public function show($id)
     {
         $contact = Contact::findOrFail($id);
-        return view('backend.admin.contact.show', compact('contact'));
+        $title = $contact->subject;
+        return view('backend.admin.contact.show', compact('contact', 'title'));
     }
 
     public function replySendMail($id)
     {
         $contact = Contact::findOrFail($id);
-        return view('backend.admin.contact.reply', compact('contact'));
+        $title = $contact->subject;
+        return view('backend.admin.contact.reply', compact('contact', 'title'));
     }
 
     public function replyMail(Request $request, $id)
@@ -68,7 +70,7 @@ class ContactController extends Controller
         $request->validate([
             'body' => 'bail|required|string'
         ]);
-        $contact = findOrFail($id);
+        $contact = Contact::findOrFail($id);
         $setting = Setting::first();
         $sender_email = "no-reply@ows.com";
         $receiver_email = $contact->email;
@@ -82,6 +84,21 @@ class ContactController extends Controller
             return back()->with('success', 'Replied successfully');
         } else {
             return back()->with('error', 'Please try again!!!');
+        }
+    }
+
+    public function contactSearch(Request $request)
+    {
+        $request->validate([
+            'query' => 'bail|required|string'
+        ]);
+        $query = $request->input('query');
+        $title = $query;
+        $contacts = Contact::where('email', $query)->orWhere('phone', $query)->get();
+        if (!$contacts->isEmpty()) {
+            return view('backend.admin.search.contact_search', compact('query', 'contacts', 'title'));
+        } else {
+            return back()->with('error', 'Contact doesn\'t exists!!!');
         }
     }
 }

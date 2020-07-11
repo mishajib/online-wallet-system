@@ -9,7 +9,6 @@
         @include('layouts.backend.admin.partials.mobile-menu')
 
 
-
         <div class="breadcome-area">
             <div class="container-fluid">
                 <div class="row">

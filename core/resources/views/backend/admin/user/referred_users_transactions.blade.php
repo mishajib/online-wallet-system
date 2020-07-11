@@ -1,8 +1,6 @@
 @extends("layouts.backend.admin.app")
 
-@section("title", "Referred Users Transactions")
-
-@section('breadcomb', 'Referred Users Transactions')
+@section('breadcomb', $title)
 
 @section("content")
     <div class="product-status mg-b-30">

@@ -7,10 +7,10 @@ use App\Models\Bonus;
 use App\Models\Setting;
 use App\Models\Transaction;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -49,16 +49,17 @@ class RegisterController extends Controller
 
     public function showRegistrationForm($user = null)
     {
+        $title = "User Registration";
         if ($user) {
             $ref_user = User::where('username', $user)->first();
             if (!$ref_user)
             {
-                return back()->with('error', 'Invalid referal link!!!');
+                return redirect()->route('register')->with('error', 'Invalid referal link!!!');
             }
-            return view('auth.register', compact('ref_user'));
+            return view('auth.register', compact('ref_user', 'title'));
         } else {
             $ref_user = 0;
-            return view('auth.register', compact('ref_user'));
+            return view('auth.register', compact('ref_user', 'title'));
         }
 
 
@@ -77,7 +78,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:80'],
             'username' => ['required', 'alpha_num', 'max:40', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'numeric'],
+            'phone' => ['required', 'numeric', 'unique:users'],
             'address' => ['required'],
             'city' => ['required'],
             'postcode' => ['required'],
@@ -92,10 +93,31 @@ class RegisterController extends Controller
      * @param array $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+
+    public function register(Request $request)
     {
-        $referUser = User::where('username', $data['refer'])->first();
+        $this->validator($request->all())->validate();
+
+            $refer = $request->refer ? $request->refer : null;;
+        event(new Registered($user = $this->create($request->all(),$refer)));
+
+        $this->guard()->login($user);
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new Response('', 201)
+            : redirect($this->redirectPath());
+    }
+
+    protected function create(array $data,$refer = null)
+    {
         $setting = Setting::first();
+        if ($refer) {
+            $referUser = User::where('username', $refer)->first();
+        }
         $user = User::create([
             'name' => $data['name'],
             'username' => $data['username'],
@@ -120,7 +142,8 @@ class RegisterController extends Controller
             'details' => number_format($setting->join_bonus, 2) . ' ' . $setting->currency . ' received join bonus',
         ]);
 
-        if (!empty($data['refer'])) {
+
+        if (!empty($refer)) {
             $refer_bonus = $setting->join_bonus * ($setting->refer_bonus/100);
             $referUser->balance += $refer_bonus;
             Transaction::create([

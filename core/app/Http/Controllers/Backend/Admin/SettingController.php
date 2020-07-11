@@ -10,8 +10,8 @@ class SettingController extends Controller
 {
     public function index()
     {
-        $setting = Setting::first();
-        return view('backend.admin.setting', compact('setting'));
+        $title = "Site Setting";
+        return view('backend.admin.setting', compact('title'));
     }
 
     public function update(Request $request, $id)

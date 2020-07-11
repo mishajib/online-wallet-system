@@ -13,13 +13,15 @@ class TransactionController extends Controller
 {
     public function index()
     {
+        $title = "All Transactions";
         $transactions = Transaction::with('user')->latest()->paginate(10);
-        return view('backend.admin.transaction.transaction', compact('transactions'));
+        return view('backend.admin.transaction.transaction', compact('transactions', 'title'));
     }
 
     public function manageBalance()
     {
-        return view('backend.admin.user.manage_balance');
+        $title = "Add / Subtract Balance";
+        return view('backend.admin.user.manage_balance', compact('title'));
     }
 
     public function balanceOperation(Request $request)
@@ -68,6 +70,17 @@ class TransactionController extends Controller
     {
         $user = User::where('slug', $slug)->first();
         $transactions = $user->transactions()->paginate(10);
-        return view('backend.admin.transaction.user-transaction', compact('user', 'transactions'));
+        $title = $user->name . ' Transactions';
+        return view('backend.admin.transaction.user-transaction', compact('user', 'transactions', 'title'));
+    }
+
+    public function transactionSearch(Request $request) {
+        $request->validate([
+            'query' => 'bail|required|string'
+        ]);
+        $query = $request->input('query');
+        $title = $query;
+        $trxs = Transaction::where('trx_num', $query)->get();
+        return view('backend.admin.search.transaction_search', compact('query', 'trxs', 'title'));
     }
 }

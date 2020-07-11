@@ -1,7 +1,5 @@
 @extends('layouts.backend.user.auth.app')
 
-@section("title", 'Reset Password')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center my-5">
@@ -24,7 +22,7 @@
                         <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="form-group form-group-sm">
-                                <input id="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus placeholder="Email address">
+                                <input id="email" type="email" readonly class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus placeholder="Email address">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">

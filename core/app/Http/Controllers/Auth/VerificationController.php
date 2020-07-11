@@ -41,6 +41,14 @@ class VerificationController extends Controller
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 
+    public function show(Request $request)
+    {
+        $title = "User Verification";
+        return $request->user()->hasVerifiedEmail()
+            ? redirect($this->redirectPath())
+            : view('auth.verify', compact('title'));
+    }
+
     protected function verified(Request $request)
     {
         return redirect(route('user.dashboard'))->with('success', 'User verification successful');

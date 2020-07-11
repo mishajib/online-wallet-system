@@ -53,10 +53,11 @@ class AdminLoginController extends Controller
 
     public function showLoginForm()
     {
+        $title = "Admin Login";
         if (Auth::guard('admin')->user()) {
             return redirect(route('admin.dashboard'));
         }
-        return view('backend.admin.authentication.login');
+        return view('backend.admin.authentication.login', compact('title'));
     }
 
     protected function attemptLogin(Request $request)

@@ -237,3 +237,5 @@
 
     $('#dropify').dropify();
 </script>
+
+@stack('js')
