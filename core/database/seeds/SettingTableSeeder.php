@@ -14,11 +14,11 @@ class SettingTableSeeder extends Seeder
     {
         return Setting::create([
             "site_name" => "Online Wallet System",
-            "fixed_charge" => 0.00,
-            "percent_charge" => 0,
-            "join_bonus" => 0.00,
-            "refer_bonus" => 0,
-            "transfer_bonus" => 0,
+            "fixed_charge" => 2.00,
+            "percent_charge" => 3,
+            "join_bonus" => 20.00,
+            "refer_bonus" => 50,
+            "transfer_bonus" => 3,
             "currency" => "BDT",
         ]);
     }

@@ -20,6 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->boolean('trx_type');
             $table->decimal('amount');
             $table->decimal('remaining_balance');
+            $table->boolean('interest')->default(false);
             $table->string('details');
             $table->timestamps();
         });
