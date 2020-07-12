@@ -37,12 +37,34 @@ class TransactionController extends Controller
             if ($request->op == "add") {
                 $user->balance += $request->amount;
                 $message = $request->amount . ' ' . $setting->currency . " added to " . $user->username . " balance";
+
+                $sender_email = "no-reply@ows.com";
+                $receiver_email = $user->email;
+                $subject = "You account has been credited by admin";
+                $mailMessage = "You have received " . $request->amount . ' ' .
+                    $setting->currency . ' for recharged.';
+                $headers = "From: $setting->site_name <$sender_email> \r\n";
+                $headers .= "Reply-To: <$receiver_email> \r\n";
+                $headers .= "MIME-Version: 1.0\r\n";
+                $headers .= "Content-Type: text/html; charset=utf-8\r\n";
+                @mail($receiver_email, $subject, $mailMessage, $headers);
             } else {
                 if ($user->balance < $request->amount) {
                     return back()->with('error', 'Doesn\'t have balance!!!')->withInput();
                 } else {
                     $user->balance -= $request->amount;
                     $message = $request->amount . ' ' . $setting->currency . " subtracted from " . $user->username . " balance";
+
+                    $sender_email = "no-reply@ows.com";
+                    $receiver_email = $user->email;
+                    $subject = "You account has been debited by admin";
+                    $mailMessage = "Your account has been debited by " . $request->amount . ' ' .
+                        $setting->currency;
+                    $headers = "From: $setting->site_name <$sender_email> \r\n";
+                    $headers .= "Reply-To: <$receiver_email> \r\n";
+                    $headers .= "MIME-Version: 1.0\r\n";
+                    $headers .= "Content-Type: text/html; charset=utf-8\r\n";
+                    @mail($receiver_email, $subject, $mailMessage, $headers);
                 }
             }
             $trx = new Transaction();
@@ -81,6 +103,10 @@ class TransactionController extends Controller
         $query = $request->input('query');
         $title = $query;
         $trxs = Transaction::where('trx_num', $query)->get();
-        return view('backend.admin.search.transaction_search', compact('query', 'trxs', 'title'));
+        if (!$trxs->isEmpty()) {
+            return view('backend.admin.search.transaction_search', compact('query', 'trxs', 'title'));
+        } else {
+            return back()->with('error', 'Invalid transaction ID!!!');
+        }
     }
 }

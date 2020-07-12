@@ -14,7 +14,7 @@
                                 / Subtract Balance</a>
                             <form action="{{ route('admin.user.search') }}" method="GET" class="navbar-form navbar-left">
                                 <div class="form-group">
-                                    <input type="text" name="query" class="form-control" placeholder="Search User">
+                                    <input type="text" name="query" class="form-control" placeholder="Search by username">
                                 </div>
                             </form>
                         </div>

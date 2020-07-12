@@ -48,9 +48,9 @@ class TransferController extends Controller
                     $setting = Setting::first();
                     $sender_email = "no-reply@ows.com";
                     $receiver_email = $receiver->email;
-                    $subject = "Your account has been debited";
-                    $message = "Your " . $request->amount . ' ' .
-                        $setting->currency . ' has been sent successfully.';
+                    $subject = "Your account has been credited";
+                    $message = "You have received " . $request->amount . ' ' .
+                        $setting->currency . ' successfully.';
                     $headers = "From: $setting->site_name <$sender_email> \r\n";
                     $headers .= "Reply-To: <$receiver_email> \r\n";
                     $headers .= "MIME-Version: 1.0\r\n";

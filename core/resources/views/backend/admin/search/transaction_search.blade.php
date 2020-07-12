@@ -2,7 +2,7 @@
 
 
 
-@section('breadcomb', $title)
+@section('breadcomb', "Search results for: ".$title)
 
 @section("content")
     <div class="product-status mg-b-30">
