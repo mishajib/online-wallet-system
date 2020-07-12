@@ -81,6 +81,14 @@
                         <ul class="submenu-angle" aria-expanded="false">
                             <li class="{{ (Request::is('admin/interest/all')) ? 'activeClass' : '' }}"><a title="All interest" href="{{ route('admin.interest.all') }}"><span class="mini-sub-pro">All interest</span></a></li>
                             <li class="{{ (Request::is('admin/interest/create')) ? 'activeClass' : '' }}"><a title="Add balance" href="{{ route('admin.interest.create') }}"><span class="mini-sub-pro">Add interest</span></a></li>
+
+                            <li class="{{ (Request::is
+                            ('admin/interest/transaction/all')) ?
+                            'activeClass' : '' }}"><a title="All interest
+                            transaction" href="{{ route('admin.interest.transactions')
+                            }}"><span class="mini-sub-pro">All interest
+                                        transaction
+                                    </span></a></li>
                         </ul>
                     </li>
                     <li class="divider"><i class="fa fa-cogs"> Setting</i> </li>

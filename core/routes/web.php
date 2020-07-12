@@ -19,9 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('email', function () {
-   return new \App\Mail\WelcomeMail();
-});
 
 Route::get('home', "HomeController@index")->name('home')->middleware(['auth:web', 'preventBackHistory']);
 Route::post('send/message', 'Backend\Admin\ContactController@sendMail')->name('send.message');
@@ -114,6 +111,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin', 'as' => 'admi
     Route::get('user/referred/search', 'ReferController@referredUserSearch')->name('user.search.referred');
     Route::get('user/transaction/search', 'TransactionController@transactionSearch')->name('user.search.transaction');
     Route::get('contact/search', 'ContactController@contactSearch')->name('search.contact');
+
+    Route::get('interest/transaction/all', 'InterestController@transactions')
+        ->name('interest.transactions');
 
 
 });

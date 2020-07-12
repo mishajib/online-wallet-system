@@ -61,6 +61,9 @@
                                 <ul id="interest" class="collapse dropdown-header-top">
                                     <li><a href="{{ route('admin.interest.all') }}">All interest</a>
                                     </li>
+                                    <li><a href="{{ route('admin.interest.transactions') }}">All
+                                            interest transaction</a>
+                                    </li>
                                     <li><a href="{{ route('admin.interest.create') }}">Add interest</a></li>
                                 </ul>
                             </li>
