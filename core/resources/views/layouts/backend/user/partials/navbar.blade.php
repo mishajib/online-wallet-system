@@ -15,16 +15,16 @@
                     {{ number_format(Auth::user()->balance, 2) . " " . $setting->currency }}
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('user.transfer') }}">Transfer Money</a>
+            <li class="nav-item {{ (Request::is('transfer/money')) ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('user.transfer') }}">Send Money</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown {{ (Request::is('profile')) ? 'active' : '' }}">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ Auth::user()->name }}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('user.profile') }}">Profile</a>
+                    <a class="dropdown-item {{ (Request::is('profile')) ? 'active' : '' }}" href="{{ route('user.profile') }}">Profile</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ route('logout') }}">{{ __("Logout") }}</a>
                 </div>

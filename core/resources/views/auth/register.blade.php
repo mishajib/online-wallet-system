@@ -24,10 +24,27 @@
                                 <form method="POST" action="{{ route('register') }}">
                                     @csrf
 
+                                    @if($ref_user)
+                                        <div class="form-group form-group-sm">
+                                            <input id="refer" type="text"
+                                                   class="form-control form-control-lg @error('refer') is-invalid @enderror"
+                                                   name="refer" readonly
+                                                   value="{{ $ref_user->username ?? old('refer') }}"
+                                                   autocomplete="refer" placeholder="Enter referral username">
+
+                                            @error('refer')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                            @enderror
+                                        </div>
+                                    @endif
+
                                     <div class="form-group form-group-sm mt-4">
                                         <input id="name" type="text"
                                                class="form-control form-control-lg @error('name') is-invalid @enderror"
-                                               name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Enter your name">
+                                               name="name" value="{{ old('name') }}" required autocomplete="name"
+                                               autofocus placeholder="Enter your name">
 
                                         @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -52,7 +69,8 @@
                                     <div class="form-group form-group-sm">
                                         <input id="email" type="email"
                                                class="form-control form-control-lg @error('email') is-invalid @enderror"
-                                               name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Enter your email">
+                                               name="email" value="{{ old('email') }}" required autocomplete="email"
+                                               placeholder="Enter your email">
 
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -64,7 +82,8 @@
                                     <div class="form-group form-group-sm">
                                         <input id="phone" type="text"
                                                class="form-control form-control-lg @error('phone') is-invalid @enderror"
-                                               name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus placeholder="Enter your phone number">
+                                               name="phone" value="{{ old('phone') }}" required autocomplete="phone"
+                                               autofocus placeholder="Enter your phone number">
 
                                         @error('phone')
                                         <span class="invalid-feedback" role="alert">
@@ -76,7 +95,8 @@
                                     <div class="form-group form-group-sm">
                                         <input id="address" type="text"
                                                class="form-control form-control-lg @error('address') is-invalid @enderror"
-                                               name="address" value="{{ old('address') }}" required autocomplete="address"
+                                               name="address" value="{{ old('address') }}" required
+                                               autocomplete="address"
                                                autofocus placeholder="Enter your address">
 
                                         @error('address')
@@ -89,7 +109,8 @@
                                     <div class="form-group form-group-sm">
                                         <input id="city" type="text"
                                                class="form-control form-control-lg @error('city') is-invalid @enderror"
-                                               name="city" value="{{ old('city') }}" required autocomplete="city" autofocus placeholder="Enter your city">
+                                               name="city" value="{{ old('city') }}" required autocomplete="city"
+                                               autofocus placeholder="Enter your city">
 
                                         @error('city')
                                         <span class="invalid-feedback" role="alert">
@@ -112,25 +133,11 @@
                                     </div>
 
 
-                                    @if($ref_user)
-                                        <div class="form-group form-group-sm">
-                                            <input id="refer" type="text"
-                                                   class="form-control form-control-lg @error('refer') is-invalid @enderror"
-                                                   name="refer" readonly value="{{ $ref_user->username ?? old('refer') }}" autocomplete="refer" placeholder="Enter referral username">
-
-                                            @error('refer')
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                            @enderror
-                                        </div>
-                                    @endif
-
-
                                     <div class="form-group form-group-sm">
                                         <input id="password" type="password"
                                                class="form-control form-control-lg @error('password') is-invalid @enderror"
-                                               name="password" required autocomplete="new-password" placeholder="Enter your password">
+                                               name="password" required autocomplete="new-password"
+                                               placeholder="Enter your password">
 
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -140,8 +147,10 @@
                                     </div>
 
                                     <div class="form-group form-group-sm">
-                                        <input id="password-confirm" type="password" class="form-control form-control-lg"
-                                               name="password_confirmation" required autocomplete="new-password" placeholder="Confirm your password">
+                                        <input id="password-confirm" type="password"
+                                               class="form-control form-control-lg"
+                                               name="password_confirmation" required autocomplete="new-password"
+                                               placeholder="Confirm your password">
                                     </div>
 
                                     <div class="form-group mb-0">

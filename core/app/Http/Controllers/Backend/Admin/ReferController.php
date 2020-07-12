@@ -18,7 +18,7 @@ class ReferController extends Controller
 
     public function referralUsers()
     {
-        $title = "No Referred Users";
+        $title = "Non Referred Users";
         $users = User::whereNull('ref_by')->latest()->paginate(10);
         return view('backend.admin.user.referral_users', compact('users', 'title'));
     }

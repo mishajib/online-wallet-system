@@ -105,9 +105,10 @@ class UserController extends Controller
             'query' => 'bail|required|string'
         ]);
         $query = $request->input('query');
+        $title = $query;
         $user = User::where('username', $query)->first();
         if ($user) {
-            return view('backend.admin.search.user_search', compact('query', 'user'));
+            return view('backend.admin.search.user_search', compact('query', 'user', 'title'));
         } else {
             return back()->with('error', 'User doesn\'t exists!!!');
         }

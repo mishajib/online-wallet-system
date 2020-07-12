@@ -11,7 +11,7 @@
                         <h4>Transactions</h4>
                         <form action="{{ route('admin.user.search.transaction') }}" method="GET" class="navbar-form navbar-right">
                             <div class="form-group">
-                                <input type="text" name="query" class="form-control" placeholder="Search User">
+                                <input type="text" name="query" class="form-control" placeholder="Search by trx num">
                             </div>
                         </form>
                         <table>

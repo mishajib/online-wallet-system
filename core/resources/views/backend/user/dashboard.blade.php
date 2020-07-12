@@ -9,7 +9,7 @@
             <div class="card bg-primary text-center shadow text-white">
                 <div class="card-header">
                     <h3>Transactions</h3>
-                    <h1><i class="fa fa-exchange"></i> {{ number_format($total_transaction, 2) .' '. $setting->currency }} </h1>
+                    <h1><i class="fa fa-exchange"></i> {{ $total_transaction + 0 .' '. $setting->currency }} </h1>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
             <div class="card bg-dark text-center shadow text-white">
                 <div class="card-header">
                     <h3>Received Bonus</h3>
-                    <h1><i class="fa fa-get-pocket"></i> {{ number_format($total_bonus, 2) . ' '. $setting->currency }} </h1>
+                    <h1><i class="fa fa-get-pocket"></i> {{ $total_bonus . ' '. $setting->currency }} </h1>
                 </div>
             </div>
         </div>

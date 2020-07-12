@@ -8,29 +8,41 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-status-wrap">
-                        <h4>Referred User Transaction List</h4>
-                        <table class="table table-bordered">
+                        <h4>{{ $title }}</h4>
+                        <form action="{{ route('admin.user.search.transaction') }}" method="GET" class="navbar-form navbar-right">
+                            <div class="form-group">
+                                <input type="text" name="query" class="form-control" placeholder="Search by trx num">
+                            </div>
+                        </form>
+                        <table>
                             <tr>
                                 <th>Serial No</th>
                                 <th>TRX Num</th>
-                                <th>Sender</th>
+                                <th>Receiver</th>
                                 <th>TRX Type</th>
                                 <th>Amount</th>
                                 <th>Remaining Balance</th>
                                 <th>Details</th>
-                                <th>Time & Date</th>
                             </tr>
                             @forelse($trans as $key => $transaction)
-                                    <tr>
-                                        <td>{{ $trans->firstItem()+$key }}</td>
-                                        <td>{{ $transaction->trx_num }}</td>
-                                        <td>{{ $transaction->user->username }}</td>
-                                        <td>{{ $transaction->trx_type }}</td>
-                                        <td>{{ $transaction->amount }}</td>
-                                        <td>{{ $transaction->remaining_balance }}</td>
-                                        <td>{{ $transaction->details }}</td>
-                                        <td>{{ $transaction->created_at->diffForHumans() }}</td>
-                                    </tr>
+                                <tr>
+
+                                    <td>{{ $trans->firstItem()+$key }}</td>
+                                    <td>{{ $transaction->trx_num }}</td>
+                                    <td>
+                                        {{ $transaction->user->username }}
+                                    </td>
+                                    <td>{{ $transaction->trx_type }}</td>
+                                    <td>{{ $transaction->amount }}</td>
+                                    <td>{{ $transaction->remaining_balance }}</td>
+                                    <td>{{ $transaction->details }}</td>
+                                    <td>
+                                        <a class="btn btn-sm btn-info"
+                                           href="{{ route('admin.user.specific.transaction', $transaction->user->slug) }}">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
                             @empty
                                 <tr>
                                     <td colspan="8">

@@ -3671,3 +3671,7 @@ th.fc-day-header.fc-widget-header {
 .form-control[disabled] {
 	background-color: #152036;
 }
+
+.activeClass {
+	background: #152036;
+}

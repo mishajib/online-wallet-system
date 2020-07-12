@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ReferBonusMail;
+use App\Mail\SignUpBonusMail;
 use App\Mail\WelcomeMail;
 use App\Models\Bonus;
 use App\Models\Setting;
@@ -82,9 +83,9 @@ class RegisterController extends Controller
             'username' => ['required', 'alpha_num', 'max:40', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'numeric', 'unique:users'],
-            'address' => ['required'],
-            'city' => ['required'],
-            'postcode' => ['required'],
+            'address' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'postcode' => ['required', 'numeric'],
             'refer' => ['alpha_num', 'nullable'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -146,7 +147,6 @@ class RegisterController extends Controller
             'details' => number_format($setting->join_bonus, 2) . ' ' . $setting->currency . ' received join bonus',
         ]);
 
-
         if (!empty($refer)) {
             $refer_bonus = $setting->join_bonus * ($setting->refer_bonus/100);
             $referUser->balance += $refer_bonus;
@@ -170,6 +170,7 @@ class RegisterController extends Controller
         }
 
         Mail::to($user)->send(new WelcomeMail($user));
+        Mail::to($user)->send(new SignUpBonusMail($setting));
         return $user;
     }
 

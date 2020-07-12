@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Backend\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Interest;
+use App\Models\Setting;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class InterestController extends Controller
 {
@@ -69,14 +72,25 @@ class InterestController extends Controller
     {
         $interest = Interest::findOrFail($id);
         $users = User::all();
+        $setting = Setting::first();
 
         if (!empty($users)) {
             foreach ($users as $user) {
                 $current_balance = $user->balance;
-                $give_interest = ($interest->percent * $current_balance) /100;
+                $give_interest = ($interest->percent * $current_balance) / 100;
                 $new_balance = $current_balance + $give_interest;
                 $user->balance = $new_balance;
+
+                $trx = new Transaction();
+                $trx->user_id = $user->id;
+                $trx->trx_num = Str::random(12);
+                $trx->trx_type = true;
+                $trx->details = $give_interest . ' ' . $setting->currency . ' received '. Str::lower($interest->name);
+                $trx->amount = $give_interest;
+                $trx->remaining_balance = $user->balance;
+                $trx->save();
                 $user->save();
+
             }
             return back()->with('success', "Interest successfully sent");
         } else {

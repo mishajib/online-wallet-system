@@ -11,7 +11,7 @@
                         <h4>Referral User List</h4>
                         <form action="{{ route('admin.user.search.referral') }}" method="GET" class="navbar-form navbar-right">
                             <div class="form-group">
-                                <input type="text" name="query" class="form-control" placeholder="Search User">
+                                <input type="text" name="query" class="form-control" placeholder="Search by username">
                             </div>
                         </form>
                         <table>
@@ -40,9 +40,6 @@
                                         @endif
                                     </td>
                                     <td>{{ $user->created_at->diffForHumans() }}</td>
-                                    <td>
-                                        <img class="img-circle img-responsive" src="{{ asset('assets/uploads/profile/' . $user->image) }}" alt="{{ $user->slug }}">
-                                    </td>
                                     <td>
                                         <a title="Click to edit user" class="btn btn-warning btn-sm" href="{{ route('admin.user.edit', $user->id) }}">
                                             <i class="fa fa-edit"></i>

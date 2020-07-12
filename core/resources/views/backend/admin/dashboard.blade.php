@@ -16,7 +16,7 @@
                                     <label class="label bg-green"><i class="fa fa-exchange" aria-hidden="true"></i></label>
                                 </div>
                                 <div class="col-xs-9 cus-gh-hd-pro">
-                                    <h2 class="text-right no-margin">{{ number_format($total_transactions, 2) . " " . $setting->currency }}</h2>
+                                    <h2 class="text-right no-margin">{{ $total_transactions + 0 . " " . $setting->currency }}</h2>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                                     <label class="label bg-blue"><i class="fa fa-money" aria-hidden="true"></i></label>
                                 </div>
                                 <div class="col-xs-9 cus-gh-hd-pro">
-                                    <h2 class="text-right no-margin">{{ number_format($revenue, 2) . " " . $setting->currency }}</h2>
+                                    <h2 class="text-right no-margin">{{ $revenue + 0 . " " . $setting->currency }}</h2>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +90,6 @@
                                 <th>Amount</th>
                                 <th>Remaining Balance</th>
                                 <th>Details</th>
-                                <th>Action</th>
                             </tr>
                             @forelse($transactions as $key => $transaction)
                                 <tr>
