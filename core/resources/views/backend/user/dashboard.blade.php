@@ -91,7 +91,7 @@
                 @endforelse
                 </tbody>
             </table>
-            <nav aria-label="...">
+            <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     {{ $transactions->links() }}
                 </ul>

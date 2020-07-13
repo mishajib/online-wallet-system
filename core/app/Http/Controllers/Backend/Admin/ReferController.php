@@ -29,7 +29,6 @@ class ReferController extends Controller
         $trans = Transaction::latest()->with('user')->whereHas('user', function ($user) {
             $user->whereNull('ref_by');
         })->paginate(10);
-
         return view('backend.admin.user.referral_users_transactions', compact('trans', 'title'));
     }
 
@@ -40,35 +39,34 @@ class ReferController extends Controller
             ->whereHas('user', function ($user) {
                 $user->whereNotNull('ref_by');
             })->paginate(10);
-
         return view('backend.admin.user.referred_users_transactions', compact('trans', 'title'));
     }
 
-    public function referralUserSearch(Request $request) {
+    public function referralUserSearch(Request $request)
+    {
         $request->validate([
             'query' => 'bail|required|string'
         ]);
         $query = $request->input('query');
         $title = $query;
         $user = User::where('username', $query)->whereNull('ref_by')->first();
-        if ($user) {
-            return view('backend.admin.search.user_search', compact('query', 'user', 'title'));
-        } else {
+        if (!$user) {
             return back()->with('error', 'User doesn\'t exists!!!');
         }
+        return view('backend.admin.search.user_search', compact('query', 'user', 'title'));
     }
 
-    public function referredUserSearch(Request $request) {
+    public function referredUserSearch(Request $request)
+    {
         $request->validate([
             'query' => 'bail|required|string'
         ]);
         $query = $request->input('query');
         $title = $query;
         $user = User::where('username', $query)->whereNotNull('ref_by')->first();
-        if ($user) {
-            return view('backend.admin.search.user_search', compact('query', 'user', 'title'));
-        } else {
+        if (!$user) {
             return back()->with('error', 'User doesn\'t exists!!!');
         }
+        return view('backend.admin.search.user_search', compact('query', 'user', 'title'));
     }
 }

@@ -33,16 +33,11 @@ class ContactController extends Controller
         $contact->subject = $request->subject;
         $contact->body = $request->body;
 
-        $setting = Setting::first();
         $sender_email = $request->email;
         $receiver_email = "no-reply@ows.com";
         $subject = $request->subject;
         $message = $request->body;
-        $headers = "From: $setting->site_name <$sender_email> \r\n";
-        $headers .= "Reply-To: <$receiver_email> \r\n";
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=utf-8\r\n";
-        if (@mail($receiver_email, $subject, $message, $headers)) {
+        if (sendMail($receiver_email, $subject, $message, $sender_email)) {
             $contact->save();
             return back()->with('success', 'Message sent successfully');
         } else {
@@ -71,16 +66,10 @@ class ContactController extends Controller
             'body' => 'bail|required|string'
         ]);
         $contact = Contact::findOrFail($id);
-        $setting = Setting::first();
-        $sender_email = "no-reply@ows.com";
         $receiver_email = $contact->email;
         $subject = $contact->subject;
         $message = $request->body;
-        $headers = "From: $setting->site_name <$sender_email> \r\n";
-        $headers .= "Reply-To: <$receiver_email> \r\n";
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=utf-8\r\n";
-        if (@mail($receiver_email, $subject, $message, $headers)) {
+        if (sendMail($receiver_email, $subject, $message)) {
             return back()->with('success', 'Replied successfully');
         } else {
             return back()->with('error', 'Please try again!!!');
@@ -95,10 +84,9 @@ class ContactController extends Controller
         $query = $request->input('query');
         $title = $query;
         $contacts = Contact::where('email', $query)->orWhere('phone', $query)->get();
-        if (!$contacts->isEmpty()) {
-            return view('backend.admin.search.contact_search', compact('query', 'contacts', 'title'));
-        } else {
+        if ($contacts->isEmpty()) {
             return back()->with('error', 'Contact doesn\'t exists!!!');
         }
+        return view('backend.admin.search.contact_search', compact('query', 'contacts', 'title'));
     }
 }

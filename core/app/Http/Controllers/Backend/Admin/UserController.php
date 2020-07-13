@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -22,16 +21,16 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
+        $title = $user->name . " Information";
         $transactions = $user->transactions()->paginate(10);
         $referredUsers = $user->referredusers()->paginate(10);
-        $title = $user->name. " Information";
         return view('backend.admin.user.show', compact('user', 'transactions', 'referredUsers', 'title'));
     }
 
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $title = $user->name. ' Edit';
+        $title = $user->name . ' Edit';
         return view('backend.admin.user.edit', compact('user', 'title'));
     }
 
@@ -49,8 +48,6 @@ class UserController extends Controller
         $user->postcode = $request->postcode;
         $user->save();
         return redirect()->back()->with('success', 'User updated successfully');
-
-
     }
 
     public function updatePassword(Request $request, $id)
@@ -77,42 +74,36 @@ class UserController extends Controller
     public function active($id)
     {
         $user = User::findOrFail($id);
-        if ($user->status == false) {
-            $user->status = true;
-            $user->save();
-            Session::flash('success', 'User has been activated');
-        } else {
-            Session::flash('error', 'User is already been activated');
+        if ($user->status != false) {
+            return back()->with('error', 'User is already been activated');
         }
-        return back();
+        $user->status = true;
+        $user->save();
+        return back()->with('success', 'User has been activated');
     }
 
     public function deactive($id)
     {
         $user = User::findOrFail($id);
-        if ($user->status == true) {
-            $user->status = false;
-            $user->save();
-            return back()->with('success', 'User has been deactivated');
-        } else {
+        if ($user->status != true) {
             return back()->with('error', 'User is already been deactivated');
         }
-
+        $user->status = false;
+        $user->save();
+        return back()->with('success', 'User has been deactivated');
     }
 
-    public function userSearch(Request $request) {
+    public function userSearch(Request $request)
+    {
         $request->validate([
             'query' => 'bail|required|string'
         ]);
         $query = $request->input('query');
         $title = $query;
         $user = User::where('username', $query)->first();
-        if ($user) {
-            return view('backend.admin.search.user_search', compact('query', 'user', 'title'));
-        } else {
+        if (!$user) {
             return back()->with('error', 'User doesn\'t exists!!!');
         }
+        return view('backend.admin.search.user_search', compact('query', 'user', 'title'));
     }
-
-
 }

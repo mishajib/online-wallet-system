@@ -9,7 +9,8 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="product-status-wrap">
                         <h4>{{ $title }}</h4>
-                        <form action="{{ route('admin.user.search.transaction') }}" method="GET" class="navbar-form navbar-right">
+                        <form action="{{ route('admin.user.search.transaction') }}" method="GET"
+                              class="navbar-form navbar-right">
                             <div class="form-group">
                                 <input type="text" name="query" class="form-control" placeholder="Search by trx num">
                             </div>
@@ -22,6 +23,7 @@
                                 <th>TRX Type</th>
                                 <th>Amount</th>
                                 <th>Remaining Balance</th>
+                                <th>Interest</th>
                                 <th>Details</th>
                             </tr>
                             @forelse($trxs as $key => $transaction)
@@ -35,6 +37,13 @@
                                     <td>{{ $transaction->trx_type }}</td>
                                     <td>{{ $transaction->amount }}</td>
                                     <td>{{ $transaction->remaining_balance }}</td>
+                                    <td>
+                                        @if($transaction->interest == true)
+                                            <span class="badge badge-success">Received</span>
+                                        @else
+                                            <span class="badge badge-danger">Not Received</span>
+                                        @endif
+                                    </td>
                                     <td>{{ $transaction->details }}</td>
                                     <td>
                                         <a class="btn btn-sm btn-info"

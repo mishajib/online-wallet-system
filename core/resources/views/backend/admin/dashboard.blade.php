@@ -13,7 +13,8 @@
                             <h4 class="text-left text-uppercase"><b>Total Transactions</b></h4>
                             <div class="row vertical-center-box vertical-center-box-tablet">
                                 <div class="col-xs-3 mar-bot-15 text-left">
-                                    <label class="label bg-green"><i class="fa fa-exchange" aria-hidden="true"></i></label>
+                                    <label class="label bg-green"><i class="fa fa-exchange"
+                                                                     aria-hidden="true"></i></label>
                                 </div>
                                 <div class="col-xs-9 cus-gh-hd-pro">
                                     <h2 class="text-right no-margin">{{ $total_transactions + 0 . " " . $setting->currency }}</h2>
@@ -89,6 +90,7 @@
                                 <th>TRX Type</th>
                                 <th>Amount</th>
                                 <th>Remaining Balance</th>
+                                <th>Interest</th>
                                 <th>Details</th>
                             </tr>
                             @forelse($transactions as $key => $transaction)
@@ -102,6 +104,13 @@
                                     <td>{{ $transaction->trx_type }}</td>
                                     <td>{{ $transaction->amount }}</td>
                                     <td>{{ $transaction->remaining_balance }}</td>
+                                    <td>
+                                        @if($transaction->interest == true)
+                                            <span class="badge badge-success">Received</span>
+                                        @else
+                                            <span class="badge badge-danger">Not Received</span>
+                                        @endif
+                                    </td>
                                     <td>{{ $transaction->details }}</td>
                                 </tr>
                             @empty

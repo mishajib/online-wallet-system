@@ -34,19 +34,10 @@ class ProfileController extends Controller
         $user->address = $request->address;
         $user->city = $request->city;
         $user->postcode = $request->postcode;
-        $user->save();
-
-        $setting = Setting::first();
-        $sender_email = "no-reply@ows.com";
-        $receiver_email = Auth::user()->email;
         $subject = "Profile updation notification";
         $message = view('emails.profile_update');
-        $headers = "From: $setting->site_name <$sender_email> \r\n";
-        $headers .= "Reply-To: <$receiver_email> \r\n";
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=utf-8\r\n";
-        @mail($receiver_email, $subject, $message, $headers);
-
+        sendMail(Auth::user()->email, $subject, $message);
+        $user->save();
         return back()->with('success', 'User profile has been successfully updated');
 
     }
@@ -75,12 +66,8 @@ class ProfileController extends Controller
             $image->move('assets/uploads/profile/', $imagename);
             $user->image = $imagename;
         }
-        if ($user->save()) {
-            return back()->with('success', 'User image successfully updated');
-        } else {
-            return back()->with('error', "Something went wrong");
-        }
-
+        $user->save();
+        return back()->with('success', 'User image successfully updated');
     }
 
     public function updatePassword(Request $request)
@@ -94,19 +81,17 @@ class ProfileController extends Controller
         }
 
         $hashedPassword = Auth::user()->getAuthPassword();
-        if (Hash::check($request->old_password, $hashedPassword)) {
-            if (!Hash::check($request->password, $hashedPassword)) {
-                $user = User::findOrFail(Auth::id());
-                $user->password = Hash::make($request->password);
-                $user->save();
-                Session::flash('success', 'User password successfully changed');
-                return redirect(route('login'))->with(Auth::logout());
-            } else {
-                return back()->with("error", "New password can't be the same as old password!");
-            }
-        } else {
+        if (!Hash::check($request->old_password, $hashedPassword)) {
             return back()->with("error", "Current password does not matched!!!");
         }
+        if (Hash::check($request->password, $hashedPassword)) {
+            return back()->with("error", "New password can't be the same as old password!");
+        }
+        $user = User::findOrFail(Auth::id());
+        $user->password = Hash::make($request->password);
+        $user->save();
+        Session::flash('success', 'User password successfully changed');
+        return redirect(route('login'))->with(Auth::logout());
     }
 
     public function referPage()
@@ -120,16 +105,9 @@ class ProfileController extends Controller
         $request->validate([
             'refer_link' => 'bail|required|email',
         ]);
-        $setting = Setting::first();
-        $sender_email = Auth::user()->email;
-        $receiver_email = $request->refer_link;
         $subject = "Join Online Wallet System by this link";
         $message = view('emails.refer_mail');
-        $headers = "From: $setting->site_name <$sender_email> \r\n";
-        $headers .= "Reply-To: <$receiver_email> \r\n";
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=utf-8\r\n";
-        @mail($receiver_email, $subject, $message, $headers);
+        sendMail($request->refer_link, $subject, $message, Auth::user()->email);
         return back()->with('success', "Referral link sent successfully");
     }
 }

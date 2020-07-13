@@ -59,12 +59,8 @@ class ProfileController extends Controller
             $imagename = $user->image;
         }
         $user->image = $imagename;
-        if ($user->save()) {
-            return back()->with('success', 'User image successfully updated');
-        } else {
-            return back()->with('error', "Something went wrong");
-        }
-
+        $user->save();
+        return back()->with('success', 'User image successfully updated');
     }
 
     public function updatePassword(Request $request)
@@ -78,18 +74,16 @@ class ProfileController extends Controller
         }
 
         $hashedPassword = Auth::user()->getAuthPassword();
-        if (Hash::check($request->old_password, $hashedPassword)) {
-            if (!Hash::check($request->password, $hashedPassword)) {
-                $user = Admin::findOrFail(Auth::id());
-                $user->password = Hash::make($request->password);
-                $user->save();
-                Session::flash('success', 'User password successfully changed');
-                return redirect(route('admin.login.page'))->with(Auth::logout());
-            } else {
-                return back()->with("error", "New password can't be the same as old password!");
-            }
-        } else {
+        if (!Hash::check($request->old_password, $hashedPassword)) {
             return back()->with("error", "Current password does not matched!!!");
         }
+        if (!Hash::check($request->password, $hashedPassword)) {
+            return back()->with("error", "New password can't be the same as old password!");
+        }
+        $user = Admin::findOrFail(Auth::id());
+        $user->password = Hash::make($request->password);
+        $user->save();
+        Session::flash('success', 'User password successfully changed');
+        return redirect(route('admin.login.page'))->with(Auth::logout());
     }
 }
