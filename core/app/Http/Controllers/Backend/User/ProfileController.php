@@ -63,9 +63,12 @@ class ProfileController extends Controller
             if (file_exists('assets/uploads/profile/' . $user->image)) {
                 unlink('assets/uploads/profile/' . $user->image);
             }
-            $image->move('assets/uploads/profile/', $imagename);
-            $user->image = $imagename;
+            Image::make($image)->resize(300, 200)->save('assets/uploads/profile/' . $imagename);
+
+        } else {
+            $imagename = $user->image;
         }
+        $user->image = $imagename;
         $user->save();
         return back()->with('success', 'User image successfully updated');
     }

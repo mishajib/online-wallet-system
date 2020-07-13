@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
@@ -54,7 +55,7 @@ class ProfileController extends Controller
             if (file_exists('assets/uploads/profile/' . $user->image)) {
                 unlink('assets/uploads/profile/' . $user->image);
             }
-            $image->move('assets/uploads/profile/', $imagename);
+            Image::make($image)->resize(300, 200)->save('assets/uploads/profile/' . $imagename);
         } else {
             $imagename = $user->image;
         }
