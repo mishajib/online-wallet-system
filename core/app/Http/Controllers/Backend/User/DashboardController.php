@@ -18,14 +18,20 @@ class DashboardController extends Controller
         $data['transfer_bonus'] = Bonus::where('user_id', $data['user']->id)->sum('transfer_bonus');
         $data['total_bonus'] = $data['refer_bonus'] + $data['transfer_bonus'];
         $data['title'] = 'User Dashboard';
-
         return view('backend.user.dashboard')->with($data);
     }
 
-    public function refUsers() {
+    public function refUsers()
+    {
         $refUsers = Auth::user()->referredusers()->latest()->with('user')->paginate(10);
         $title = "Referred Users";
         return view('backend.user.referred_user', compact('refUsers', 'title'));
+    }
+
+    public function notifications()
+    {
+        $title = "All notification";
+        return view('backend.user.notifications', compact('title'));
     }
 
 

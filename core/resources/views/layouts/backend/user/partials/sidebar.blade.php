@@ -16,6 +16,12 @@
         <a href="{{ route('user.transfer.bonus') }}" class="bg-dark text-white
          list-group-item list-group-item-action bg-light mt-4 {{ (Request::is('transfer/bonus/all')) ? 'active':'' }}">{{ __('Transfer
          Bonus List') }}</a>
+
+        <a href="{{ route('user.notification.all') }}" class="bg-dark text-white
+         list-group-item list-group-item-action bg-light mt-4 {{ (Request::is('notification/all')) ? 'active':''
+         }}">{{ __
+         ('All Notification') }} <span class="badge badge-info">{{ count(Auth::user()->unreadNotifications) }}</span></a>
+
         <a href="{{ route('user.refer.friend') }}" class="bg-dark text-white list-group-item list-group-item-action bg-light mt-4 {{ (Request::is('refer/friend')) ? 'active':'' }}">{{ __('Refer a friend') }}</a>
 
     </div>

@@ -9,7 +9,6 @@ use App\Models\Setting;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -76,36 +75,33 @@ class InterestController extends Controller
         $users = User::all();
         $setting = Setting::first();
 
-        if (!empty($users)) {
-            foreach ($users as $user) {
-                $current_balance = $user->balance;
-                $give_interest = ($interest->percent * $current_balance) / 100;
-                $new_balance = $current_balance + $give_interest;
-                $user->balance = $new_balance;
-
-                $trx = new Transaction();
-                $trx->user_id = $user->id;
-                $trx->trx_num = Str::random(12);
-                $trx->trx_type = true;
-                $trx->details = $give_interest . ' ' . $setting->currency . ' received ' . Str::lower($interest->name);
-                $trx->amount = $give_interest;
-                $trx->remaining_balance = $user->balance;
-                $trx->interest = true;
-
-                Mail::to($user)->send(new InterestMail($give_interest, $setting));
-                sleep(1);
-
-                $trx->save();
-                $user->save();
-
-            }
-            return back()->with('success', "Interest successfully sent");
-        } else {
+        if ($users->isEmpty()) {
             return back()->with('error', 'No user found');
         }
+        foreach ($users as $user) {
+            $current_balance = $user->balance;
+            $give_interest = ($interest->percent * $current_balance) / 100;
+            $new_balance = $current_balance + $give_interest;
+            $user->balance = $new_balance;
 
+            $trx = new Transaction();
+            $trx->user_id = $user->id;
+            $trx->trx_num = Str::random(12);
+            $trx->trx_type = true;
+            $trx->details = $give_interest . ' ' . $setting->currency . ' received ' . Str::lower($interest->name);
+            $trx->amount = $give_interest;
+            $trx->remaining_balance = $user->balance;
+            $trx->interest = true;
+
+            Mail::to($user)->send(new InterestMail($give_interest, $setting));
+            sleep(1);
+
+            $trx->save();
+            $user->save();
+
+        }
+        return back()->with('success', "Interest successfully sent");
     }
-
 
     public function transactions()
     {
@@ -113,6 +109,5 @@ class InterestController extends Controller
         $trxs = Transaction::where('interest', true)->latest()->paginate(10);
         return view('backend.admin.interest.interest_transactions', compact('trxs', 'title'));
     }
-
 
 }
