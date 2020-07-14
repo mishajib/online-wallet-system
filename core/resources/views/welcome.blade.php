@@ -1,100 +1,490 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!doctype html>
+<html lang="en">
 
-        <title>Laravel</title>
+<head>
+    <title>Home | {{ $setting->site_name }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <link rel="icon" href="{{ asset('assets/favicon.png') }}">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,700"
+          rel="stylesheet">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+    <link rel="stylesheet"
+          href="{{ asset('assets/frontend/fonts/icomoon/style.css') }}">
 
-            .full-height {
-                height: 100vh;
-            }
+    <link rel="stylesheet"
+          href="{{ asset('assets/frontend/css/bootstrap.min.css') }}">
+    <link rel="stylesheet"
+          href="{{ asset('assets/backend/admin/css/font-awesome.min.css') }}">
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}">
 
-            .position-ref {
-                position: relative;
-            }
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+</head>
 
-            .content {
-                text-align: center;
-            }
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
-            .title {
-                font-size: 84px;
-            }
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+<div class="site-wrap" id="home-section">
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+    <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+    <header class="site-navbar site-navbar-target" role="banner">
+
+        <div class="container">
+            <div class="row align-items-center position-relative">
+
+                <div class="col-3 ">
+                    <div class="site-logo">
+                        <a href="{{ route('welcome') }}" class="font-weight-bold">
+                            <img class="img-responsive w-75"
+                                 src="{{ asset('assets/frontend/images/logo.png') }}"
+                                 alt="ows">
+                        </a>
+                    </div>
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="col-9  text-right">
+
+
+            <span class="d-inline-block d-lg-block"><a href="#"
+                                                       class="text-white site-menu-toggle js-menu-toggle py-5 text-white"><span
+                        class="icon-menu h3 text-white"></span></a></span>
+
+
+                    <nav
+                        class="site-navigation text-right ml-auto d-none d-lg-none"
+                        role="navigation">
+                        <ul class="site-menu main-menu js-clone-nav ml-auto ">
+                            <li class="active"><a href="{{ url('/') }}"
+                                                  class="nav-link">Home</a></li>
+                            <li><a href="{{ route('login') }}" class="nav-link">Login</a>
+                            </li>
+                            <li><a href="{{ route('register') }}"
+                                   class="nav-link">Register</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+
+            </div>
+        </div>
+
+    </header>
+
+    <div class="ftco-blocks-cover-1">
+        <div class="site-section-cover overlay" data-aos="fade"
+             style="background-image: url('{{ asset('assets/frontend/images/bg_wallet.jpg') }}')">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-md-7 text-center fade-up">
+                        <h1 class="mb-4 text-white">
+                            E-WALLET is <span class="typer" data-delay="50"
+                                              data-words="online transaction system, a money transfer system, a digital wallet"
+                                              data-colors="lightblue,orange,cyan"></span>
+                        </h1>
+                        <p class="mb-4">ONLINE WALLET SYSTEM</p>
+                        <p><a href="{{ route('login') }}"
+                              class="btn btn-primary btn-outline-white py-3 px-5">GET
+                                STARTED</a></p>
+                    </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</div>
+
+<section id="about" class="p-5 mt-5" data-aos="fade-up">
+    <div class="container-fluid">
+        <div class="row mt-4">
+            <div class="col-lg-7 col-md-8 col-sm-12">
+                <h3 class="h5">WHAT WE DO ?</h3>
+                <h1 class="display-4 ml-5">About Us</h1>
+                <p class="text-justify text-dark pt-2 mt-4">Lorem ipsum dolor
+                    sit amet, consectetur adipisicing elit. Amet autem, cum
+                    delectus dolore eaque eligendi, error fuga minus molestiae
+                    nobis odio odit, omnis placeat sunt unde. Ab adipisci, amet
+                    animi asperiores aspernatur cum deserunt dolore ducimus
+                    error eum excepturi harum in maiores officia quasi quisquam
+                    repellat, tempore? Accusamus accusantium aliquam debitis eum
+                    facilis nostrum provident quas voluptatum. Iure natus
+                    placeat tempore tenetur. Assumenda cumque, cupiditate
+                    debitis facere id in laudantium natus, nemo obcaecati sed
+                    sequi soluta ullam veniam voluptas voluptate. Accusamus
+                    aperiam assumenda doloribus eaque minima obcaecati placeat
+                    repudiandae! Animi corporis dignissimos dolorem ea eaque,
+                    earum eligendi et ipsam itaque laudantium libero magnam,
+                    molestiae natus odit porro possimus rem repellat sed sit
+                    temporibus totam vero voluptate. Cupiditate distinctio dolor
+                    tempore tenetur. Atque et inventore nihil, nostrum pariatur
+                    perspiciatis temporibus. Ad at consectetur cumque, deserunt
+                    dolorem eaque enim error facilis fugiat fugit molestias
+                    neque quam qui quibusdam sapiente sint sit, suscipit?</p>
+            </div>
+
+            <div class="col-lg-5 col-md-5 col-sm-12">
+                <img
+                    src="{{ asset('assets/frontend/images/about_wallet.svg') }}"
+                    alt="about" class="img-responsive img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="works" class="p-5" data-aos="fade-up">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="section-title">
+                    <h1 class="display-4 text-center">
+                        How It Works
+                    </h1>
+                    <p class="text-center mt-2">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Aliquid consequuntur cupiditate <br> deserunt
+                        ducimus explicabo laborum mollitia non optio
+                        reprehenderit ullam?
+                    </p>
+                </div>
+                <div class="section-content mt-5">
+                    <div class="row text-center text-dark">
+                        <div class="col-md-4 p-4">
+                            <p>
+                                <img class="img-responsive rounded w-25"
+                                     src="{{ asset('assets/frontend/images/send.svg') }}"
+                                     alt="send">
+                            </p>
+                            <h3>Send</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Architecto cumque omnis optio
+                                perferendis perspiciatis quisquam, veritatis. At
+                                eaque itaque reiciendis?s</p>
+                        </div>
+
+                        <div class="col-md-4 p-4">
+                            <p>
+                                <img class="img-responsive rounded w-25"
+                                     src="{{ asset('assets/frontend/images/receive.svg') }}"
+                                     alt="send">
+                            </p>
+                            <h3>Receive</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Architecto cumque omnis optio
+                                perferendis perspiciatis quisquam, veritatis. At
+                                eaque itaque reiciendis?s</p>
+                        </div>
+
+                        <div class="col-md-4 p-4">
+                            <p>
+                                <img class="img-responsive rounded w-25"
+                                     src="{{ asset('assets/frontend/images/dg_wallet.svg') }}"
+                                     alt="send">
+                            </p>
+                            <h3>Wallet</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Architecto cumque omnis optio
+                                perferendis perspiciatis quisquam, veritatis. At
+                                eaque itaque reiciendis?s</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="service" class="p-5" data-aos="fade-up">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="section-title">
+                    <h1 class="display-4 text-center">
+                        Our Services
+                    </h1>
+                    <p class="text-center mt-2">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Aliquid consequuntur <br>cupiditate deserunt
+                        ducimus explicabo laborum
+                    </p>
+                </div>
+                <div class="section-content mt-5">
+                    <div class="row text-center text-dark">
+                        <div class="col-md-4 p-4">
+                            <p>
+                                <img class="img-responsive rounded w-25"
+                                     src="{{ asset('assets/frontend/images/money-transfer.svg') }}"
+                                     alt="send">
+                            </p>
+                            <h3>Money Transaction</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Architecto cumque omnis optio
+                                perferendis perspiciatis quisquam, veritatis. At
+                                eaque itaque reiciendis?s</p>
+                        </div>
+
+                        <div class="col-md-4 p-4">
+                            <p>
+                                <img class="img-responsive rounded w-25"
+                                     src="{{ asset('assets/frontend/images/smartphone.svg') }}"
+                                     alt="send">
+                            </p>
+                            <h3>Online Shopping</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Architecto cumque omnis optio
+                                perferendis perspiciatis quisquam, veritatis. At
+                                eaque itaque reiciendis?s</p>
+                        </div>
+
+                        <div class="col-md-4 p-4">
+                            <p>
+                                <img class="img-responsive rounded w-25"
+                                     src="{{ asset('assets/frontend/images/money.svg') }}"
+                                     alt="send">
+                            </p>
+                            <h3>Currency Supported</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Architecto cumque omnis optio
+                                perferendis perspiciatis quisquam, veritatis. At
+                                eaque itaque reiciendis?s</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="choose" class="p-5" data-aos="fade-up">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="section-title">
+                    <h1 class="display-4 text-center">
+                        Why Choose Us
+                    </h1>
+                    <p class="text-center mt-2">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Aliquid consequuntur <br>cupiditate deserunt
+                        ducimus explicabo laborum
+                    </p>
+                </div>
+                <div class="section-content mt-5">
+                    <div class="row text-center text-dark">
+                        <div class="col-md-4 p-4">
+                            <p>
+                                <img class="img-responsive rounded w-25"
+                                     src="{{ asset('assets/frontend/images/lock.svg') }}"
+                                     alt="send">
+                            </p>
+                            <h3>Secure</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Architecto cumque omnis optio
+                                perferendis perspiciatis quisquam, veritatis. At
+                                eaque itaque reiciendis?s</p>
+                        </div>
+
+                        <div class="col-md-4 p-4">
+                            <p>
+                                <img class="img-responsive rounded w-25"
+                                     src="{{ asset('assets/frontend/images/globe.svg') }}"
+                                     alt="send">
+                            </p>
+                            <h3>Global</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Architecto cumque omnis optio
+                                perferendis perspiciatis quisquam, veritatis. At
+                                eaque itaque reiciendis?s</p>
+                        </div>
+
+                        <div class="col-md-4 p-4">
+                            <p>
+                                <img class="img-responsive rounded w-25"
+                                     src="{{ asset('assets/frontend/images/currency.svg') }}"
+                                     alt="send">
+                            </p>
+                            <h3>Multiple Currency</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Architecto cumque omnis optio
+                                perferendis perspiciatis quisquam, veritatis. At
+                                eaque itaque reiciendis?s</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="contact" class="p-5" data-aos="fade-up">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="section-title">
+                    <h1 class="display-4 text-center">
+                        Contact Us
+                    </h1>
+                    <h4 class="text-center">Any Asking To Us?</h4>
+                </div>
+                <div class="section-content mt-5">
+                    <div class="row text-center text-dark">
+                        <div class="col-md-8 mx-auto">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form action="{{ route('send.message') }}" method="POST">
+                                        @csrf
+
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="name">Name</label>
+                                                <input type="text"
+                                                       class="form-control
+                                                       @error('name') is-invalid
+                                                        @enderror"
+                                                       id="name" name="name"
+                                                       required
+                                                       placeholder="Enter full name">
+                                                @error('name')
+                                                <span class="invalid-feedback"
+                                                      role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label
+                                                    for="phone">Contact
+                                                    Number</label>
+                                                <input type="text"
+                                                       class="form-control
+                                                       @error('phone')
+                                                           is-invalid @enderror"
+                                                       id="phone"
+                                                       name="phone"
+                                                       placeholder="Enter contact number"
+                                                       required>
+
+                                                @error('phone')
+                                                <span class="invalid-feedback"
+                                                      role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-12 mb-3">
+                                                <label
+                                                    for="email">Email</label>
+                                                <input type="email"
+                                                       class="form-control
+                                                       @error('email')
+                                                           is-invalid @enderror"
+                                                       id="email"
+                                                       name="email"
+                                                       required
+                                                       placeholder="Enter your email">
+
+                                                    @error('email')
+                                                    <span class="invalid-feedback"
+                                                          role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-12 mb-3">
+                                                <label
+                                                    for="subject">Subject</label>
+                                                <input type="text"
+                                                       class="form-control
+                                                       @error('subject')
+                                                           is-invalid @enderror"
+                                                       id="subject"
+                                                       name="subject"
+                                                       required
+                                                       placeholder="Enter your subject">
+
+                                                @error('subject')
+                                                <span class="invalid-feedback"
+                                                      role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-12 mb-3">
+                                                <label
+                                                    for="body">Message</label>
+                                                <textarea class="form-control
+                                                       @error('body')
+                                                    is-invalid @enderror"
+                                                          rows="5"
+                                                          name="body"></textarea>
+
+                                                @error('body')
+                                                <span class="invalid-feedback"
+                                                      role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <button class="btn btn-primary"
+                                                type="submit">Send Message
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="footer" class="border border-top p-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center mt-2 text-bold">&copy; {{ now()->year }} -
+                    MI SHAJIB. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="{{ asset('assets/frontend/js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('assets/frontend/js/popper.min.js') }}"></script>
+<script src="{{ asset('assets/frontend/js/bootstrap.min.js') }}"></script>
+<script async src="https://unpkg.com/typer-dot-js@0.1.0/typer.js"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="{{ asset('assets/frontend/js/main.js') }}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+@include('layouts.errors')
+@include('layouts.success')
+@include('layouts.error')
+</body>
 </html>
