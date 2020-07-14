@@ -78,7 +78,7 @@ class ProfileController extends Controller
         if (!Hash::check($request->old_password, $hashedPassword)) {
             return back()->with("error", "Current password does not matched!!!");
         }
-        if (!Hash::check($request->password, $hashedPassword)) {
+        if (Hash::check($request->password, $hashedPassword)) {
             return back()->with("error", "New password can't be the same as old password!");
         }
         $user = Admin::findOrFail(Auth::id());
