@@ -20,6 +20,11 @@ class ForgotPasswordController extends Controller
 
     use SendsPasswordResetEmails;
 
+    public function __construct()
+    {
+        $this->middleware('demomode');
+    }
+
     public function showLinkRequestForm()
     {
         $title = "Forgot Password";

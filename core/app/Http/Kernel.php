@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminIfAuthenticated;
+use App\Http\Middleware\DemoMiddleware;
 use App\Http\Middleware\PreventBackHistory;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -67,5 +68,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'preventBackHistory' => PreventBackHistory::class,
         'adminauth' => AdminIfAuthenticated::class,
+        'demomode' => DemoMiddleware::class,
     ];
 }

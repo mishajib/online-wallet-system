@@ -31,6 +31,11 @@ class ResetPasswordController extends Controller
      */
     protected $redirectTo = '/dashboard';
 
+    public function __construct()
+    {
+        $this->middleware('demomode');
+    }
+
     protected function resetPassword($user, $password)
     {
         $this->setUserPassword($user, $password);
