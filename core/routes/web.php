@@ -23,7 +23,8 @@ Auth::routes(['verify' => true]);
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('register/{user}', 'Auth\RegisterController@showRegistrationForm')->name('refer');
 
-Route::group(['namespace' => 'Backend\User', 'as' => 'user.', 'middleware' => ['auth:web', 'verified', 'preventBackHistory']], function () {
+Route::group(['namespace' => 'Backend\User', 'as' => 'user.', 'middleware' =>
+    ['auth:web', 'verified', 'preventBackHistory', 'demomode']], function () {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     // Profile Routes
     Route::get('profile', 'ProfileController@index')->name('profile')->middleware('password.confirm');
@@ -58,17 +59,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin\Authentication'
 
     // Forgot Password
     Route::get('password/reset', 'AdminForgotPasswordController@showLinkRequestForm')->name('password.request');
-    Route::post('password/email', 'AdminForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    Route::post('password/email', 'AdminForgotPasswordController@sendResetLinkEmail')->name('password.email')->middleware('demomode');
     // Forgot Password End
 
     // Reset Password
     Route::get('password/reset/{token}', 'AdminResetPasswordController@showResetForm')->name('password.reset');
-    Route::post('password/reset', 'AdminResetPasswordController@reset')->name('update.password');
+    Route::post('password/reset', 'AdminResetPasswordController@reset')->name
+    ('update.password')->middleware('demomode');
     // Reset Password End
 
 });
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin', 'as' => 'admin.', 'middleware' => ['auth:admin', 'adminauth', 'preventBackHistory']], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Backend\Admin', 'as' => 'admin.', 'middleware' => ['auth:admin', 'adminauth', 'preventBackHistory', 'demomode']], function () {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('logout', 'Authentication\AdminLoginController@logout')->name('logout');
 

@@ -49,6 +49,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest:web');
+        $this->middleware('demomode');
     }
 
     public function showRegistrationForm($user = null)
